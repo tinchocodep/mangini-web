@@ -39,6 +39,17 @@ body{font-family:var(--font-sans);background:var(--bg);color:var(--fg);line-heig
 .nav a{font-size:13px;font-weight:400;color:var(--muted);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;position:relative}
 .nav a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--fg);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
 .nav a:hover{color:var(--fg)}.nav a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-dd{position:relative}
+.nav-dd>a::after{display:none}
+.nav-dd>a{display:flex;align-items:center;gap:5px}
+.nav-dd>a svg{width:12px;height:12px;transition:transform .3s var(--ease)}
+.nav-dd:hover>a svg{transform:rotate(180deg)}
+.nav-dd-menu{position:absolute;top:100%;left:-16px;padding-top:12px;opacity:0;visibility:hidden;transform:translateY(8px);transition:all .3s var(--ease)}
+.nav-dd:hover .nav-dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
+.nav-dd-menu ul{list-style:none;background:var(--card);border:1px solid var(--line);box-shadow:0 12px 40px rgba(26,26,24,.08);min-width:200px;padding:8px 0}
+.nav-dd-menu li a{display:block;padding:10px 24px;font-size:13px;font-weight:400;color:var(--muted);text-decoration:none;letter-spacing:.03em;text-transform:none;transition:background .2s,color .2s}
+.nav-dd-menu li a::after{display:none}
+.nav-dd-menu li a:hover{background:var(--accent-soft);color:var(--fg)}
 .nav a.active{color:var(--fg)}.nav a.active::after{transform:scaleX(1);transform-origin:left}
 .cart-t{position:relative;background:none;border:none;cursor:pointer;padding:8px;display:flex;align-items:center;gap:8px;font-family:var(--font-sans);font-size:13px;font-weight:400;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;transition:color .3s}
 .cart-t:hover{color:var(--fg)}
@@ -220,9 +231,20 @@ body{font-family:var(--font-sans);background:var(--bg);color:var(--fg);line-heig
   <div class="hdr-in">
     <a href="index.html" class="logo"><img src="logo_mangini.png" alt="Mangini"></a>
     <div class="nav">
-      <a href="productos.html" class="active">Productos</a>
       <a href="index.html#nosotros">Nosotros</a>
       <a href="index.html#sucursales">Sucursales</a>
+      <div class="nav-dd">
+        <a href="productos.html" class="active">Productos <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg></a>
+        <div class="nav-dd-menu">
+          <ul>
+            <li><a href="productos.html">Todo el catálogo</a></li>
+            <li><a href="productos.html?cat=Facturas">Facturas</a></li>
+            <li><a href="productos.html?cat=Tortas">Tortas</a></li>
+            <li><a href="productos.html?cat=Tartas y Salados">Tartas y Salados</a></li>
+            <li><a href="productos.html?cat=Panes">Panes</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div style="display:flex;align-items:center;gap:16px">
       <button class="cart-t" id="cOpen"><span class="dot" id="cDot"></span>Carrito</button>
@@ -232,9 +254,9 @@ body{font-family:var(--font-sans);background:var(--bg);color:var(--fg);line-heig
 </header>
 
 <nav class="mob-nav" id="mobNav">
-  <a href="productos.html" onclick="closeMob()">Productos</a>
   <a href="index.html#nosotros" onclick="closeMob()">Nosotros</a>
   <a href="index.html#sucursales" onclick="closeMob()">Sucursales</a>
+  <a href="productos.html" onclick="closeMob()">Productos</a>
 </nav>
 
 <section class="cat-hero">
@@ -323,7 +345,8 @@ const P=[
 ];
 
 const CATS=["Todo",...[...new Set(P.map(p=>p.cat))]];
-let aCat="Todo",cart=[],searchQ="";
+const urlCat=new URLSearchParams(location.search).get('cat');
+let aCat=urlCat||"Todo",cart=JSON.parse(localStorage.getItem('mangini_cart')||'[]'),searchQ="";
 
 /* Load cart from localStorage */
 try{const saved=localStorage.getItem('mangini_cart');if(saved)cart=JSON.parse(saved)}catch(e){}
