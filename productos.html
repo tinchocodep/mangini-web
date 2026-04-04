@@ -8,439 +8,288 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Productos — Mangini Confitería & Panadería Artesanal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#FAFAF7;--fg:#1A1A18;--muted:#6B6B63;--accent:#9B2D7B;--accent2:#B8860B;
-  --accent-soft:rgba(155,45,123,.06);--line:#E8E8E2;--card:#FFFFFF;
-  --font-serif:'Cormorant Garamond',Georgia,serif;
-  --font-sans:'Outfit',system-ui,sans-serif;
-  --ease:cubic-bezier(.16,1,.3,1);
+  --bg:#faf9f6;--dark:#1a1a1a;--mid:#e8e6e1;--accent:#8b5e6b;--accent-l:#a87783;
+  --text:#2c2c2c;--text-s:#888;--text-inv:#faf9f6;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;
 }
-html{scroll-behavior:smooth;overscroll-behavior:none}
-body{font-family:var(--font-sans);background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;overscroll-behavior:none}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+::selection{background:var(--accent);color:#fff}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 
-/* ── REVEAL ── */
-[data-r]{opacity:0;transform:translateY(40px);transition:opacity .7s var(--ease),transform .7s var(--ease);will-change:opacity,transform}
-[data-r].v{opacity:1;transform:translateY(0)}
-[data-r="l"]{transform:translateX(-50px)}[data-r="l"].v{transform:translateX(0)}
-[data-r="r"]{transform:translateX(50px)}[data-r="r"].v{transform:translateX(0)}
-[data-r="s"]{transform:scale(.96);opacity:0}[data-r="s"].v{transform:scale(1);opacity:1}
-[data-r="f"]{transform:none;opacity:0}[data-r="f"].v{opacity:1}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,249,246,.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--mid);transition:all .5s}
+.nl{display:flex;align-items:center}.nl img{height:36px;width:auto}
+.nk{display:none;gap:32px;list-style:none}
+.nk a{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--text);opacity:.5;transition:opacity .3s}.nk a:hover,.nk a.act{opacity:1}
+.nr{display:flex;align-items:center;gap:20px}
+.nc{font-family:var(--sans);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);opacity:.5;display:none;transition:opacity .3s;position:relative;cursor:pointer;background:none;border:none}.nc:hover{opacity:1}
+.nc span{position:absolute;top:-6px;right:-14px;width:16px;height:16px;border-radius:50%;background:var(--accent);color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center}
+.nh{display:flex;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;padding:6px}
+.nh em{display:block;width:22px;height:1px;background:var(--text);transition:all .4s;font-style:normal}
+.nh.open em:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.nh.open em:nth-child(2){opacity:0}.nh.open em:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(min-width:900px){.nk{display:flex}.nc{display:block}.nh{display:none}nav{padding:18px 48px}}
 
-/* ── HEADER ── */
-.hdr{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 clamp(24px,5vw,80px);height:72px;display:flex;align-items:center;transition:background .4s var(--ease),border-color .4s var(--ease);will-change:background}
-.hdr.s{background:rgba(250,250,247,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-.hdr-in{width:100%;max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;text-decoration:none}
-.logo img{height:52px;width:auto}
-.nav{display:flex;align-items:center;gap:36px}
-.nav a{font-size:13px;font-weight:400;color:var(--muted);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;position:relative}
-.nav a::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;background:var(--fg);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
-.nav a:hover{color:var(--fg)}.nav a:hover::after{transform:scaleX(1);transform-origin:left}
-.nav-dd{position:relative}
-.nav-dd>a::after{display:none}
-.nav-dd>a{display:flex;align-items:center;gap:5px}
-.nav-dd>a svg{width:12px;height:12px;transition:transform .3s var(--ease)}
-.nav-dd:hover>a svg{transform:rotate(180deg)}
-.nav-dd-menu{position:absolute;top:100%;left:-16px;padding-top:12px;opacity:0;visibility:hidden;transform:translateY(8px);transition:all .3s var(--ease)}
-.nav-dd:hover .nav-dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
-.nav-dd-menu ul{list-style:none;background:var(--card);border:1px solid var(--line);box-shadow:0 12px 40px rgba(26,26,24,.08);min-width:200px;padding:8px 0}
-.nav-dd-menu li a{display:block;padding:10px 24px;font-size:13px;font-weight:400;color:var(--muted);text-decoration:none;letter-spacing:.03em;text-transform:none;transition:background .2s,color .2s}
-.nav-dd-menu li a::after{display:none}
-.nav-dd-menu li a:hover{background:var(--accent-soft);color:var(--fg)}
-.nav a.active{color:var(--fg)}.nav a.active::after{transform:scaleX(1);transform-origin:left}
-.cart-t{position:relative;background:none;border:none;cursor:pointer;padding:8px;display:flex;align-items:center;gap:8px;font-family:var(--font-sans);font-size:13px;font-weight:400;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;transition:color .3s}
-.cart-t:hover{color:var(--fg)}
-.cart-t .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:0;transform:scale(0);transition:all .4s var(--ease)}
-.cart-t .dot.on{opacity:1;transform:scale(1)}
-.mob-t{display:none;background:none;border:none;cursor:pointer;width:40px;height:40px;flex-direction:column;justify-content:center;align-items:center;gap:5px;z-index:102}
-.mob-t span{display:block;width:20px;height:1.5px;background:var(--fg);transition:transform .3s var(--ease),opacity .3s}
-.mob-t.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
-.mob-t.active span:nth-child(2){opacity:0}
-.mob-t.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mob{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .4s}
+.mob.open{opacity:1;pointer-events:auto}.mob a{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--text)}
 
-/* ── MOBILE NAV ── */
-.mob-nav{position:fixed;inset:0;z-index:101;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
-.mob-nav.open{opacity:1;visibility:visible}
-.mob-nav a{font-family:var(--font-serif);font-size:32px;font-weight:400;color:var(--fg);text-decoration:none;letter-spacing:-.01em;transition:color .3s}
-.mob-nav a:hover{color:var(--accent)}
+/* CART DRAWER */
+.co{position:fixed;inset:0;background:rgba(26,26,26,.4);z-index:200;opacity:0;pointer-events:none;transition:opacity .4s}.co.open{opacity:1;pointer-events:auto}
+.cp{position:fixed;top:0;right:0;bottom:0;width:420px;max-width:90vw;background:var(--bg);z-index:201;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);padding:32px;display:flex;flex-direction:column}
+.cp.open{transform:none}
+.cp__h{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+.cp__t{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.cp__x{background:none;border:none;font-size:22px;cursor:pointer;color:var(--text);padding:4px}
+.cp__items{flex:1;overflow-y:auto}
+.cp__empty{font-family:var(--sans);font-size:14px;font-weight:300;color:var(--text-s);text-align:center;padding:60px 0}
+.ci{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--mid)}
+.ci__img{width:64px;height:64px;overflow:hidden;flex-shrink:0}.ci__img img{width:100%;height:100%;object-fit:cover}
+.ci__info{flex:1}.ci__n{font-family:var(--sans);font-size:13px;font-weight:500}.ci__p{font-family:var(--sans);font-size:13px;color:var(--accent);margin-top:4px}
+.ci__q{display:flex;align-items:center;gap:12px;margin-top:8px}
+.ci__q button{width:24px;height:24px;border:1px solid var(--mid);background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:border-color .3s}.ci__q button:hover{border-color:var(--accent)}
+.ci__q em{font-style:normal;font-family:var(--sans);font-size:13px}
+.ci__rm{background:none;border:none;cursor:pointer;color:var(--text-s);font-size:18px;padding:4px;transition:color .3s;align-self:flex-start}.ci__rm:hover{color:#c00}
+.cp__f{padding-top:24px;border-top:1px solid var(--mid)}
+.cp__total{display:flex;justify-content:space-between;margin-bottom:20px;font-family:var(--sans);font-size:14px;font-weight:500}
+.cp__wa{display:block;text-align:center;padding:14px;background:var(--accent);color:#fff;font-family:var(--sans);font-size:12px;letter-spacing:.1em;text-transform:uppercase;transition:background .3s}.cp__wa:hover{background:var(--accent-l)}
 
-/* ── CAT HERO ── */
-.cat-hero{position:relative;height:40vh;min-height:280px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
-.cat-hero-img{position:absolute;inset:0}
-.cat-hero-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.45)}
-.cat-hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,26,24,.6) 0%,rgba(26,26,24,.2) 50%,rgba(26,26,24,.4) 100%)}
-.cat-hero-c{position:relative;z-index:1;padding:0 24px}
-.cat-hero-over{font-size:12px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:12px}
-.cat-hero-over::before{content:'';width:40px;height:1px;background:rgba(255,255,255,.4)}
-.cat-hero h1{font-family:var(--font-serif);font-size:clamp(36px,6vw,72px);font-weight:400;line-height:1;letter-spacing:-.03em;color:#fff}
-.cat-hero h1 em{font-style:italic}
+/* HERO */
+.phero{position:relative;height:40vh;min-height:280px;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.phero__img{position:absolute;inset:0}.phero__img img{width:100%;height:100%;object-fit:cover;filter:brightness(.45)}
+.phero__c{position:relative;z-index:2;padding:0 24px}
+.phero__pre{font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,249,246,.45);margin-bottom:16px}
+.phero__h1{font-family:var(--serif);font-size:clamp(36px,6vw,64px);font-weight:300;color:var(--text-inv);line-height:1.1}.phero__h1 em{font-style:italic}
 
-/* ── SEARCH ── */
-.search-wrap{position:relative;max-width:600px;margin:0 auto 32px;padding:0 clamp(24px,5vw,80px)}
-.search-ico{position:absolute;left:calc(clamp(24px,5vw,80px) + 18px);top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;width:20px;height:20px}
-.search-inp{width:100%;font-family:var(--font-sans);font-size:16px;font-weight:400;padding:14px 20px 14px 48px;border-radius:100px;border:1px solid var(--line);background:var(--card);color:var(--fg);outline:none;transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
-.search-inp::placeholder{color:var(--muted);font-weight:300}
-.search-inp:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+/* SEARCH */
+.search{max-width:600px;margin:0 auto;padding:40px 32px 0;position:relative}
+.search svg{position:absolute;left:52px;top:58px;width:20px;height:20px;color:var(--text-s);pointer-events:none}
+.search input{width:100%;font-family:var(--sans);font-size:15px;font-weight:300;padding:14px 20px 14px 48px;border:1px solid var(--mid);background:#fff;color:var(--text);outline:none;transition:border-color .3s}.search input::placeholder{color:var(--text-s)}.search input:focus{border-color:var(--accent)}
+@media(min-width:900px){.search{padding:48px 48px 0}.search svg{left:68px;top:66px}}
 
-/* ── SECTION ── */
-.sec{padding:clamp(80px,12vh,140px) clamp(24px,5vw,80px);max-width:1400px;margin:0 auto}
-.sec-lab{font-size:11px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:12px}
-.sec-lab::before{content:'';width:24px;height:1px;background:var(--accent)}
-.sec-ttl{font-family:var(--font-serif);font-size:clamp(32px,5vw,52px);font-weight:400;line-height:1.1;letter-spacing:-.02em;max-width:600px;margin-bottom:56px}
-.sec-ttl em{font-style:italic}
+/* FILTERS */
+.filters{max-width:1100px;margin:0 auto;padding:32px 32px 0;display:flex;gap:8px;flex-wrap:wrap}
+.flt-btn{padding:10px 22px;border:1px solid var(--mid);background:transparent;font-family:var(--sans);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-s);cursor:pointer;transition:all .3s}.flt-btn:hover{border-color:var(--text);color:var(--text)}
+.flt-btn.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+@media(min-width:900px){.filters{padding:40px 48px 0}}
 
-/* ── FILTERS ── */
-.flt{display:flex;gap:4px;margin-bottom:48px;flex-wrap:wrap}
-.flt-b{padding:10px 22px;border-radius:100px;border:1px solid var(--line);background:transparent;font-family:var(--font-sans);font-size:13px;font-weight:400;color:var(--muted);cursor:pointer;transition:all .35s var(--ease);letter-spacing:.02em}
-.flt-b:hover{border-color:var(--fg);color:var(--fg)}
-.flt-b.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+/* PRODUCT GRID */
+.pgrid-wrap{max-width:1100px;margin:0 auto;padding:32px}
+.pgrid-count{font-family:var(--sans);font-size:13px;color:var(--text-s);margin-bottom:24px}
+.pgrid{display:grid;gap:1px;background:var(--mid)}
+.pc{background:var(--bg);overflow:hidden;transition:background .4s;cursor:default}.pc:hover{background:#fff}
+.pc__i{aspect-ratio:4/5;overflow:hidden;position:relative}.pc__i img{width:100%;height:100%;object-fit:cover;transition:transform 5s cubic-bezier(.16,1,.3,1)}.pc:hover .pc__i img{transform:scale(1.04)}
+.pc__tag{position:absolute;top:16px;left:16px;font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:4px 10px}
+.pc__b{padding:20px}
+.pc__cat{font-family:var(--sans);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.pc__n{font-family:var(--sans);font-size:14px;font-weight:500;margin-bottom:4px}
+.pc__d{font-family:var(--sans);font-size:12px;font-weight:300;color:var(--text-s);line-height:1.6;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc__ft{display:flex;align-items:center;justify-content:space-between}
+.pc__pr{font-family:var(--serif);font-size:20px;font-weight:400}.pc__pr small{display:block;font-family:var(--sans);font-size:10px;color:var(--text-s);margin-top:2px}
+.pc__add{width:38px;height:38px;border:1px solid var(--mid);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;color:var(--text);flex-shrink:0}
+.pc__add:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.pc__add svg{width:18px;height:18px}
+.pc__add.ok{background:var(--accent);border-color:var(--accent);color:#fff}
+.no-res{text-align:center;padding:80px 24px;grid-column:1/-1}.no-res h3{font-family:var(--serif);font-size:24px;font-weight:300;margin-bottom:8px}.no-res p{font-size:14px;color:var(--text-s)}
 
-/* ── PRODUCT GRID ── */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px}
-.pcard{background:var(--card);cursor:pointer;position:relative;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease);overflow:hidden;border:1px solid transparent;will-change:transform}
-.pcard:hover{border-color:var(--line);transform:translateY(-4px);box-shadow:0 20px 60px rgba(26,26,24,.06)}
-.pcard-img{height:300px;overflow:hidden;position:relative;background:var(--line)}
-.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease);will-change:transform}
-.pcard:hover .pcard-img img{transform:scale(1.06)}
-.pcard-tag{position:absolute;top:16px;left:16px;font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#fff;background:rgba(155,45,123,.85);padding:6px 14px;z-index:2}
-.pcard-body{padding:24px 24px 28px}
-.pcard-cat{font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-.pcard-name{font-family:var(--font-serif);font-size:21px;font-weight:400;line-height:1.25;margin-bottom:6px}
-.pcard-desc{font-size:13px;color:var(--muted);font-weight:400;line-height:1.6;margin-bottom:20px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.pcard-ft{display:flex;align-items:center;justify-content:space-between}
-.pcard-pr{font-family:var(--font-serif);font-size:24px;font-weight:400}
-.pcard-pr small{display:block;font-family:var(--font-sans);font-size:11px;color:var(--muted);font-weight:400;margin-top:2px}
-.add-b{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;display:grid;place-items:center;transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);color:var(--fg);flex-shrink:0}
-.add-b:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.add-b svg{width:18px;height:18px;transition:transform .3s var(--ease)}
-.add-b:hover svg{transform:rotate(90deg)}
-.add-b.ok{background:var(--accent);border-color:var(--accent);color:#fff;animation:aP .4s var(--ease)}
-@keyframes aP{0%{transform:scale(1)}40%{transform:scale(1.2)}100%{transform:scale(1)}}
+@media(min-width:640px){.pgrid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.pgrid-wrap{padding:40px 48px}.pgrid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1200px){.pgrid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:639px){.pc__i{aspect-ratio:1/1}.pc__d{display:none}}
 
-/* ── NO RESULTS ── */
-.no-res{text-align:center;padding:80px 24px;grid-column:1/-1}
-.no-res-ico{font-size:48px;margin-bottom:20px;opacity:.25}
-.no-res-t{font-family:var(--font-serif);font-size:24px;font-weight:400;margin-bottom:8px}
-.no-res-p{font-size:14px;color:var(--muted);font-weight:300}
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text);color:var(--bg);padding:12px 28px;font-family:var(--sans);font-size:13px;z-index:300;transition:transform .5s cubic-bezier(.16,1,.3,1)}.toast.show{transform:translateX(-50%) translateY(0)}
 
-/* ── FOOTER ── */
-.ftr{border-top:1px solid var(--line);padding:60px clamp(24px,5vw,80px)}
-.ftr-in{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
-.ftr-l{max-width:300px}
-.ftr-l img{height:44px;margin-bottom:16px}
-.ftr-l p{font-size:14px;color:var(--muted);font-weight:400;line-height:1.7}
-.ftr-cols{display:flex;gap:56px;flex-wrap:wrap}
-.ftr-col h5{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.ftr-col a{display:block;font-size:14px;color:var(--fg);text-decoration:none;font-weight:400;margin-bottom:10px;transition:color .2s}
-.ftr-col a:hover{color:var(--accent)}
-.ftr-bt{max-width:1400px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-weight:400;flex-wrap:wrap;gap:12px}
+/* FOOTER */
+footer{background:var(--dark);color:var(--text-inv);padding:64px 32px 32px}
+.fi{max-width:1000px;margin:0 auto}.fgr{display:grid;gap:40px;margin-bottom:56px}
+.ft{font-family:var(--sans);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,249,246,.3);margin-bottom:14px}
+.ftag{font-family:var(--sans);font-size:13px;font-weight:300;color:rgba(250,249,246,.4);line-height:1.6}
+.flk{list-style:none}.flk li+li{margin-top:10px}.flk a{font-family:var(--sans);font-size:13px;font-weight:300;color:rgba(250,249,246,.45);transition:color .3s}.flk a:hover{color:var(--accent-l)}
+.fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;font-family:var(--sans);font-size:11px;font-weight:300;color:rgba(250,249,246,.2)}
+@media(min-width:768px){.fgr{grid-template-columns:2fr 1fr 1fr 1fr}footer{padding:80px 48px 32px}}
 
-/* ── CART DRAWER ── */
-.c-ov{position:fixed;inset:0;z-index:200;background:rgba(26,26,24,.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
-.c-ov.open{opacity:1;visibility:visible}
-.c-dr{position:fixed;top:0;right:0;bottom:0;z-index:201;width:min(460px,100vw);background:var(--bg);transform:translateX(100%);transition:transform .5s var(--ease);display:flex;flex-direction:column;will-change:transform}
-.c-dr.open{transform:translateX(0)}
-.c-hd{display:flex;align-items:center;justify-content:space-between;padding:28px 32px;border-bottom:1px solid var(--line);flex-shrink:0}
-.c-hd h2{font-family:var(--font-serif);font-size:24px;font-weight:400}
-.c-hd-n{font-size:13px;color:var(--muted);font-weight:400;margin-left:8px}
-.cl-b{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;display:grid;place-items:center;transition:all .3s;color:var(--fg)}
-.cl-b:hover{background:var(--fg);color:var(--bg)}
-.cl-b svg{width:16px;height:16px}
-.c-bd{flex:1;overflow-y:auto;padding:8px 0}
-.c-em{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:40px;text-align:center}
-.c-em-i{font-size:48px;margin-bottom:20px;opacity:.25}
-.c-em p{font-size:15px;color:var(--muted);font-weight:300}
-.ci{display:flex;gap:16px;padding:20px 32px;border-bottom:1px solid var(--line);animation:ciS .4s var(--ease)}
-@keyframes ciS{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
-.ci-img{width:64px;height:64px;flex-shrink:0;border-radius:6px;overflow:hidden;background:var(--line)}
-.ci-img img{width:100%;height:100%;object-fit:cover}
-.ci-nfo{flex:1;min-width:0}
-.ci-nm{font-size:15px;font-weight:400;margin-bottom:2px}
-.ci-pr{font-family:var(--font-serif);font-size:16px;color:var(--accent)}
-.ci-q{display:flex;align-items:center;gap:12px;margin-top:10px}
-.q-b{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;display:grid;place-items:center;font-size:14px;color:var(--fg);transition:all .2s}
-.q-b:hover{border-color:var(--fg)}
-.ci-qn{font-size:14px;font-weight:500;min-width:20px;text-align:center}
-.ci-rm{align-self:flex-start;padding:4px;background:none;border:none;cursor:pointer;color:var(--muted);transition:color .2s}
-.ci-rm:hover{color:#C62828}
-.ci-rm svg{width:16px;height:16px}
-.c-ft{border-top:1px solid var(--line);padding:28px 32px;flex-shrink:0}
-.c-ln{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:400;margin-bottom:8px}
-.c-tot{display:flex;justify-content:space-between;font-family:var(--font-serif);font-size:22px;margin-bottom:24px}
-.ck-b{width:100%;padding:16px;border:none;background:var(--fg);color:var(--bg);font-family:var(--font-sans);font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .4s var(--ease);position:relative;overflow:hidden}
-.ck-b::after{content:'';position:absolute;inset:0;background:var(--accent);transform:translateY(100%);transition:transform .4s var(--ease)}
-.ck-b span{position:relative;z-index:1}
-.ck-b:hover::after{transform:translateY(0)}.ck-b:hover{color:#fff}
-.wa-i{text-align:center;font-size:11px;color:var(--muted);margin-top:12px;font-weight:300}
-
-/* ── TOAST ── */
-.tst{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--fg);color:var(--bg);padding:14px 28px;font-size:13px;font-weight:400;z-index:300;transition:transform .5s var(--ease)}
-.tst.show{transform:translateX(-50%) translateY(0)}
-
-/* ── CATALOG SECTION ── */
-.cat-sec{padding:clamp(48px,6vh,80px) clamp(24px,5vw,80px);max-width:1400px;margin:0 auto}
-.result-count{font-size:13px;color:var(--muted);font-weight:400;margin-bottom:24px}
-
-@media(max-width:900px){
-  .nav{display:none}.mob-t{display:flex}
-  .ftr-in{flex-direction:column}.ftr-cols{gap:40px}
-}
-@media(max-width:600px){
-  .hdr{height:64px;padding:0 16px}
-  .logo img{height:40px}
-  .cat-hero{height:30vh;min-height:220px}
-  .cat-hero h1{font-size:clamp(28px,8vw,44px)}
-  .search-wrap{padding:0 20px}
-  .search-ico{left:38px}
-  .sec{padding:60px 20px}
-  .sec-ttl{font-size:clamp(28px,7vw,40px);margin-bottom:36px}
-  .flt{gap:6px;margin-bottom:32px}
-  .flt-b{padding:8px 16px;font-size:12px}
-  .pgrid{grid-template-columns:1fr 1fr;gap:1px}
-  .pcard-img{height:140px}
-  .pcard-body{padding:10px 10px 12px}
-  .pcard-cat{font-size:9px;margin-bottom:2px}
-  .pcard-name{font-size:14px;margin-bottom:2px}
-  .pcard-desc{display:none}
-  .pcard-pr{font-size:16px}
-  .pcard-pr small{font-size:10px}
-  .pcard-ft{margin-top:0}
-  .pcard-tag{font-size:8px;padding:4px 8px;top:8px;left:8px}
-  .add-b{width:32px;height:32px}
-  .add-b svg{width:14px;height:14px}
-  .cat-sec{padding:40px 20px}
-  .ftr{padding:40px 20px}
-  .ftr-cols{gap:32px}
-  .c-hd{padding:20px}
-  .ci{padding:16px 20px}
-  .c-ft{padding:20px}
-  .tst{font-size:12px;padding:12px 20px;bottom:20px}
-}
-@media(max-width:420px){
-  .pcard-img{height:120px}
-}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}[data-r]{opacity:1;transform:none}}
+/* WA FLOAT */
+.waf{position:fixed;bottom:28px;right:28px;z-index:90;width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(139,94,107,.3);transition:transform .3s}.waf:hover{transform:scale(1.08)}.waf svg{width:24px;height:24px;fill:#fff}
+@media(max-width:767px){.waf{width:48px;height:48px;bottom:20px;right:20px}}
 </style>
 </head>
 <body>
 
-<header class="hdr s" id="hdr">
-  <div class="hdr-in">
-    <a href="index.html" class="logo"><img src="logo_mangini.png" alt="Mangini"></a>
-    <div class="nav">
-      <a href="index.html#nosotros">Nosotros</a>
-      <a href="index.html#sucursales">Sucursales</a>
-      <div class="nav-dd">
-        <a href="productos.html" class="active">Productos <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg></a>
-        <div class="nav-dd-menu">
-          <ul>
-            <li><a href="productos.html">Todo el catálogo</a></li>
-            <li><a href="productos.html?cat=Facturas">Facturas</a></li>
-            <li><a href="productos.html?cat=Tortas">Tortas</a></li>
-            <li><a href="productos.html?cat=Tartas y Salados">Tartas y Salados</a></li>
-            <li><a href="productos.html?cat=Panes">Panes</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:16px">
-      <button class="cart-t" id="cOpen"><span class="dot" id="cDot"></span>Carrito</button>
-      <button class="mob-t" id="mobT" aria-label="Menu"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-</header>
-
-<nav class="mob-nav" id="mobNav">
-  <a href="index.html#nosotros" onclick="closeMob()">Nosotros</a>
-  <a href="index.html#sucursales" onclick="closeMob()">Sucursales</a>
-  <a href="productos.html" onclick="closeMob()">Productos</a>
+<nav>
+  <a href="mangini.html" class="nl"><img src="logo_mangini.png" alt="Mangini"></a>
+  <ul class="nk"><li><a href="mangini.html#nosotros">Nosotros</a></li><li><a href="mangini.html#sucursales">Sucursales</a></li><li><a href="productos.html" class="act">Productos</a></li><li><a href="mangini.html#como-pedir">Cómo pedir</a></li></ul>
+  <div class="nr"><button class="nc" id="cBtn" onclick="openC()">Carrito <span id="cCnt">0</span></button><button class="nh" id="ham" aria-label="Menú"><em></em><em></em><em></em></button></div>
 </nav>
+<div class="mob" id="mob"><a href="mangini.html#nosotros" onclick="cM()">Nosotros</a><a href="mangini.html#sucursales" onclick="cM()">Sucursales</a><a href="productos.html" onclick="cM()">Productos</a><a href="mangini.html#como-pedir" onclick="cM()">Cómo pedir</a></div>
 
-<section class="cat-hero">
-  <div class="cat-hero-img"><img src="img/pan%20frances.JPG" alt="Productos Mangini" loading="eager"></div>
-  <div class="cat-hero-c">
-    <div class="cat-hero-over" data-r="f">Catalogo completo</div>
-    <h1 data-r>Nuestros <em>Productos</em></h1>
+<div class="co" id="cO" onclick="closeC()"></div>
+<div class="cp" id="cP">
+  <div class="cp__h"><div class="cp__t">Tu carrito</div><button class="cp__x" onclick="closeC()">×</button></div>
+  <div class="cp__items" id="cI"><p class="cp__empty">Tu carrito está vacío.</p></div>
+  <div class="cp__f" id="cF" style="display:none"><div class="cp__total"><span>Total</span><span id="cT">$0</span></div><a href="#" class="cp__wa" id="cW" target="_blank">Finalizar compra por WhatsApp →</a></div>
+</div>
+
+<!-- HERO -->
+<section class="phero">
+  <div class="phero__img"><img src="pan frances.JPG" alt="Productos Mangini"></div>
+  <div class="phero__c">
+    <p class="phero__pre">Catálogo completo</p>
+    <h1 class="phero__h1">Nuestros <em>Productos</em></h1>
   </div>
 </section>
 
-<div style="padding-top:clamp(40px,6vh,64px)">
-  <div class="search-wrap">
-    <svg class="search-ico" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
-    <input class="search-inp" id="searchInp" type="text" placeholder="Buscar productos..." autocomplete="off">
-  </div>
+<!-- SEARCH -->
+<div class="search">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+  <input type="text" id="searchInp" placeholder="Buscar productos...">
 </div>
 
-<div class="cat-sec">
-  <div class="flt" id="flt" data-r="f" data-d="100"></div>
-  <div class="result-count" id="resCnt"></div>
+<!-- FILTERS -->
+<div class="filters" id="flt"></div>
+
+<!-- GRID -->
+<div class="pgrid-wrap">
+  <div class="pgrid-count" id="resCnt"></div>
   <div class="pgrid" id="pGrid"></div>
 </div>
 
-<footer class="ftr">
-  <div class="ftr-in">
-    <div class="ftr-l"><img src="logo_mangini.png" alt="Mangini"><p>Confiteria & Panaderia artesanal. Produccion propia desde 2004 en Buenos Aires.</p></div>
-    <div class="ftr-cols">
-      <div class="ftr-col"><h5>Navegacion</h5><a href="productos.html">Productos</a><a href="index.html#nosotros">Nosotros</a><a href="index.html#sucursales">Sucursales</a></div>
-      <div class="ftr-col"><h5>Contacto</h5><a href="mailto:manginiconfiterias@gmail.com">manginiconfiterias@gmail.com</a><a href="https://www.instagram.com/mangini.bsas/" target="_blank">@mangini.bsas</a><a href="https://wa.me/5491157491693" target="_blank">WhatsApp Pedidos</a></div>
-      <div class="ftr-col"><h5>Pedidos</h5><a href="https://www.rappi.com.ar/restaurantes/112410-mangini" target="_blank">Rappi</a><a href="https://www.pedidosya.com.ar/cadenas/mangini" target="_blank">PedidosYa</a><a href="index.html#sucursales">Retiro en sucursal</a></div>
+<footer>
+  <div class="fi">
+    <div class="fgr">
+      <div><img src="logo_mangini.png" alt="Mangini" style="height:32px;width:auto;filter:brightness(0) invert(1);margin-bottom:10px"><p class="ftag">Confitería & Panadería Artesanal<br>Buenos Aires, Argentina</p></div>
+      <div><div class="ft">Navegación</div><ul class="flk"><li><a href="mangini.html#nosotros">Nosotros</a></li><li><a href="mangini.html#sucursales">Sucursales</a></li><li><a href="productos.html">Productos</a></li><li><a href="mangini.html#como-pedir">Cómo pedir</a></li></ul></div>
+      <div><div class="ft">Contacto</div><ul class="flk"><li><a href="#">Email: A confirmar</a></li><li><a href="https://wa.me/5491100000000" target="_blank">WhatsApp</a></li><li><a href="#">Instagram</a></li></ul></div>
+      <div><div class="ft">Delivery</div><ul class="flk"><li><a href="#">Rappi</a></li><li><a href="#">PedidosYa</a></li><li><a href="mangini.html#sucursales">Retiro en sucursal</a></li></ul></div>
     </div>
+    <div class="fbot">© 2026 Mangini — Panificadora Satchmo S.A. | Producción propia desde 2004</div>
   </div>
-  <div class="ftr-bt"><span>&copy; 2026 Mangini Confiterias</span><span>Buenos Aires, Argentina</span></div>
 </footer>
 
-<div class="c-ov" id="cOv"></div>
-<div class="c-dr" id="cDr">
-  <div class="c-hd"><h2>Carrito<span class="c-hd-n" id="cCnt"></span></h2><button class="cl-b" id="cCl" aria-label="Cerrar"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button></div>
-  <div class="c-bd" id="cBd"></div>
-  <div class="c-ft" id="cFt" style="display:none">
-    <div class="c-ln"><span>Subtotal</span><span id="cSub">$0</span></div>
-    <div class="c-tot"><span>Total</span><span id="cTot">$0</span></div>
-    <button class="ck-b" id="ckB"><span>Finalizar pedido por WhatsApp</span></button>
-    <div class="wa-i">Se abre WhatsApp con tu pedido armado</div>
-  </div>
-</div>
-<div class="tst" id="tst"></div>
+<a href="https://wa.me/5491100000000?text=Hola%20Mangini%2C%20quiero%20hacer%20un%20pedido." class="waf" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.326 0-4.48-.764-6.219-2.055l-.435-.334-2.998 1.005 1.005-2.998-.334-.435A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+
+<div class="toast" id="toast"></div>
 
 <script>
 const P=[
-  {id:1,name:"Medialunas Dulces",desc:"Medialunas de manteca recién horneadas, crocantes y tiernas.",price:14300,cat:"Facturas",img:"img/MEDIALUNAS DULCES.JPG",tag:"Más vendido",unit:"docena"},
-  {id:2,name:"Medialunas Saladas",desc:"Medialunas saladas ideales para sándwich o acompañar.",price:14300,cat:"Facturas",img:"img/medialunas saladas.JPG",unit:"docena"},
-  {id:3,name:"Facturas Surtidas",desc:"Vigilantes, cañoncitos, cremona, bola de fraile y más.",price:14300,cat:"Facturas",img:"img/FACTURAS SURTIDAS.JPG",unit:"docena"},
-  {id:4,name:"Cremonas",desc:"Rellenas de crema pastelera artesanal. Un clásico Mangini.",price:2050,cat:"Facturas",img:"img/cremonas.JPG",tag:"Clásico"},
-  {id:5,name:"Tortitas Negras",desc:"Tortitas negras con cobertura de azúcar quemada, receta tradicional.",price:2050,cat:"Facturas",img:"img/tortitas negras.JPG"},
-  {id:6,name:"Masitas Surtidas",desc:"Bandeja de masitas finas artesanales, variedad de sabores.",price:28500,cat:"Facturas",img:"img/masitas.JPG",tag:"Para regalar",unit:"kg"},
-  {id:7,name:"Mini Alfajores de Maicena",desc:"Alfajorcitos caseros con dulce de leche y coco rallado.",price:6650,cat:"Facturas",img:"img/Mini Alfajoreces de maicena.JPG",unit:"¼ kg"},
-  {id:8,name:"Pastaflora de Batata",desc:"Pastaflora casera rellena de dulce de batata, receta clásica.",price:26000,cat:"Facturas",img:"img/PASTAFLORA DE BATATA.JPG"},
-  {id:10,name:"Torta Mangini",desc:"Nuestra torta insignia con cobertura de chocolate y frutilla.",price:35700,cat:"Tortas",img:"img/torta mangini .JPG",tag:"Insignia"},
-  {id:11,name:"Torta Balcarce",desc:"Bizcochuelo, crema chantilly, merengue y dulce de leche.",price:35700,cat:"Tortas",img:"img/torta balcarce .JPG"},
-  {id:12,name:"Torta Niza",desc:"Brownie, dulce de leche y merengue italiano. Irresistible.",price:35700,cat:"Tortas",img:"img/torta niza.JPG"},
-  {id:13,name:"Torta Aconcagua",desc:"Glaseado de chocolate intenso con terminación artesanal.",price:35700,cat:"Tortas",img:"img/torta aconcagua.JPG"},
-  {id:20,name:"Tarta de Puerro y Jamón",desc:"Tarta individual con puerro, jamón y queso gratinado.",price:6100,cat:"Tartas y Salados",img:"img/tarta de puerro y jamon.JPG"},
-  {id:21,name:"Tarta de Calabaza",desc:"Tarta individual cremosa de calabaza asada.",price:6100,cat:"Tartas y Salados",img:"img/tarta de calabaza.JPG"},
-  {id:22,name:"Tarta Calabaza y Acelga",desc:"Combinación de calabaza y acelga en masa casera.",price:6100,cat:"Tartas y Salados",img:"img/tarta calabaza y acelga.JPG"},
-  {id:23,name:"Tarta de Queso",desc:"Tarta individual de queso gratinado, masa crocante.",price:6100,cat:"Tartas y Salados",img:"img/tarta salada de queso .JPG"},
-  {id:24,name:"Canastita de J&Q",desc:"Canasta de jamón y queso en masa hojaldrada.",price:2850,cat:"Tartas y Salados",img:"img/canastita de jyq.JPG"},
-  {id:25,name:"Canastita de Verdura",desc:"Canasta rellena de verduras frescas de estación.",price:2850,cat:"Tartas y Salados",img:"img/canastita de verdura.JPG"},
-  {id:26,name:"Canastita de Humita",desc:"Canasta con relleno cremoso de humita casera.",price:2850,cat:"Tartas y Salados",img:"img/canastita de humita.JPG"},
-  {id:27,name:"Empanada Árabe",desc:"Empanada de masa fina estilo árabe con carne especiada.",price:2850,cat:"Tartas y Salados",img:"img/empanada arabe.JPG"},
-  {id:28,name:"Pastel de Papa",desc:"Pastel de papa gratinado con carne, en bandeja individual.",price:5700,cat:"Tartas y Salados",img:"img/pastel de papa.JPG"},
-  {id:29,name:"Arrollado de Pollo",desc:"Arrollado de pollo con papa gratinado, listo para comer.",price:5700,cat:"Tartas y Salados",img:"img/arrollado de pollo con papa.JPG"},
-  {id:30,name:"Pan Francés",desc:"Pan francés clásico, corteza dorada y miga esponjosa.",price:2550,cat:"Panes",img:"img/pan frances.JPG",unit:"½ kg"},
-  {id:31,name:"Pan Flauta",desc:"Baguette alargada con corteza crocante y miga aireada.",price:2550,cat:"Panes",img:"img/pan flauta.JPG"},
-  {id:32,name:"Pan Mignón en Tira",desc:"Pancitos mignón ideales para picada o sándwich.",price:2550,cat:"Panes",img:"img/pan mignion en tira.JPG"},
-  {id:33,name:"Pan de Campo",desc:"Pan rústico de campo con corteza dorada artesanal.",price:3800,cat:"Panes",img:"img/pan de campo.JPG"},
-  {id:34,name:"Pan de Salvado",desc:"Pan integral de salvado, saludable y con mucha fibra.",price:3400,cat:"Panes",img:"img/pan de salvado.JPG"},
-  {id:35,name:"Pan Lactal Multicereal",desc:"Pan lactal con semillas y cereales variados, rebanado.",price:4250,cat:"Panes",img:"img/pan lactal multicereal .JPG",tag:"Saludable"},
-  {id:36,name:"Pan de Masa Madre",desc:"Fermentación natural 24hs con semillas. Sabor intenso.",price:5500,cat:"Panes",img:"img/pan de masa madre .JPG",tag:"Artesanal"},
-  {id:37,name:"Pan Masa Madre sin Semilla",desc:"Masa madre clásica, corteza crujiente, sin semillas.",price:5100,cat:"Panes",img:"img/pan de masa madre sin semilla.JPG"},
-  {id:38,name:"Pan de Queso",desc:"Pan de queso artesanal, esponjoso y aromático.",price:4250,cat:"Panes",img:"img/pan de queso.JPG"},
-  {id:39,name:"Figaza con Queso",desc:"Figaza artesanal con queso, ideal para acompañar.",price:3800,cat:"Panes",img:"img/figaza con queso .JPG"},
-  {id:40,name:"Figaza de Manteca",desc:"Figaza alargada de manteca, suave y dorada.",price:3400,cat:"Panes",img:"img/figaza de manteca alargada.JPG"},
-  {id:41,name:"Chapata",desc:"Chapata clásica italiana con corteza crujiente.",price:3000,cat:"Panes",img:"img/chapata.JPG"},
-  {id:42,name:"Chapata Multicereal",desc:"Chapata con semillas de lino, girasol, sésamo y chía.",price:3400,cat:"Panes",img:"img/chapata multicereal.JPG"},
+  {id:1,name:"Medialunas Dulces",desc:"Medialunas de manteca recién horneadas, crocantes y tiernas.",price:1200,cat:"Facturas",img:"MEDIALUNAS DULCES.JPG",tag:"Más vendido",unit:"x 6"},
+  {id:2,name:"Medialunas Saladas",desc:"Medialunas saladas ideales para sándwich o acompañar.",price:1200,cat:"Facturas",img:"medialunas saladas.JPG",unit:"x 6"},
+  {id:3,name:"Facturas Surtidas",desc:"Vigilantes, cañoncitos, cremona, bola de fraile y más.",price:2400,cat:"Facturas",img:"FACTURAS SURTIDAS.JPG",unit:"x 6"},
+  {id:4,name:"Cremonas",desc:"Rellenas de crema pastelera artesanal. Un clásico Mangini.",price:650,cat:"Facturas",img:"cremonas.JPG",tag:"Clásico",unit:"unidad"},
+  {id:5,name:"Tortitas Negras",desc:"Tortitas negras con cobertura de azúcar quemada, receta tradicional.",price:650,cat:"Facturas",img:"tortitas negras.JPG",unit:"unidad"},
+  {id:6,name:"Masitas Surtidas",desc:"Bandeja de masitas finas artesanales, variedad de sabores.",price:5800,cat:"Facturas",img:"masitas.JPG",tag:"Para regalar",unit:"½ kg"},
+  {id:7,name:"Mini Alfajores de Maicena",desc:"Alfajorcitos caseros con dulce de leche y coco rallado.",price:2800,cat:"Facturas",img:"Mini Alfajoreces de maicena.JPG",unit:"x 6"},
+  {id:8,name:"Pastaflora de Batata",desc:"Pastaflora casera rellena de dulce de batata, receta clásica.",price:4500,cat:"Facturas",img:"PASTAFLORA DE BATATA.JPG",unit:"unidad"},
+
+  {id:10,name:"Torta Mangini",desc:"Nuestra torta insignia con cobertura de chocolate y frutilla.",price:15000,cat:"Tortas",img:"torta mangini .JPG",tag:"Insignia"},
+  {id:11,name:"Torta Balcarce",desc:"Bizcochuelo, crema chantilly, merengue y dulce de leche.",price:15000,cat:"Tortas",img:"torta balcarce .JPG"},
+  {id:12,name:"Torta Niza",desc:"Brownie, dulce de leche y merengue italiano. Irresistible.",price:15000,cat:"Tortas",img:"torta niza.JPG"},
+  {id:13,name:"Torta Aconcagua",desc:"Glaseado de chocolate intenso con terminación artesanal.",price:15000,cat:"Tortas",img:"torta aconcagua.JPG"},
+
+  {id:20,name:"Tarta de Puerro y Jamón",desc:"Tarta individual con puerro, jamón y queso gratinado.",price:2800,cat:"Tartas y Salados",img:"tarta de puerro y jamon.JPG",unit:"unidad"},
+  {id:21,name:"Tarta de Calabaza",desc:"Tarta individual cremosa de calabaza asada.",price:2800,cat:"Tartas y Salados",img:"tarta de calabaza.JPG",unit:"unidad"},
+  {id:22,name:"Tarta Calabaza y Acelga",desc:"Combinación de calabaza y acelga en masa casera.",price:2800,cat:"Tartas y Salados",img:"tarta calabaza y acelga.JPG",unit:"unidad"},
+  {id:23,name:"Tarta de Queso",desc:"Tarta individual de queso gratinado, masa crocante.",price:2800,cat:"Tartas y Salados",img:"tarta salada de queso .JPG",unit:"unidad"},
+  {id:24,name:"Canastita de J&Q",desc:"Canasta de jamón y queso en masa hojaldrada.",price:1500,cat:"Tartas y Salados",img:"canastita de jyq.JPG",unit:"unidad"},
+  {id:25,name:"Canastita de Verdura",desc:"Canasta rellena de verduras frescas de estación.",price:1500,cat:"Tartas y Salados",img:"canastita de verdura.JPG",unit:"unidad"},
+  {id:26,name:"Canastita de Humita",desc:"Canasta con relleno cremoso de humita casera.",price:1500,cat:"Tartas y Salados",img:"canastita de humita.JPG",unit:"unidad"},
+  {id:27,name:"Empanada Árabe",desc:"Empanada de masa fina estilo árabe con carne especiada.",price:1500,cat:"Tartas y Salados",img:"empanada arabe.JPG",unit:"unidad"},
+  {id:28,name:"Pastel de Papa",desc:"Pastel de papa gratinado con carne, en bandeja individual.",price:3200,cat:"Tartas y Salados",img:"pastel de papa.JPG",unit:"unidad"},
+  {id:29,name:"Arrollado de Pollo",desc:"Arrollado de pollo con papa gratinado, listo para comer.",price:3200,cat:"Tartas y Salados",img:"arrollado de pollo con papa.JPG",unit:"unidad"},
+
+  {id:30,name:"Pan Francés",desc:"Pan francés clásico, corteza dorada y miga esponjosa.",price:1800,cat:"Panes",img:"pan frances.JPG",unit:"½ kg"},
+  {id:31,name:"Pan Flauta",desc:"Baguette alargada con corteza crocante y miga aireada.",price:1800,cat:"Panes",img:"pan flauta.JPG",unit:"unidad"},
+  {id:32,name:"Pan Mignón en Tira",desc:"Pancitos mignón ideales para picada o sándwich.",price:1800,cat:"Panes",img:"pan mignion en tira.JPG",unit:"tira"},
+  {id:33,name:"Pan de Campo",desc:"Pan rústico de campo con corteza dorada artesanal.",price:2500,cat:"Panes",img:"pan de campo.JPG",unit:"unidad"},
+  {id:34,name:"Pan de Salvado",desc:"Pan integral de salvado, saludable y con mucha fibra.",price:2200,cat:"Panes",img:"pan de salvado.JPG",unit:"unidad"},
+  {id:35,name:"Pan Lactal Multicereal",desc:"Pan lactal con semillas y cereales variados, rebanado.",price:2800,cat:"Panes",img:"pan lactal multicereal .JPG",tag:"Saludable",unit:"unidad"},
+  {id:36,name:"Pan de Masa Madre",desc:"Fermentación natural 24hs con semillas. Sabor intenso.",price:3200,cat:"Panes",img:"pan de masa madre .JPG",tag:"Artesanal",unit:"unidad"},
+  {id:37,name:"Pan Masa Madre sin Semilla",desc:"Masa madre clásica, corteza crujiente, sin semillas.",price:3000,cat:"Panes",img:"pan de masa madre sin semilla.JPG",unit:"unidad"},
+  {id:38,name:"Pan de Queso",desc:"Pan de queso artesanal, esponjoso y aromático.",price:2500,cat:"Panes",img:"pan de queso.JPG",unit:"unidad"},
+  {id:39,name:"Figaza con Queso",desc:"Figaza artesanal con queso, ideal para acompañar.",price:2200,cat:"Panes",img:"figaza con queso .JPG",unit:"unidad"},
+  {id:40,name:"Figaza de Manteca",desc:"Figaza alargada de manteca, suave y dorada.",price:2000,cat:"Panes",img:"figaza de manteca alargada.JPG",unit:"unidad"},
+  {id:41,name:"Chapata",desc:"Chapata clásica italiana con corteza crujiente.",price:1800,cat:"Panes",img:"chapata.JPG",unit:"unidad"},
+  {id:42,name:"Chapata Multicereal",desc:"Chapata con semillas de lino, girasol, sésamo y chía.",price:2200,cat:"Panes",img:"chapata multicereal.JPG",unit:"unidad"},
 ];
 
 const CATS=["Todo",...[...new Set(P.map(p=>p.cat))]];
 const urlCat=new URLSearchParams(location.search).get('cat');
 let aCat=urlCat||"Todo",cart=JSON.parse(localStorage.getItem('mangini_cart')||'[]'),searchQ="";
 
-/* Load cart from localStorage */
-try{const saved=localStorage.getItem('mangini_cart');if(saved)cart=JSON.parse(saved)}catch(e){}
 function saveCart(){try{localStorage.setItem('mangini_cart',JSON.stringify(cart))}catch(e){}}
 
 function rFlt(){
-  document.getElementById('flt').innerHTML=CATS.map(c=>`<button class="flt-b${c===aCat?' on':''}" data-c="${c}">${c}</button>`).join('');
-  document.querySelectorAll('.flt-b').forEach(b=>b.onclick=()=>{aCat=b.dataset.c;rFlt();rProd()});
+  document.getElementById('flt').innerHTML=CATS.map(c=>`<button class="flt-btn${c===aCat?' on':''}" data-c="${c}">${c}</button>`).join('');
+  document.querySelectorAll('.flt-btn').forEach(b=>b.onclick=()=>{aCat=b.dataset.c;rFlt();rProd()});
 }
 
 function rProd(){
   const g=document.getElementById('pGrid');
   const q=searchQ.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   let l=aCat==="Todo"?P:P.filter(p=>p.cat===aCat);
-  if(q){
-    l=l.filter(p=>{
-      const name=p.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      const desc=p.desc.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      const cat=p.cat.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-      return name.includes(q)||desc.includes(q)||cat.includes(q);
-    });
-  }
-  document.getElementById('resCnt').textContent=l.length===P.length?`${l.length} productos`:`${l.length} producto${l.length!==1?'s':''} encontrado${l.length!==1?'s':''}`;
-  if(!l.length){
-    g.innerHTML='<div class="no-res"><div class="no-res-ico">&#9675;</div><div class="no-res-t">No encontramos resultados</div><p class="no-res-p">Prueba con otro termino de busqueda o cambia la categoria.</p></div>';
-    return;
-  }
-  g.innerHTML=l.map((p,i)=>`
-    <div class="pcard" data-r="s" style="transition-delay:${Math.min(i*50,400)}ms">
-      <div class="pcard-img">
-        ${p.tag?`<div class="pcard-tag">${p.tag}</div>`:''}
+  if(q){l=l.filter(p=>{
+    const n=p.name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    const d=p.desc.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    return n.includes(q)||d.includes(q);
+  })}
+  document.getElementById('resCnt').textContent=`${l.length} producto${l.length!==1?'s':''}`;
+  if(!l.length){g.innerHTML='<div class="no-res"><h3>No encontramos resultados</h3><p>Probá con otro término o cambiá la categoría.</p></div>';return}
+  g.innerHTML=l.map(p=>`
+    <div class="pc">
+      <div class="pc__i">
+        ${p.tag?`<div class="pc__tag">${p.tag}</div>`:''}
         <img src="${p.img}" alt="${p.name}" loading="lazy">
       </div>
-      <div class="pcard-body">
-        <div class="pcard-cat">${p.cat}</div>
-        <div class="pcard-name">${p.name}</div>
-        <div class="pcard-desc">${p.desc}</div>
-        <div class="pcard-ft">
-          <div class="pcard-pr">$${p.price.toLocaleString('es-AR')}${p.unit?`<small>${p.unit}</small>`:''}</div>
-          <button class="add-b" data-id="${p.id}" aria-label="Agregar">
+      <div class="pc__b">
+        <div class="pc__cat">${p.cat}</div>
+        <div class="pc__n">${p.name}</div>
+        <div class="pc__d">${p.desc}</div>
+        <div class="pc__ft">
+          <div class="pc__pr">$${p.price.toLocaleString('es-AR')}${p.unit?`<small>${p.unit}</small>`:''}</div>
+          <button class="pc__add" data-id="${p.id}" aria-label="Agregar al carrito">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
           </button>
         </div>
       </div>
     </div>`).join('');
-  g.querySelectorAll('.add-b').forEach(b=>{
-    b.onclick=e=>{e.stopPropagation();addC(+b.dataset.id);b.classList.add('ok');b.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>';setTimeout(()=>{b.classList.remove('ok');b.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>'},1200)}
-  });obs();
+  g.querySelectorAll('.pc__add').forEach(b=>{
+    b.onclick=()=>{addC(+b.dataset.id);b.classList.add('ok');b.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/></svg>';setTimeout(()=>{b.classList.remove('ok');b.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>'},1200)}
+  });
 }
 
-function addC(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});saveCart();uC();tst('Agregado al carrito')}
+function addC(id){const x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});saveCart();uC();showToast('Agregado al carrito')}
 function rmC(id){cart=cart.filter(i=>i.id!==id);saveCart();uC()}
 function chQ(id,d){const x=cart.find(i=>i.id===id);if(!x)return;x.qty+=d;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);saveCart();uC()}
 function tot(){return cart.reduce((s,i)=>{const p=P.find(x=>x.id===i.id);return s+(p?p.price*i.qty:0)},0)}
+
 function uC(){
   const n=cart.reduce((s,i)=>s+i.qty,0);
-  document.getElementById('cDot').classList.toggle('on',n>0);
-  document.getElementById('cCnt').textContent=n?` (${n})`:'';
-  const bd=document.getElementById('cBd'),ft=document.getElementById('cFt');
-  if(!cart.length){bd.innerHTML='<div class="c-em"><div class="c-em-i">&#9675;</div><p>Tu carrito esta vacio</p></div>';ft.style.display='none';return}
+  document.getElementById('cCnt').textContent=n;
+  const items=document.getElementById('cI'),ft=document.getElementById('cF'),wa=document.getElementById('cW');
+  if(!cart.length){items.innerHTML='<p class="cp__empty">Tu carrito está vacío.</p>';ft.style.display='none';return}
   ft.style.display='block';
-  bd.innerHTML=cart.map(i=>{const p=P.find(x=>x.id===i.id);if(!p)return'';return`<div class="ci"><div class="ci-img"><img src="${p.img}" alt="${p.name}"></div><div class="ci-nfo"><div class="ci-nm">${p.name}</div><div class="ci-pr">$${(p.price*i.qty).toLocaleString('es-AR')}</div><div class="ci-q"><button class="q-b" onclick="chQ(${p.id},-1)">&#8722;</button><span class="ci-qn">${i.qty}</span><button class="q-b" onclick="chQ(${p.id},1)">+</button></div></div><button class="ci-rm" onclick="rmC(${p.id})"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg></button></div>`}).join('');
-  const t=tot();document.getElementById('cSub').textContent=`$${t.toLocaleString('es-AR')}`;document.getElementById('cTot').textContent=`$${t.toLocaleString('es-AR')}`;
+  const t=tot();
+  document.getElementById('cT').textContent=`$${t.toLocaleString('es-AR')}`;
+  items.innerHTML=cart.map(i=>{const p=P.find(x=>x.id===i.id);if(!p)return'';return`<div class="ci"><div class="ci__img"><img src="${p.img}" alt="${p.name}"></div><div class="ci__info"><div class="ci__n">${p.name}</div><div class="ci__p">$${(p.price*i.qty).toLocaleString('es-AR')}</div><div class="ci__q"><button onclick="chQ(${p.id},-1)">−</button><em>${i.qty}</em><button onclick="chQ(${p.id},1)">+</button></div></div><button class="ci__rm" onclick="rmC(${p.id})">×</button></div>`}).join('');
+  wa.href=`https://wa.me/5491100000000?text=${encodeURIComponent(`Hola Mangini, quiero comprar:\n\n${cart.map(i=>{const p=P.find(x=>x.id===i.id);return p?`• ${i.qty}× ${p.name} — $${(p.price*i.qty).toLocaleString('es-AR')}`:''}).join('\n')}\n\nTotal: $${t.toLocaleString('es-AR')}`)}`;
 }
 
-function openC(){document.getElementById('cOv').classList.add('open');document.getElementById('cDr').classList.add('open');document.body.style.overflow='hidden'}
-function closeC(){document.getElementById('cOv').classList.remove('open');document.getElementById('cDr').classList.remove('open');document.body.style.overflow=''}
-function closeMob(){document.getElementById('mobNav').classList.remove('open');document.getElementById('mobT').classList.remove('active');document.body.style.overflow=''}
-document.getElementById('mobT').onclick=()=>{const n=document.getElementById('mobNav'),t=document.getElementById('mobT');n.classList.toggle('open');t.classList.toggle('active');document.body.style.overflow=n.classList.contains('open')?'hidden':''};
-document.getElementById('cOpen').onclick=openC;
-document.getElementById('cCl').onclick=closeC;
-document.getElementById('cOv').onclick=closeC;
-document.getElementById('ckB').onclick=()=>{
-  if(!cart.length)return;
-  let m='¡Hola Mangini! Quiero hacer este pedido:\n\n';
-  cart.forEach(i=>{const p=P.find(x=>x.id===i.id);if(p)m+=`• ${i.qty}× ${p.name} — $${(p.price*i.qty).toLocaleString('es-AR')}\n`});
-  m+=`\nTotal: $${tot().toLocaleString('es-AR')}\n\n¡Gracias!`;
-  window.open(`https://wa.me/5491157491693?text=${encodeURIComponent(m)}`,'_blank');
-};
-function tst(t){const e=document.getElementById('tst');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2000)}
+function openC(){document.getElementById('cO').classList.add('open');document.getElementById('cP').classList.add('open');document.body.style.overflow='hidden'}
+function closeC(){document.getElementById('cO').classList.remove('open');document.getElementById('cP').classList.remove('open');document.body.style.overflow=''}
+function showToast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2000)}
 
-/* Search */
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''});
+function cM(){ham.classList.remove('open');mob.classList.remove('open');document.body.style.overflow=''}
+
 document.getElementById('searchInp').addEventListener('input',function(){searchQ=this.value;rProd()});
 
-/* Header scroll */
-let sTick=false;
-window.addEventListener('scroll',()=>{if(!sTick){sTick=true;requestAnimationFrame(()=>{document.getElementById('hdr').classList.toggle('s',scrollY>50);sTick=false})}},{passive:true});
-
-/* Reveal observer */
-const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){const el=e.target,d=el.dataset.d||0;setTimeout(()=>{el.classList.add('v');setTimeout(()=>{el.style.willChange='auto'},800)},+d);io.unobserve(el)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-function obs(){document.querySelectorAll('[data-r]:not(.v)').forEach(el=>io.observe(el))}
-
-/* Init */
-rFlt();rProd();uC();obs();
+rFlt();rProd();uC();
 </script>
 </body>
 </html>

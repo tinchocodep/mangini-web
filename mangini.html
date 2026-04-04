@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Mangini — Confitería & Panadería Artesanal | Buenos Aires</title>
+<meta name="description" content="Panadería artesanal con producción propia. Facturas, tortas, panes y medialunas recién horneados todos los días. 5 sucursales en Buenos Aires.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#faf9f6;--dark:#1a1a1a;--mid:#e8e6e1;--accent:#8b5e6b;--accent-l:#a87783;
+  --text:#2c2c2c;--text-s:#888;--text-inv:#faf9f6;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}[data-a]{opacity:1!important;transform:none!important}}
+::selection{background:var(--accent);color:#fff}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+
+[data-a]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+[data-a].v{opacity:1;transform:none}
+[data-a][data-d="1"]{transition-delay:.12s}[data-a][data-d="2"]{transition-delay:.24s}[data-a][data-d="3"]{transition-delay:.36s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;transition:all .5s}
+nav.s{background:rgba(250,249,246,.93);backdrop-filter:blur(20px);padding:16px 32px}
+.nl{display:flex;align-items:center}.nl img{height:36px;width:auto;transition:filter .3s}.nl.inv img{filter:brightness(0) invert(1)}nav.s .nl img{filter:none!important}
+.nk{display:none;gap:32px;list-style:none}
+.nk a{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:var(--text);opacity:.5;transition:opacity .3s}.nk a.inv{color:var(--text-inv)}nav.s .nk a{color:var(--text)!important}.nk a:hover{opacity:1}
+.nr{display:flex;align-items:center;gap:20px}
+.nc{font-family:var(--sans);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);opacity:.5;display:none;transition:opacity .3s;position:relative;cursor:pointer;background:none;border:none}.nc.inv{color:var(--text-inv)}nav.s .nc{color:var(--text)!important}.nc:hover{opacity:1}
+.nc span{position:absolute;top:-6px;right:-14px;width:16px;height:16px;border-radius:50%;background:var(--accent);color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center}
+.nh{display:flex;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;padding:6px}
+.nh em{display:block;width:22px;height:1px;background:var(--text);transition:all .4s;font-style:normal}.nh.inv em{background:var(--text-inv)}nav.s .nh em{background:var(--text)!important}
+.nh.open em:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.nh.open em:nth-child(2){opacity:0}.nh.open em:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(min-width:900px){.nk{display:flex}.nc{display:block}.nh{display:none}nav{padding:28px 48px}nav.s{padding:18px 48px}}
+
+.mob{position:fixed;inset:0;z-index:99;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .4s}
+.mob.open{opacity:1;pointer-events:auto}.mob a{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--text)}
+
+/* CART */
+.co{position:fixed;inset:0;background:rgba(26,26,26,.4);z-index:200;opacity:0;pointer-events:none;transition:opacity .4s}.co.open{opacity:1;pointer-events:auto}
+.cp{position:fixed;top:0;right:0;bottom:0;width:380px;max-width:90vw;background:var(--bg);z-index:201;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1);padding:32px;display:flex;flex-direction:column}
+.cp.open{transform:none}
+.cp__h{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+.cp__t{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.cp__x{background:none;border:none;font-size:22px;cursor:pointer;color:var(--text);padding:4px}
+.cp__items{flex:1;overflow-y:auto}
+.cp__empty{font-family:var(--sans);font-size:14px;font-weight:300;color:var(--text-s)}
+.ci{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--mid)}
+.ci__img{width:64px;height:64px;overflow:hidden;flex-shrink:0}.ci__img img{width:100%;height:100%;object-fit:cover}
+.ci__info{flex:1}.ci__n{font-family:var(--sans);font-size:13px;font-weight:500}.ci__p{font-family:var(--sans);font-size:13px;color:var(--accent);margin-top:4px}
+.ci__q{display:flex;align-items:center;gap:12px;margin-top:8px}
+.ci__q button{width:24px;height:24px;border:1px solid var(--mid);background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:border-color .3s}.ci__q button:hover{border-color:var(--accent)}
+.ci__q em{font-style:normal;font-family:var(--sans);font-size:13px}
+.cp__f{padding-top:24px;border-top:1px solid var(--mid)}
+.cp__total{display:flex;justify-content:space-between;margin-bottom:20px;font-family:var(--sans);font-size:14px;font-weight:500}
+.cp__wa{display:block;text-align:center;padding:14px;background:var(--accent);color:#fff;font-family:var(--sans);font-size:12px;letter-spacing:.1em;text-transform:uppercase;transition:background .3s}.cp__wa:hover{background:var(--accent-l)}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;display:flex;align-items:flex-end}
+.hero__img{position:absolute;inset:0;background:url('MEDIALUNAS DULCES.JPG') center/cover}
+.hero__ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,26,.68) 0%,rgba(26,26,26,.08) 50%,rgba(26,26,26,.2) 100%)}
+.hero__c{position:relative;z-index:2;padding:0 32px 72px;max-width:800px}
+.hero__pre{font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,249,246,.45);margin-bottom:24px;opacity:0;animation:fu .8s .4s forwards}
+.hero__h1{font-family:var(--serif);font-size:clamp(44px,8.5vw,84px);font-weight:300;color:var(--text-inv);line-height:1.06;margin-bottom:20px;opacity:0;animation:fu .8s .6s forwards}.hero__h1 em{font-style:italic}
+.hero__sub{font-family:var(--sans);font-size:15px;font-weight:300;color:rgba(250,249,246,.6);line-height:1.75;max-width:400px;margin-bottom:40px;opacity:0;animation:fu .8s .8s forwards}
+.hero__btns{display:flex;gap:24px;flex-wrap:wrap;opacity:0;animation:fu .8s 1s forwards}
+.hb{padding:14px 0;font-family:var(--sans);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-inv);border-bottom:1px solid rgba(250,249,246,.3);transition:all .4s}.hb:hover{border-color:var(--accent-l);color:var(--accent-l)}
+.hb--a{border-bottom-color:var(--accent);color:var(--accent-l)}
+.hscr{position:absolute;bottom:32px;right:32px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fu .8s 1.3s forwards}
+.hscr b{font-family:var(--sans);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(250,249,246,.25);writing-mode:vertical-lr;font-weight:400}
+.scrl{width:1px;height:40px;background:rgba(250,249,246,.12);overflow:hidden;position:relative}.scrl::after{content:'';position:absolute;left:0;width:100%;height:100%;background:var(--accent);animation:sl 2.2s infinite}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes sl{0%{top:-100%}50%{top:100%}100%{top:100%}}
+@media(min-width:900px){.hero__c{padding:0 48px 96px}}
+
+/* MARQUEE */
+.mq{overflow:hidden;padding:28px 0;border-bottom:1px solid var(--mid)}
+.mq__t{display:flex;width:max-content;animation:mr 40s linear infinite}
+.mq__i{font-family:var(--serif);font-size:18px;font-weight:300;font-style:italic;color:var(--text-s);white-space:nowrap;padding:0 20px}.mq__i::after{content:'·';padding-left:20px}
+@keyframes mr{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@media(min-width:768px){.mq__i{font-size:22px;padding:0 28px}.mq__i::after{padding-left:28px}.mq{padding:36px 0}}
+
+/* SHARED */
+.sec{padding:100px 32px}.sec--d{background:var(--dark);color:var(--text-inv)}
+.si{max-width:1000px;margin:0 auto}
+.pre{font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.h2{font-family:var(--serif);font-size:clamp(28px,4.5vw,48px);font-weight:300;line-height:1.2;margin-bottom:20px}
+.pp{font-family:var(--sans);font-size:15px;font-weight:300;line-height:1.8;color:var(--text-s);max-width:520px}.pp+.pp{margin-top:16px}
+@media(min-width:900px){.sec{padding:140px 48px}}
+
+/* FEATURED */
+.fgrid{display:grid;gap:1px;background:var(--mid);margin-top:48px}
+.fc{background:var(--bg);overflow:hidden;transition:background .4s}.fc:hover{background:#fff}
+.fc__i{aspect-ratio:4/5;overflow:hidden;position:relative}.fc__i img{width:100%;height:100%;object-fit:cover;transition:transform 5s cubic-bezier(.16,1,.3,1)}.fc:hover .fc__i img{transform:scale(1.04)}
+.fc__badge{position:absolute;top:16px;left:16px;font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:4px 10px}
+.fc__b{padding:24px}
+.fc__n{font-family:var(--sans);font-size:14px;font-weight:500;margin-bottom:6px}
+.fc__p{font-family:var(--sans);font-size:16px;color:var(--accent)}
+.fc__add{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-s);cursor:pointer;background:none;border:none;padding:0;transition:color .3s}.fc__add:hover{color:var(--accent)}
+.va{display:inline-flex;align-items:center;gap:8px;margin-top:48px;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);padding:12px 0;border-bottom:1px solid var(--accent);transition:all .3s}.va:hover{color:var(--text);border-color:var(--text)}
+@media(min-width:640px){.fgrid{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.fgrid{grid-template-columns:repeat(4,1fr)}}
+
+/* PROMOS */
+.promos{display:grid;gap:1px;background:var(--mid)}
+.promo{position:relative;overflow:hidden;min-height:400px;display:flex;align-items:flex-end}
+.promo__i{position:absolute;inset:0}.promo__i img{width:100%;height:100%;object-fit:cover;transition:transform 5s cubic-bezier(.16,1,.3,1)}.promo:hover .promo__i img{transform:scale(1.04)}
+.promo__o{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,26,.6) 0%,transparent 60%)}
+.promo__c{position:relative;z-index:2;padding:32px}
+.promo__t{font-family:var(--serif);font-size:clamp(24px,3vw,36px);font-weight:300;color:var(--text-inv);margin-bottom:8px}
+.promo__s{font-family:var(--sans);font-size:14px;font-weight:300;color:rgba(250,249,246,.6);line-height:1.6;max-width:360px;margin-bottom:20px}
+.promo__lk{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-inv);padding:8px 0;border-bottom:1px solid rgba(250,249,246,.3);transition:all .3s;display:inline-block}.promo__lk:hover{border-color:var(--accent-l);color:var(--accent-l)}
+@media(min-width:768px){.promos{grid-template-columns:1fr 1fr}.promo:first-child{grid-row:span 2}}
+
+/* GALLERY */
+.gallery{display:grid;gap:1px;background:var(--mid)}
+.gi{overflow:hidden}.gi img{width:100%;height:100%;object-fit:cover;transition:transform 5s cubic-bezier(.16,1,.3,1)}.gi:hover img{transform:scale(1.05)}
+.gal-2{grid-template-columns:1fr 1fr}.gal-2 .gi{aspect-ratio:3/2}
+.gal-3{grid-template-columns:1fr 1fr 1fr}.gal-3 .gi{aspect-ratio:4/3}
+.gal-h{grid-template-columns:2fr 1fr}.gal-h .gi:first-child{aspect-ratio:16/9;grid-row:span 2}.gal-h .gi{aspect-ratio:1/1}
+@media(max-width:767px){.gal-2,.gal-3,.gal-h{grid-template-columns:1fr}.gal-h .gi:first-child{grid-row:auto}}
+
+/* IMGBREAK */
+.ib{width:100%;height:55vh;min-height:360px;overflow:hidden}.ib img{width:100%;height:100%;object-fit:cover}
+
+/* ABOUT */
+.about{display:grid;gap:48px}
+.about__imgs{display:grid;gap:1px;background:var(--mid)}.about__imgs .ai{overflow:hidden;aspect-ratio:4/3}.about__imgs .ai img{width:100%;height:100%;object-fit:cover;transition:transform 6s cubic-bezier(.16,1,.3,1)}.about__imgs .ai:hover img{transform:scale(1.04)}
+.about__lk{display:inline-flex;align-items:center;gap:8px;margin-top:32px;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);padding:12px 0;border-bottom:1px solid var(--accent);transition:all .3s}.about__lk:hover{color:var(--text);border-color:var(--text)}
+.about__stats{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;padding-top:32px;border-top:1px solid var(--mid)}
+.as-n{font-family:var(--serif);font-size:32px;font-weight:300;line-height:1}.as-l{font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-s);margin-top:6px}
+@media(min-width:768px){.about{grid-template-columns:1fr 1fr;gap:80px;align-items:center}.about__imgs{grid-template-columns:1fr 1fr}}
+
+/* CATEGORIES */
+.cats{display:grid;gap:1px;background:var(--mid);margin-top:48px}
+.cat{position:relative;aspect-ratio:3/2;overflow:hidden;cursor:pointer}
+.cat img{width:100%;height:100%;object-fit:cover;transition:transform 4s cubic-bezier(.16,1,.3,1)}.cat:hover img{transform:scale(1.06)}
+.cat__o{position:absolute;inset:0;background:rgba(26,26,26,.35);transition:background .4s;display:flex;align-items:center;justify-content:center}.cat:hover .cat__o{background:rgba(26,26,26,.5)}
+.cat__n{font-family:var(--serif);font-size:22px;font-weight:300;color:var(--text-inv)}
+@media(min-width:640px){.cats{grid-template-columns:repeat(2,1fr)}}@media(min-width:900px){.cats{grid-template-columns:repeat(3,1fr)}}
+
+/* ORDER */
+.ogrid{display:grid;gap:1px;background:var(--mid);margin-top:48px}
+.oc{background:var(--bg);padding:40px 32px;transition:background .4s}.oc:hover{background:#fff}
+.oc__img{aspect-ratio:16/9;overflow:hidden;margin-bottom:20px}.oc__img img{width:100%;height:100%;object-fit:cover;transition:transform 4s cubic-bezier(.16,1,.3,1)}.oc:hover .oc__img img{transform:scale(1.04)}
+.oc__t{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.oc__p{font-family:var(--sans);font-size:14px;font-weight:300;line-height:1.75;color:var(--text-s);margin-bottom:16px}
+.oc__lk{font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:var(--accent);display:inline-flex;align-items:center;gap:6px;transition:color .3s}.oc__lk:hover{color:var(--text)}
+@media(min-width:640px){.ogrid{grid-template-columns:repeat(2,1fr)}}@media(min-width:900px){.ogrid{grid-template-columns:repeat(4,1fr)}}
+
+/* SUCURSALES */
+.sgrid{display:grid;gap:1px;background:var(--mid);margin-top:48px}
+.suc{background:var(--bg);overflow:hidden;transition:background .4s}.suc:hover{background:#fff}
+.suc__img{aspect-ratio:16/9;overflow:hidden}.suc__img img{width:100%;height:100%;object-fit:cover;transition:transform 5s cubic-bezier(.16,1,.3,1)}.suc:hover .suc__img img{transform:scale(1.04)}
+.suc__b{padding:24px}
+.suc__n{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.suc__d{font-family:var(--sans);font-size:13px;font-weight:300;color:var(--text-s);line-height:2}
+.suc__lk{display:inline-block;margin-top:10px;font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:var(--accent);transition:color .3s}.suc__lk:hover{color:var(--text)}
+@media(min-width:640px){.sgrid{grid-template-columns:repeat(2,1fr)}}@media(min-width:900px){.sgrid{grid-template-columns:repeat(3,1fr)}}
+
+/* FOOTER */
+footer{background:var(--dark);color:var(--text-inv);padding:64px 32px 32px}
+.fi{max-width:1000px;margin:0 auto}.fgr{display:grid;gap:40px;margin-bottom:56px}
+.ft{font-family:var(--sans);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(250,249,246,.3);margin-bottom:14px}
+.flogo{font-family:var(--serif);font-size:20px;font-weight:400;margin-bottom:10px}
+.ftag{font-family:var(--sans);font-size:13px;font-weight:300;color:rgba(250,249,246,.4);line-height:1.6}
+.flk{list-style:none}.flk li+li{margin-top:10px}.flk a{font-family:var(--sans);font-size:13px;font-weight:300;color:rgba(250,249,246,.45);transition:color .3s}.flk a:hover{color:var(--accent-l)}
+.fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;font-family:var(--sans);font-size:11px;font-weight:300;color:rgba(250,249,246,.2)}
+@media(min-width:768px){.fgr{grid-template-columns:2fr 1fr 1fr 1fr}footer{padding:80px 48px 32px}}
+
+/* WA */
+.waf{position:fixed;bottom:28px;right:28px;z-index:90;width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(139,94,107,.3);transition:transform .3s}.waf:hover{transform:scale(1.08)}.waf svg{width:24px;height:24px;fill:#fff}
+@media(max-width:767px){.waf{width:48px;height:48px;bottom:20px;right:20px}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nl inv"><img src="logo_mangini.png" alt="Mangini"></a>
+  <ul class="nk"><li><a href="#nosotros" class="inv">Nosotros</a></li><li><a href="#sucursales" class="inv">Sucursales</a></li><li><a href="productos.html" class="inv">Productos</a></li><li><a href="#como-pedir" class="inv">Cómo pedir</a></li></ul>
+  <div class="nr"><button class="nc inv" id="cBtn" onclick="tC()">Carrito <span id="cCnt">0</span></button><button class="nh inv" id="ham" aria-label="Menú"><em></em><em></em><em></em></button></div>
+</nav>
+<div class="mob" id="mob"><a href="#nosotros" onclick="cM()">Nosotros</a><a href="#sucursales" onclick="cM()">Sucursales</a><a href="productos.html" onclick="cM()">Productos</a><a href="#como-pedir" onclick="cM()">Cómo pedir</a></div>
+
+<div class="co" id="cO" onclick="xC()"></div>
+<div class="cp" id="cP">
+  <div class="cp__h"><div class="cp__t">Tu carrito</div><button class="cp__x" onclick="xC()">×</button></div>
+  <div class="cp__items" id="cI"><p class="cp__empty">Tu carrito está vacío.</p></div>
+  <div class="cp__f" id="cF" style="display:none"><div class="cp__total"><span>Total</span><span id="cT">$0</span></div><a href="#" class="cp__wa" id="cW" target="_blank">Finalizar compra por WhatsApp →</a></div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__img"></div>
+  <div class="hero__ov"></div>
+  <div class="hero__c">
+    <p class="hero__pre">Confitería & Panadería desde 2004</p>
+    <h1 class="hero__h1">Horneamos<br>cada <em>mañana</em></h1>
+    <p class="hero__sub">Producción propia en nuestra planta. Recetas de tradición europea. Hoy se hizo, hoy lo tenés.</p>
+    <div class="hero__btns"><a href="productos.html" class="hb hb--a">Ver productos</a><a href="#sucursales" class="hb">Ver sucursales</a></div>
+  </div>
+  <div class="hscr"><b>Scroll</b><div class="scrl"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq"><div class="mq__t"><span class="mq__i">Medialunas de Manteca</span><span class="mq__i">Pan con Masa Madre</span><span class="mq__i">Tortas Artesanales</span><span class="mq__i">Sándwiches de Miga</span><span class="mq__i">Facturas Surtidas</span><span class="mq__i">Chapata Multicereal</span><span class="mq__i">Empanadas de Hojaldre</span><span class="mq__i">Medialunas de Manteca</span><span class="mq__i">Pan con Masa Madre</span><span class="mq__i">Tortas Artesanales</span><span class="mq__i">Sándwiches de Miga</span><span class="mq__i">Facturas Surtidas</span><span class="mq__i">Chapata Multicereal</span><span class="mq__i">Empanadas de Hojaldre</span></div></div>
+
+<!-- GALLERY 1 -->
+<div class="gallery gal-h" data-a>
+  <div class="gi"><img src="pan frances.JPG" alt="Pan francés" loading="lazy"></div>
+  <div class="gi"><img src="MEDIALUNAS DULCES.JPG" alt="Medialunas dulces" loading="lazy"></div>
+  <div class="gi"><img src="masitas.JPG" alt="Masitas surtidas" loading="lazy"></div>
+</div>
+
+<!-- FEATURED -->
+<section class="sec" id="productos">
+  <div class="si">
+    <div data-a><p class="pre">Favoritos</p><h2 class="h2">¿Qué se lleva todo el mundo?</h2><p class="pp">Los favoritos de nuestras 5 sucursales. Probados cada día.</p></div>
+    <div class="fgrid" data-a data-d="1" id="fG"></div>
+    <a href="#categorias" class="va" data-a data-d="2">Ver todos los productos →</a>
+  </div>
+</section>
+
+<!-- PROMOS -->
+<section class="sec" style="padding-top:0">
+  <div class="si">
+    <div class="promos" data-a>
+      <div class="promo"><div class="promo__i"><img src="torta mangini .JPG" alt="Torta Mangini" loading="lazy"></div><div class="promo__o"></div><div class="promo__c"><h3 class="promo__t">Tortas para cada ocasión</h3><p class="promo__s">Cumpleaños, reuniones, o simplemente porque sí. Hacemos tortas que se recuerdan.</p><a href="#" class="promo__lk">Ver tortas →</a></div></div>
+      <div class="promo"><div class="promo__i"><img src="MEDIALUNAS DULCES.JPG" alt="Medialunas de manteca" loading="lazy"></div><div class="promo__o"></div><div class="promo__c"><h3 class="promo__t">Medialunas de manteca</h3><p class="promo__s">Masa madre, manteca real, horneadas esta mañana.</p><a href="#" class="promo__lk">Pedí ahora →</a></div></div>
+      <div class="promo"><div class="promo__i"><img src="pan de masa madre .JPG" alt="Pan de masa madre" loading="lazy"></div><div class="promo__o"></div><div class="promo__c"><h3 class="promo__t">Masa madre. 24 horas de fermentación.</h3><p class="promo__s">No hay atajo para el buen pan. Nuestro proceso empieza un día antes.</p><a href="#" class="promo__lk">Pedí el tuyo →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY 2 -->
+<div class="gallery gal-3" data-a>
+  <div class="gi"><img src="FACTURAS SURTIDAS.JPG" alt="Facturas surtidas" loading="lazy"></div>
+  <div class="gi"><img src="chapata multicereal.JPG" alt="Chapata multicereal" loading="lazy"></div>
+  <div class="gi"><img src="Mini Alfajoreces de maicena.JPG" alt="Mini alfajores de maicena" loading="lazy"></div>
+</div>
+
+<!-- NOSOTROS -->
+<section class="sec" id="nosotros">
+  <div class="si">
+    <div class="about">
+      <div data-a>
+        <p class="pre">Desde 2004</p>
+        <h2 class="h2">Detrás de cada vitrina hay una planta industrial</h2>
+        <p class="pp">Mangini nació como una panadería de barrio en Belgrano. Hoy somos 5 locales y una planta propia en Villa Lugano con 160 personas que producen todo lo que ves en nuestras vitrinas.</p>
+        <p class="pp">No compramos a terceros. No revendemos producto ajeno. Cada factura, cada torta, cada pan — sale de nuestro obrador con recetas que llevan más de 20 años de ajuste.</p>
+        <p class="pp">Somos parte de Satchmo, la misma operación que abastece a cientos de restaurantes, bares y hoteles en Buenos Aires.</p>
+        <a href="https://satchmo.vercel.app" class="about__lk">Conocé Satchmo →</a>
+        <div class="about__stats">
+          <div><div class="as-n">+20</div><div class="as-l">Años de producción</div></div>
+          <div><div class="as-n">160</div><div class="as-l">Personas en planta</div></div>
+          <div><div class="as-n">5</div><div class="as-l">Locales propios</div></div>
+          <div><div class="as-n">100%</div><div class="as-l">Elaboración propia</div></div>
+        </div>
+      </div>
+      <div class="about__imgs" data-a data-d="2">
+        <div class="ai"><img src="tortitas negras.JPG" alt="Tortitas negras" loading="lazy"></div>
+        <div class="ai"><img src="cremonas.JPG" alt="Cremonas" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMAGE BREAK -->
+<div class="ib"><img src="PASTAFLORA DE BATATA.JPG" alt="Pastaflora de batata" loading="lazy"></div>
+
+<!-- CATEGORÍAS -->
+<section class="sec" id="categorias">
+  <div class="si">
+    <div data-a><p class="pre">Categorías</p><h2 class="h2">Las cosas se hacen como antes</h2><p class="pp">Cada día, cada producto. Fresco y recién horneado.</p></div>
+    <div class="cats" data-a data-d="1">
+      <div class="cat"><img src="pan de masa madre .JPG" alt="Panes" loading="lazy"><div class="cat__o"><span class="cat__n">Panes artesanales</span></div></div>
+      <div class="cat"><img src="FACTURAS SURTIDAS.JPG" alt="Facturas" loading="lazy"><div class="cat__o"><span class="cat__n">Facturas y medialunas</span></div></div>
+      <div class="cat"><img src="torta aconcagua.JPG" alt="Tortas" loading="lazy"><div class="cat__o"><span class="cat__n">Tortas</span></div></div>
+      <div class="cat"><img src="tarta de puerro y jamon.JPG" alt="Tartas" loading="lazy"><div class="cat__o"><span class="cat__n">Tartas y salados</span></div></div>
+      <div class="cat"><img src="empanada arabe.JPG" alt="Empanadas" loading="lazy"><div class="cat__o"><span class="cat__n">Empanadas y salados</span></div></div>
+      <div class="cat"><img src="chapata multicereal.JPG" alt="Chapatas" loading="lazy"><div class="cat__o"><span class="cat__n">Chapatas y focaccias</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO PEDIR -->
+<section class="sec" id="como-pedir">
+  <div class="si">
+    <div data-a><p class="pre">Cómo pedir</p><h2 class="h2">Elegí la forma que te quede más cómoda</h2></div>
+    <div class="ogrid" data-a data-d="1">
+      <div class="oc"><div class="oc__img"><img src="masitas.JPG" alt="Pedido online" loading="lazy"></div><div class="oc__t">Pedí desde acá</div><p class="oc__p">Elegí lo que quieras desde la web y agregalo al carrito.</p><a href="productos.html" class="oc__lk">Ver productos →</a></div>
+      <div class="oc"><div class="oc__img"><img src="torta balcarce .JPG" alt="WhatsApp" loading="lazy"></div><div class="oc__t">Por WhatsApp</div><p class="oc__p">Escribinos directo y te ayudamos con tu compra.</p><a href="https://wa.me/5491100000000?text=Hola%20Mangini%2C%20quiero%20hacer%20un%20pedido." class="oc__lk" target="_blank">Abrir WhatsApp →</a></div>
+      <div class="oc"><div class="oc__img"><img src="canastita de jyq.JPG" alt="Delivery" loading="lazy"></div><div class="oc__t">Por Rappi</div><p class="oc__p">Delivery en menos de 1 hora desde la sucursal más cercana.</p><a href="#" class="oc__lk">Pedir por Rappi →</a></div>
+      <div class="oc"><div class="oc__img"><img src="pan de campo.JPG" alt="Sucursal" loading="lazy"></div><div class="oc__t">Retirá en sucursal</div><p class="oc__p">Hacé tu pedido online y retiralo listo en la sucursal que prefieras.</p><a href="#sucursales" class="oc__lk">Ver sucursales →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY 3 -->
+<div class="gallery gal-2" data-a>
+  <div class="gi"><img src="torta niza.JPG" alt="Torta Niza" loading="lazy"></div>
+  <div class="gi"><img src="figaza de manteca alargada.JPG" alt="Figaza de manteca" loading="lazy"></div>
+</div>
+
+<!-- SUCURSALES -->
+<section class="sec" id="sucursales">
+  <div class="si">
+    <div data-a><p class="pre">Sucursales</p><h2 class="h2">Visitanos</h2><p class="pp">5 locales en Buenos Aires. Todos con producción fresca diaria.</p></div>
+    <div class="sgrid" data-a data-d="1">
+      <div class="suc"><div class="suc__img"><img src="pan flauta.JPG" alt="Belgrano" loading="lazy"></div><div class="suc__b"><div class="suc__n">Mangini Belgrano</div><div class="suc__d">Dirección: A confirmar<br>Teléfono: A confirmar<br>Horario: A confirmar</div><a href="#" class="suc__lk">Cómo llegar →</a></div></div>
+      <div class="suc"><div class="suc__img"><img src="medialunas saladas.JPG" alt="Las Cañitas" loading="lazy"></div><div class="suc__b"><div class="suc__n">Mangini Las Cañitas</div><div class="suc__d">Dirección: A confirmar<br>Teléfono: A confirmar<br>Horario: A confirmar</div><a href="#" class="suc__lk">Cómo llegar →</a></div></div>
+      <div class="suc"><div class="suc__img"><img src="canastita de humita.JPG" alt="Colegiales" loading="lazy"></div><div class="suc__b"><div class="suc__n">Mangini Colegiales</div><div class="suc__d">Dirección: A confirmar<br>Teléfono: A confirmar<br>Horario: A confirmar</div><a href="#" class="suc__lk">Cómo llegar →</a></div></div>
+      <div class="suc"><div class="suc__img"><img src="pan de queso.JPG" alt="Olivos" loading="lazy"></div><div class="suc__b"><div class="suc__n">Mangini Olivos</div><div class="suc__d">Dirección: A confirmar<br>Teléfono: A confirmar<br>Horario: A confirmar</div><a href="#" class="suc__lk">Cómo llegar →</a></div></div>
+      <div class="suc"><div class="suc__img"><img src="pan de salvado.JPG" alt="5to local" loading="lazy"></div><div class="suc__b"><div class="suc__n">Mangini — 5to local</div><div class="suc__d">Dirección: A confirmar<br>Teléfono: A confirmar<br>Horario: A confirmar</div><a href="#" class="suc__lk">Cómo llegar →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="fgr">
+      <div><div class="flogo"><img src="logo_mangini.png" alt="Mangini" style="height:32px;width:auto;filter:brightness(0) invert(1);margin-bottom:10px"></div><p class="ftag">Confitería & Panadería Artesanal<br>Buenos Aires, Argentina</p></div>
+      <div><div class="ft">Navegación</div><ul class="flk"><li><a href="#nosotros">Nosotros</a></li><li><a href="#sucursales">Sucursales</a></li><li><a href="productos.html">Productos</a></li><li><a href="#como-pedir">Cómo pedir</a></li></ul></div>
+      <div><div class="ft">Contacto</div><ul class="flk"><li><a href="#">Email: A confirmar</a></li><li><a href="https://wa.me/5491100000000" target="_blank">WhatsApp</a></li><li><a href="#">Instagram</a></li></ul></div>
+      <div><div class="ft">Delivery</div><ul class="flk"><li><a href="#">Rappi</a></li><li><a href="#">PedidosYa</a></li><li><a href="#sucursales">Retiro en sucursal</a></li></ul></div>
+    </div>
+    <div class="fbot">© 2026 Mangini — Panificadora Satchmo S.A. | Producción propia desde 2004</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5491100000000?text=Hola%20Mangini%2C%20quiero%20hacer%20un%20pedido." class="waf" target="_blank" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.326 0-4.48-.764-6.219-2.055l-.435-.334-2.998 1.005 1.005-2.998-.334-.435A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+
+<script>
+const allP=[
+  {name:"Medialuna de Manteca",price:500,img:"MEDIALUNAS DULCES.JPG",badge:"Más pedido"},
+  {name:"Pan de Masa Madre",price:3200,img:"pan de masa madre .JPG",badge:""},
+  {name:"Facturas Surtidas x6",price:2400,img:"FACTURAS SURTIDAS.JPG",badge:"Más pedido"},
+  {name:"Torta Mangini",price:15000,img:"torta mangini .JPG",badge:""},
+  {name:"Torta Aconcagua",price:14000,img:"torta aconcagua.JPG",badge:""},
+  {name:"Pastaflora de Batata",price:4500,img:"PASTAFLORA DE BATATA.JPG",badge:""},
+  {name:"Chapata Multicereal",price:2200,img:"chapata multicereal.JPG",badge:""},
+  {name:"Mini Alfajores de Maicena x6",price:3600,img:"Mini Alfajoreces de maicena.JPG",badge:"Nuevo"},
+];
+const feat=allP.slice(0,4);
+document.getElementById('fG').innerHTML=feat.map((p,i)=>`<div class="fc"><div class="fc__i"><img src="${p.img}" alt="${p.name}" loading="lazy">${p.badge?`<div class="fc__badge">${p.badge}</div>`:''}</div><div class="fc__b"><div class="fc__n">${p.name}</div><div class="fc__p">$${p.price.toLocaleString('es-AR')}</div><button class="fc__add" onclick='aTC(${i})'>+ Agregar al carrito</button></div></div>`).join('');
+
+let cart=[];
+function aTC(i){const p=allP[i];const e=cart.find(c=>c.name===p.name);if(e)e.qty++;else cart.push({...p,qty:1});rC()}
+function chQ(n,d){const it=cart.find(c=>c.name===n);if(!it)return;it.qty+=d;if(it.qty<=0)cart=cart.filter(c=>c.name!==n);rC()}
+function rC(){
+  const cnt=document.getElementById('cCnt'),items=document.getElementById('cI'),ft=document.getElementById('cF'),tot=document.getElementById('cT'),wa=document.getElementById('cW');
+  const t=cart.reduce((s,c)=>s+c.price*c.qty,0);cnt.textContent=cart.reduce((s,c)=>s+c.qty,0);
+  if(!cart.length){items.innerHTML='<p class="cp__empty">Tu carrito está vacío.</p>';ft.style.display='none';return}
+  ft.style.display='block';tot.textContent=`$${t.toLocaleString('es-AR')}`;
+  items.innerHTML=cart.map(c=>`<div class="ci"><div class="ci__img"><img src="${c.img}" alt="${c.name}"></div><div class="ci__info"><div class="ci__n">${c.name}</div><div class="ci__p">$${(c.price*c.qty).toLocaleString('es-AR')}</div><div class="ci__q"><button onclick="chQ('${c.name}',-1)">−</button><em>${c.qty}</em><button onclick="chQ('${c.name}',1)">+</button></div></div></div>`).join('');
+  wa.href=`https://wa.me/5491100000000?text=${encodeURIComponent(`Hola Mangini, quiero hacer un pedido:\n\n${cart.map(c=>`• ${c.name} x${c.qty} — $${(c.price*c.qty).toLocaleString('es-AR')}`).join('\n')}\n\nTotal: $${t.toLocaleString('es-AR')}`)}`
+}
+function tC(){document.getElementById('cO').classList.toggle('open');document.getElementById('cP').classList.toggle('open')}
+function xC(){document.getElementById('cO').classList.remove('open');document.getElementById('cP').classList.remove('open')}
+rC();
+
+const nv=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nv.classList.toggle('s',scrollY>80);const inv=scrollY<=80;document.querySelectorAll('.nl,.nk a,.nc').forEach(el=>el.classList.toggle('inv',inv));document.querySelector('.nh')?.classList.toggle('inv',inv)});
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''});
+function cM(){ham.classList.remove('open');mob.classList.remove('open');document.body.style.overflow=''}
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('[data-a]').forEach(el=>obs.observe(el));
+setTimeout(()=>{document.querySelectorAll('[data-a]').forEach(el=>el.classList.add('v'))},3000);
+</script>
+</body>
+</html>
