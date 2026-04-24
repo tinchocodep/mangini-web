@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Productos — Mangini | Confitería & Panadería Artesanal</title>
+<meta name="description" content="Todo lo que horneamos en Mangini: panes, facturas, tortas, tartas, masitas y empanadas. Producción propia todos los días.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fbf7f2; --bg-alt:#f3ece2; --ink:#1a140f; --ink-soft:#564a3f; --ink-mute:#8a7d70;
+  --line:#e8dfd1; --line-soft:#efe7db; --card:#ffffff;
+  --brand:#b5317c; --brand-ink:#8e2562; --warm:#d18a3a; --warm-ink:#a86a22;
+  --olive:#6b7a3a;
+  --shadow:0 2px 8px rgba(26,20,15,.04), 0 16px 40px -12px rgba(26,20,15,.08);
+  --shadow-lg:0 4px 12px rgba(26,20,15,.06), 0 30px 80px -18px rgba(26,20,15,.18);
+  --display:'Fraunces',Georgia,serif;
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --mono:'DM Mono',ui-monospace,monospace;
+  --r-sm:6px; --r-md:12px; --r-lg:20px; --r-pill:999px;
+  --pad-x:24px;
+  --s-gap:clamp(72px, 9vw, 140px);
+  --content-w:1280px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:16px;line-height:1.5}
+::selection{background:var(--brand);color:#fff}
+img{display:block;max-width:100%} a{color:inherit;text-decoration:none}
+button{font-family:inherit;color:inherit}
+
+[data-a]{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+[data-a].v{opacity:1;transform:none}
+
+.wrap{max-width:var(--content-w);margin:0 auto;padding:0 var(--pad-x)}
+
+.kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--brand);font-weight:500;display:inline-flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:18px;height:1px;background:var(--brand)}
+
+.h1{font-family:var(--display);font-weight:400;line-height:.98;letter-spacing:-0.02em;font-size:clamp(44px,6.8vw,88px)}
+.h1 em{font-style:italic;font-weight:300}
+.h2{font-family:var(--display);font-weight:400;line-height:1.02;letter-spacing:-0.018em;font-size:clamp(32px,4vw,52px)}
+.h2 em{font-style:italic;font-weight:300;color:var(--brand)}
+.lede{font-size:17px;line-height:1.6;color:var(--ink-soft);max-width:56ch;font-weight:400}
+
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.02em;border-radius:var(--r-pill);border:1px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer;transition:all .3s;white-space:nowrap}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -6px rgba(26,20,15,.25)}
+.btn.brand{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.brand:hover{background:var(--brand-ink);border-color:var(--brand-ink)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--ink)}
+.btn svg{width:14px;height:14px;transition:transform .3s}
+.btn:hover svg{transform:translateX(3px)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,3vw,40px);transition:all .4s;background:transparent;border-bottom:1px solid transparent}
+nav.scrolled{background:color-mix(in oklab, var(--bg) 92%, transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom-color:var(--line-soft)}
+.nav-logo{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.nav-logo img{height:28px;filter:brightness(0) invert(1);transition:filter .4s}
+nav.scrolled .nav-logo img{filter:none}
+.nav-title{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;font-weight:500;padding-right:4px;border-right:1px solid rgba(255,255,255,.3);margin-right:6px;padding-top:2px;transition:color .4s,border-color .4s}
+nav.scrolled .nav-title{color:var(--brand);border-right-color:var(--line)}
+.nav-links{display:none}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-wa{display:none;align-items:center;gap:8px;font-size:13px;padding:8px 14px;border:1px solid rgba(255,255,255,.3);border-radius:var(--r-pill);transition:all .3s;color:#fff}
+.nav-wa:hover{border-color:#fff;color:#fff}
+.nav-wa svg{width:14px;height:14px;fill:currentColor}
+nav.scrolled .nav-wa{border-color:var(--line);color:var(--ink)}
+nav.scrolled .nav-wa:hover{border-color:var(--brand);color:var(--brand)}
+.back-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:#fff;transition:all .3s;padding:8px 14px 8px 10px;border:1px solid rgba(255,255,255,.3);border-radius:var(--r-pill);background:rgba(255,255,255,.1);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.back-link:hover{border-color:#fff;color:#fff;transform:translateX(-2px);background:rgba(255,255,255,.18)}
+.back-link svg{width:14px;height:14px;transition:transform .3s}
+.back-link:hover svg{transform:translateX(-2px)}
+nav.scrolled .back-link{color:var(--ink-soft);border-color:var(--line);background:var(--card);backdrop-filter:none;-webkit-backdrop-filter:none}
+nav.scrolled .back-link:hover{border-color:var(--ink);color:var(--ink);background:var(--card)}
+@media(min-width:640px){.nav-wa{display:inline-flex}}
+@media(max-width:560px){.nav-title{display:none}.back-link span{display:none}.back-link{padding:8px}}
+
+/* PAGE HEAD */
+/* PAGE HEAD — full-bleed hero */
+.page-head{position:relative;min-height:70vh;padding:140px 0 48px;overflow:hidden;color:#fff;display:flex;align-items:flex-end;border-bottom:none}
+.page-head .ph-bg{position:absolute;inset:0;z-index:0}
+.page-head .ph-bg img{width:100%;height:100%;object-fit:cover;animation:heroZoom 20s ease-out forwards}
+@keyframes heroZoom{from{transform:scale(1.06)}to{transform:scale(1)}}
+.page-head .ph-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,12,6,.4) 0%, rgba(20,12,6,.15) 30%, rgba(20,12,6,.55) 75%, rgba(20,12,6,.85) 100%)}
+.page-head .wrap{position:relative;z-index:2;display:flex;flex-direction:column;gap:40px;align-items:flex-start;width:100%}
+.page-head .ph-top{display:flex;flex-direction:column;gap:20px;max-width:none}
+.page-head .kicker{color:color-mix(in oklab, var(--brand) 55%, #fff);display:inline-flex;align-items:center;gap:12px}
+.page-head .kicker::before{content:"";width:28px;height:1px;background:currentColor;display:inline-block}
+.page-head h1{color:#fff;letter-spacing:-0.03em;max-width:14ch;text-wrap:balance;text-shadow:0 2px 40px rgba(0,0,0,.3)}
+.page-head h1 em{color:color-mix(in oklab, var(--warm) 80%, #fff);font-style:italic;font-weight:300}
+.page-head .meta{display:flex;flex-wrap:wrap;gap:24px 40px;padding-top:32px;border-top:1px solid rgba(255,255,255,.18);width:100%;align-items:flex-end;justify-content:space-between}
+.page-head .meta-stats{display:flex;gap:36px;flex-wrap:wrap}
+.page-head .meta-stat .n{font-family:var(--display);font-size:clamp(28px,3vw,40px);font-weight:400;line-height:1;letter-spacing:-0.02em;color:#fff}
+.page-head .meta-stat .l{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:8px}
+.page-head .search{max-width:340px;flex:1;min-width:240px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.page-head .search input{color:#fff}
+.page-head .search input::placeholder{color:rgba(255,255,255,.55)}
+.page-head .search svg{color:rgba(255,255,255,.75)}
+@media(max-width:720px){.page-head{min-height:62vh;padding:120px 0 40px}.page-head .meta{flex-direction:column;align-items:flex-start;gap:24px}.page-head h1{font-size:clamp(44px,11vw,72px)}}
+
+/* CATEGORY NAV */
+.cat-nav{position:sticky;top:68px;z-index:70;background:color-mix(in oklab, var(--bg) 92%, transparent);backdrop-filter:blur(14px);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+.cat-nav-inner{max-width:var(--content-w);margin:0 auto;padding:0 var(--pad-x);display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.cat-nav-inner::-webkit-scrollbar{display:none}
+.cat-nav a{flex-shrink:0;padding:16px 18px;font-size:13px;color:var(--ink-soft);position:relative;white-space:nowrap;font-weight:500;transition:color .3s}
+.cat-nav a:hover{color:var(--ink)}
+.cat-nav a.on{color:var(--brand)}
+.cat-nav a.on::after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:2px;background:var(--brand)}
+.cat-nav a em{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--ink-mute);margin-left:8px;opacity:.7}
+
+/* CATEGORY BLOCK */
+.cat-block{padding:var(--s-gap) 0 0}
+.cat-block:last-of-type{padding-bottom:var(--s-gap)}
+.cat-head{margin-bottom:40px;display:grid;gap:16px;grid-template-columns:1fr;align-items:end}
+@media(min-width:820px){.cat-head{grid-template-columns:1.5fr 1fr;gap:60px}}
+.cat-head .lede{margin-top:8px}
+
+/* PRODUCT GRID */
+.prods{display:grid;gap:20px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:1024px){.prods{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1280px){.prods{grid-template-columns:repeat(4,1fr)}}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;position:relative;display:flex;flex-direction:column;transition:all .3s}
+.prod:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--brand)}
+.prod:hover{background:var(--card)}
+.prod .pic{aspect-ratio:1/1;overflow:hidden;background:var(--bg-alt);position:relative}
+.prod .pic img{width:100%;height:100%;object-fit:cover;transition:transform 5s ease}
+.prod:hover .pic img{transform:scale(1.06)}
+.prod .badge{position:absolute;top:12px;left:12px;padding:5px 10px;background:var(--brand);color:#fff;border-radius:var(--r-pill);font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.prod .badge.new{background:var(--olive)}
+.prod .badge.top{background:var(--warm)}
+.prod .body{padding:22px;display:flex;flex-direction:column;flex:1;gap:6px}
+.prod .name{font-family:var(--display);font-size:22px;font-weight:500;letter-spacing:-0.01em;line-height:1.15}
+.prod .desc{font-size:13px;color:var(--ink-mute);line-height:1.5;margin-bottom:4px}
+.prod .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:12px}
+.prod .tag{padding:3px 9px;background:var(--bg-alt);border-radius:var(--r-pill);font-family:var(--mono);font-size:10px;letter-spacing:.05em;color:var(--ink-mute);text-transform:uppercase}
+
+/* SEARCH / FILTER BAR */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{display:flex;align-items:center;gap:10px;padding:10px 16px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--card);flex:1;min-width:220px;max-width:360px}
+.search input{flex:1;border:none;background:none;outline:none;font-family:inherit;font-size:14px;color:var(--ink)}
+.search svg{width:14px;height:14px;color:var(--ink-mute)}
+.filter-chips{display:flex;gap:6px;flex-wrap:wrap}
+.filter-chips button{padding:8px 14px;font-size:12px;border:1px solid var(--line);background:var(--card);border-radius:var(--r-pill);cursor:pointer;color:var(--ink-soft);transition:all .2s;font-weight:500}
+.filter-chips button:hover{border-color:var(--ink)}
+.filter-chips button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* NOTE CARD */
+.note{background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;display:flex;gap:18px;align-items:flex-start;margin-top:24px}
+.note svg{flex-shrink:0;color:var(--brand);width:22px;height:22px;margin-top:2px}
+.note p{font-size:14px;line-height:1.6;color:var(--ink-soft)}
+.note p strong{color:var(--ink);font-weight:500}
+
+/* DELIVERY CTA */
+.delivery-strip{margin-top:32px;display:flex;align-items:center;justify-content:space-between;gap:32px;padding:28px 32px;background:var(--bg-alt);border:1px solid var(--line);border-radius:var(--r-lg);flex-wrap:wrap}
+.delivery-strip-text{display:flex;flex-direction:column;gap:6px;flex:1;min-width:220px}
+.delivery-strip-text .kicker{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.delivery-strip-text p{font-size:14px;line-height:1.5;color:var(--ink);margin:0;max-width:48ch}
+.delivery-strip-btns{display:flex;gap:14px;align-items:flex-start}
+.delivery-btn{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;transition:transform .3s}
+.delivery-btn:hover{transform:translateY(-3px)}
+.delivery-logo{width:56px;height:56px;border-radius:50%;display:block;object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,.14);transition:box-shadow .3s,transform .3s}
+.delivery-btn:hover .delivery-logo{box-shadow:0 12px 28px rgba(0,0,0,.2)}
+.delivery-label{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);font-weight:500}
+@media(max-width:640px){
+  .delivery-strip{flex-direction:column;align-items:flex-start;padding:22px;gap:22px}
+  .delivery-strip-btns{align-self:stretch;justify-content:flex-start}
+  .prods{gap:12px}
+  .prod{border-radius:var(--r-md)}
+  .prod .body{padding:12px 12px 14px;gap:4px}
+  .prod .name{font-size:15px;line-height:1.2}
+  .prod .desc{font-size:11.5px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:2px}
+  .prod .badge{font-size:9px;padding:4px 8px;top:8px;left:8px}
+  .prod .tags{padding-top:8px;gap:4px}
+  .prod .tag{font-size:9px;padding:2px 7px}
+  .cat-head{margin-bottom:20px;gap:8px}
+  .cat-head h2{font-size:clamp(26px,7.2vw,38px)}
+}
+@media(max-width:420px){
+  .prods{gap:10px}
+  .prod .desc{display:none}
+  .prod .tags{display:none}
+  .prod .body{padding:10px 10px 12px}
+  .prod .name{font-size:13.5px}
+}
+
+/* FOOTER */
+footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relative}
+.f-grid{display:grid;grid-template-columns:1fr;gap:48px;margin-bottom:56px}
+@media(min-width:720px){.f-grid{grid-template-columns:2fr 1fr 1fr 1fr}}
+.f-logo{margin-bottom:16px}
+.f-logo img{height:34px;filter:brightness(0) invert(1)}
+.f-tag{font-size:14px;line-height:1.6;color:rgba(255,255,255,.55);max-width:320px}
+.f-social{display:flex;gap:10px;margin-top:20px}
+.f-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;transition:all .3s}
+.f-social a:hover{background:var(--brand);border-color:var(--brand);transform:translateY(-2px)}
+.f-social svg{width:14px;height:14px;fill:#fff}
+.f-col h4{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:18px;font-weight:500}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.f-col a{font-size:14px;color:rgba(255,255,255,.65);transition:color .3s}
+.f-col a:hover{color:var(--warm)}
+.f-bot{border-top:1px solid rgba(255,255,255,.08);padding-top:28px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.35);text-transform:uppercase}
+
+/* Floating WA */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:69;width:54px;height:54px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 28px rgba(37,211,102,.45);transition:transform .3s}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:26px;height:26px;fill:#fff}
+@media(max-width:640px){.wa-float{bottom:16px;right:16px;width:48px;height:48px}.wa-float svg{width:22px;height:22px}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="back-link" aria-label="Volver al inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> <span>Volver</span></a>
+  <a href="index.html" class="nav-logo"><img src="logo_mangini.png" alt="Mangini"></a>
+  <div class="nav-right">
+    <span class="nav-title">Productos</span>
+    <a href="https://wa.me/5491157491693?text=Hola%20Mangini%2C%20quiero%20hacer%20un%20pedido." class="nav-wa" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+      Pedidos
+    </a>
+  </div>
+</nav>
+
+<!-- PAGE HEAD -->
+<section class="page-head">
+  <div class="ph-bg"><img src="img/vitrina-panoramica.jpg" alt="Vitrina Mangini"></div>
+  <div class="wrap">
+    <div class="ph-top">
+      <span class="kicker">Catálogo</span>
+      <h1 class="h1">Todo lo que sale del <em>horno.</em></h1>
+    </div>
+    <div class="meta">
+      <div class="meta-stats">
+        <div class="meta-stat"><div class="n">90+</div><div class="l">Productos</div></div>
+        <div class="meta-stat"><div class="n">6</div><div class="l">Categorías</div></div>
+        <div class="meta-stat"><div class="n">100%</div><div class="l">Producción propia</div></div>
+      </div>
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="q" type="text" placeholder="Buscar producto…" autocomplete="off">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY NAV -->
+<div class="cat-nav" id="catNav">
+  <div class="cat-nav-inner">
+    <a href="#panes" class="on">Panes <em>18</em></a>
+    <a href="#facturas">Facturas & medialunas <em>12</em></a>
+    <a href="#tortas">Tortas <em>10</em></a>
+    <a href="#tartas">Tartas saladas <em>7</em></a>
+    <a href="#masitas">Masitas & alfajores <em>6</em></a>
+    <a href="#empanadas">Empanadas & canastitas <em>9</em></a>
+  </div>
+</div>
+
+<main id="cats">
+
+<!-- PANES -->
+<section class="cat-block" id="panes">
+  <div class="wrap">
+    <div class="cat-head">
+      <div>
+        <span class="kicker">Panes artesanales</span>
+        <h2 class="h2">Fermentación <em>lenta</em>, corteza real.</h2>
+      </div>
+      <p class="lede">Masa madre de 24 horas, harina de trigo y centeno. Horneados en piedra. Salen tandas desde primera hora hasta la tarde.</p>
+    </div>
+    <div class="prods" data-a>
+      <article class="prod" data-name="Pan de masa madre"><div class="pic"><img src="img/pan de masa madre .JPG" alt=""><span class="badge top">Top</span></div><div class="body"><div class="name">Pan de masa madre</div><div class="desc">Corteza crocante, miga aireada. 24h de fermentación.</div><div class="tags"><span class="tag">Masa madre</span><span class="tag">Sin aditivos</span></div></div></article>
+      <article class="prod" data-name="Pan de masa madre sin semilla"><div class="pic"><img src="img/pan de masa madre sin semilla.JPG" alt=""></div><div class="body"><div class="name">Masa madre sin semilla</div><div class="desc">Versión clásica para quienes prefieren sin semillas.</div><div class="tags"><span class="tag">Masa madre</span></div></div></article>
+      <article class="prod" data-name="Pan francés"><div class="pic"><img src="img/pan frances.JPG" alt=""><span class="badge">Fresco</span></div><div class="body"><div class="name">Pan francés</div><div class="desc">Horneado a primera hora. El clásico de desayuno.</div><div class="tags"><span class="tag">Diario</span></div></div></article>
+      <article class="prod" data-name="Pan flauta"><div class="pic"><img src="img/pan flauta.JPG" alt=""></div><div class="body"><div class="name">Flauta</div><div class="desc">Corteza dorada, miga tierna. Ideal para sándwiches.</div><div class="tags"><span class="tag">Diario</span></div></div></article>
+      <article class="prod" data-name="Chapata"><div class="pic"><img src="img/chapata.JPG" alt=""></div><div class="body"><div class="name">Chapata</div><div class="desc">Alveolada, hidratación alta. Perfecta con aceite de oliva.</div><div class="tags"><span class="tag">Masa madre</span></div></div></article>
+      <article class="prod" data-name="Chapata multicereal"><div class="pic"><img src="img/chapata multicereal.JPG" alt=""></div><div class="body"><div class="name">Chapata multicereal</div><div class="desc">Mix de semillas de lino, sésamo, girasol y avena.</div><div class="tags"><span class="tag">Integral</span><span class="tag">Semillas</span></div></div></article>
+      <article class="prod" data-name="Pan de salvado"><div class="pic"><img src="img/pan de salvado.JPG" alt=""></div><div class="body"><div class="name">Pan de salvado</div><div class="desc">Harina integral, más fibra. Miga firme y nutritiva.</div><div class="tags"><span class="tag">Integral</span></div></div></article>
+      <article class="prod" data-name="Pan de campo"><div class="pic"><img src="img/pan de campo.JPG" alt=""></div><div class="body"><div class="name">Pan de campo</div><div class="desc">Hogaza grande, corteza rústica. Rinde para toda la semana.</div><div class="tags"><span class="tag">Grande</span></div></div></article>
+      <article class="prod" data-name="Pan de queso"><div class="pic"><img src="img/pan de queso.JPG" alt=""></div><div class="body"><div class="name">Pan de queso</div><div class="desc">Relleno con queso estacionado. Ideal para picar.</div><div class="tags"><span class="tag">Con queso</span></div></div></article>
+      <article class="prod" data-name="Pan mignon en tira"><div class="pic"><img src="img/pan mignion en tira.JPG" alt=""></div><div class="body"><div class="name">Mignon en tira</div><div class="desc">Pancitos individuales para desayuno o lunch.</div><div class="tags"><span class="tag">Individual</span></div></div></article>
+      <article class="prod" data-name="Pan lactal multicereal"><div class="pic"><img src="img/pan lactal multicereal .JPG" alt=""></div><div class="body"><div class="name">Lactal multicereal</div><div class="desc">Molde esponjoso, con mix de semillas y copos.</div><div class="tags"><span class="tag">Lactal</span><span class="tag">Semillas</span></div></div></article>
+      <article class="prod" data-name="Figaza con queso"><div class="pic"><img src="img/figaza con queso .JPG" alt=""></div><div class="body"><div class="name">Figaza con queso</div><div class="desc">Base de figaza aceitada con queso gratinado.</div><div class="tags"><span class="tag">Con queso</span></div></div></article>
+      <article class="prod" data-name="Figaza de manteca alargada"><div class="pic"><img src="img/figaza de manteca alargada.JPG" alt=""></div><div class="body"><div class="name">Figaza de manteca</div><div class="desc">Formato alargado, con manteca. Para compartir.</div><div class="tags"><span class="tag">Manteca</span></div></div></article>
+    </div>
+    <div class="delivery-strip">
+      <div class="delivery-strip-text">
+        <span class="kicker">Más productos</span>
+        <p>No todo el catálogo está acá. Pedí el resto desde las apps de delivery:</p>
+      </div>
+      <div class="delivery-strip-btns">
+        <a href="https://www.rappi.com.ar/restaurantes/112409-mangini" class="delivery-btn rappi" target="_blank" rel="noopener" aria-label="Ver más productos en Rappi">
+          <img src="img/logo-rappi.png" alt="" class="delivery-logo">
+          <span class="delivery-label">Rappi</span>
+        </a>
+        <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires/mangini-confiterias-las-heras-menu?origin=shop_list" class="delivery-btn pya" target="_blank" rel="noopener" aria-label="Ver más productos en PedidosYa">
+          <img src="img/logo-pedidosya.png" alt="" class="delivery-logo">
+          <span class="delivery-label">PedidosYa</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACTURAS -->
+<section class="cat-block" id="facturas">
+  <div class="wrap">
+    <div class="cat-head">
+      <div>
+        <span class="kicker">Facturas & medialunas</span>
+        <h2 class="h2">Manteca de verdad,<br><em>siempre.</em></h2>
+      </div>
+      <p class="lede">Nuestras facturas son con manteca, no con margarina. Hojaldre casero, laminado a mano. Arrancan a las 9 y hay tandas durante toda la mañana.</p>
+    </div>
+    <div class="prods" data-a>
+      <article class="prod" data-name="Medialunas de manteca"><div class="pic"><img src="img/MEDIALUNAS DULCES.JPG" alt=""><span class="badge top">Top</span></div><div class="body"><div class="name">Medialuna de manteca</div><div class="desc">La clásica. Hojaldre dorado, interior tierno.</div><div class="tags"><span class="tag">Manteca</span><span class="tag">Clásico</span></div></div></article>
+      <article class="prod" data-name="Medialunas saladas"><div class="pic"><img src="img/medialunas saladas.JPG" alt=""></div><div class="body"><div class="name">Medialuna salada</div><div class="desc">Versión sin azúcar, para rellenar con jamón y queso.</div><div class="tags"><span class="tag">Salada</span></div></div></article>
+      <article class="prod" data-name="Facturas surtidas"><div class="pic"><img src="img/FACTURAS SURTIDAS.JPG" alt=""></div><div class="body"><div class="name">Surtido de facturas</div><div class="desc">Media docena con la selección del día.</div><div class="tags"><span class="tag">Surtido</span><span class="tag">Media docena</span></div></div></article>
+      <article class="prod" data-name="Cremonas"><div class="pic"><img src="img/cremonas.JPG" alt=""></div><div class="body"><div class="name">Cremona</div><div class="desc">Hojaldre en espiral con grasa de pella. Sale a la mañana.</div><div class="tags"><span class="tag">Grasa</span><span class="tag">Mañana</span></div></div></article>
+      <article class="prod" data-name="Tortitas negras"><div class="pic"><img src="img/tortitas negras.JPG" alt=""></div><div class="body"><div class="name">Tortita negra</div><div class="desc">Hojaldre espolvoreado con azúcar negra caramelizada.</div><div class="tags"><span class="tag">Hojaldre</span></div></div></article>
+      <article class="prod" data-name="Pastaflora de batata"><div class="pic"><img src="img/PASTAFLORA DE BATATA.JPG" alt=""></div><div class="body"><div class="name">Pastaflora de batata</div><div class="desc">Tarta de masa dulce rellena con dulce de batata.</div><div class="tags"><span class="tag">Dulce</span></div></div></article>
+    </div>
+    <div class="delivery-strip">
+      <div class="delivery-strip-text">
+        <span class="kicker">Más productos</span>
+        <p>No todo el catálogo está acá. Pedí el resto desde las apps de delivery:</p>
+      </div>
+      <div class="delivery-strip-btns">
+        <a href="https://www.rappi.com.ar/restaurantes/112409-mangini" class="delivery-btn rappi" target="_blank" rel="noopener" aria-label="Ver más productos en Rappi">
+          <img src="img/logo-rappi.png" alt="" class="delivery-logo">
+          <span class="delivery-label">Rappi</span>
+        </a>
+        <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires/mangini-confiterias-las-heras-menu?origin=shop_list" class="delivery-btn pya" target="_blank" rel="noopener" aria-label="Ver más productos en PedidosYa">
+          <img src="img/logo-pedidosya.png" alt="" class="delivery-logo">
+          <span class="delivery-label">PedidosYa</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TORTAS -->
+<section class="cat-block" id="tortas">
+  <div class="wrap">
+    <div class="cat-head">
+      <div>
+        <span class="kicker">Tortas de ocasión</span>
+        <h2 class="h2">Clásicos de <em>confitería</em><br>y especiales por encargo.</h2>
+      </div>
+      <p class="lede">Tortas de vitrina para el día a día, y por encargo las armamos a medida. Avisá con 48h de anticipación para pedidos especiales.</p>
+    </div>
+    <div class="prods" data-a>
+      <article class="prod" data-name="Torta Mangini"><div class="pic"><img src="img/torta-mangini.jpeg" alt=""><span class="badge top">La casa</span></div><div class="body"><div class="name">Torta Mangini</div><div class="desc">Nuestra torta de la casa. Dulce de leche, merengue y bizcochuelo.</div><div class="tags"><span class="tag">Dulce de leche</span></div></div></article>
+      <article class="prod" data-name="Torta Aconcagua"><div class="pic"><img src="img/torta aconcagua.JPG" alt=""></div><div class="body"><div class="name">Aconcagua</div><div class="desc">Capas de bizcochuelo, crema y merengue suizo.</div><div class="tags"><span class="tag">Merengue</span></div></div></article>
+      <article class="prod" data-name="Torta Balcarce"><div class="pic"><img src="img/torta balcarce .JPG" alt=""></div><div class="body"><div class="name">Balcarce</div><div class="desc">Clásico argentino. Crema chantilly, dulce de leche, nueces.</div><div class="tags"><span class="tag">Clásico</span></div></div></article>
+      <article class="prod" data-name="Torta Niza"><div class="pic"><img src="img/torta niza.JPG" alt=""></div><div class="body"><div class="name">Niza</div><div class="desc">Bizcochuelo con crema pastelera y frutas de estación.</div><div class="tags"><span class="tag">Frutas</span></div></div></article>
+    </div>
+    <div class="note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p><strong>Tortas a medida:</strong> cumpleaños, casamientos, eventos corporativos. Coordinamos por WhatsApp con 48hs de anticipación — <a href="https://wa.me/5491157491693?text=Hola%20Mangini%2C%20quiero%20consultar%20por%20una%20torta%20especial." style="color:var(--brand);font-weight:500" target="_blank">escribinos acá</a>.</p>
+    </div>
+    <div class="delivery-strip">
+      <div class="delivery-strip-text">
+        <span class="kicker">Más productos</span>
+        <p>No todo el catálogo está acá. Pedí el resto desde las apps de delivery:</p>
+      </div>
+      <div class="delivery-strip-btns">
+        <a href="https://www.rappi.com.ar/restaurantes/112409-mangini" class="delivery-btn rappi" target="_blank" rel="noopener" aria-label="Ver más productos en Rappi">
+          <img src="img/logo-rappi.png" alt="" class="delivery-logo">
+          <span class="delivery-label">Rappi</span>
+        </a>
+        <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires/mangini-confiterias-las-heras-menu?origin=shop_list" class="delivery-btn pya" target="_blank" rel="noopener" aria-label="Ver más productos en PedidosYa">
+          <img src="img/logo-pedidosya.png" alt="" class="delivery-logo">
+          <span class="delivery-label">PedidosYa</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARTAS -->
+<section class="cat-block" id="tartas">
+  <div class="wrap">
+    <div class="cat-head">
+      <div>
+        <span class="kicker">Tartas saladas</span>
+        <h2 class="h2">Rellenos <em>bien cargados</em>,<br>masa hojaldrada.</h2>
+      </div>
+      <p class="lede">Tartas de porción o enteras para llevar. Todas con masa casera. Ideales para viandas, almuerzos de oficina o cenas rápidas.</p>
+    </div>
+    <div class="prods" data-a>
+      <article class="prod" data-name="Tarta de puerro y jamón"><div class="pic"><img src="img/tarta de puerro y jamon.JPG" alt=""><span class="badge top">Top</span></div><div class="body"><div class="name">Puerro & jamón</div><div class="desc">Puerro salteado, jamón cocido, queso y crema.</div><div class="tags"><span class="tag">Salada</span></div></div></article>
+      <article class="prod" data-name="Tarta de calabaza"><div class="pic"><img src="img/tarta de calabaza.JPG" alt=""></div><div class="body"><div class="name">Calabaza</div><div class="desc">Calabaza asada con cebolla caramelizada y queso.</div><div class="tags"><span class="tag">Vegetariana</span></div></div></article>
+      <article class="prod" data-name="Tarta calabaza y acelga"><div class="pic"><img src="img/tarta calabaza y acelga.JPG" alt=""></div><div class="body"><div class="name">Calabaza & acelga</div><div class="desc">Combinación suave y nutritiva. Muy pedida.</div><div class="tags"><span class="tag">Vegetariana</span></div></div></article>
+      <article class="prod" data-name="Tarta salada de queso"><div class="pic"><img src="img/tarta salada de queso .JPG" alt=""></div><div class="body"><div class="name">Tarta de queso</div><div class="desc">Mix de quesos gratinados con hierbas frescas.</div><div class="tags"><span class="tag">Con queso</span></div></div></article>
+    </div>
+    <div class="delivery-strip">
+      <div class="delivery-strip-text">
+        <span class="kicker">Más productos</span>
+        <p>No todo el catálogo está acá. Pedí el resto desde las apps de delivery:</p>
+      </div>
+      <div class="delivery-strip-btns">
+        <a href="https://www.rappi.com.ar/restaurantes/112409-mangini" class="delivery-btn rappi" target="_blank" rel="noopener" aria-label="Ver más productos en Rappi">
+          <img src="img/logo-rappi.png" alt="" class="delivery-logo">
+          <span class="delivery-label">Rappi</span>
+        </a>
+        <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires/mangini-confiterias-las-heras-menu?origin=shop_list" class="delivery-btn pya" target="_blank" rel="noopener" aria-label="Ver más productos en PedidosYa">
+          <img src="img/logo-pedidosya.png" alt="" class="delivery-logo">
+          <span class="delivery-label">PedidosYa</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASITAS -->
+<section class="cat-block" id="masitas">
+  <div class="wrap">
+    <div class="cat-head">
+      <div>
+        <span class="kicker">Masitas & alfajores</span>
+        <h2 class="h2">Para el <em>mate</em><br>de la tarde.</h2>
+      </div>
+      <p class="lede">Masitas finas surtidas, alfajores de maicena, pepas, conitos. Vendemos por kilo o en cajas para regalo.</p>
+    </div>
+    <div class="prods" data-a>
+      <article class="prod" data-name="Masitas finas surtidas"><div class="pic"><img src="img/masitas.JPG" alt=""><span class="badge top">Por kilo</span></div><div class="body"><div class="name">Masitas finas</div><div class="desc">Variedad de masitas de manteca, con dulce, con merengue.</div><div class="tags"><span class="tag">Surtido</span><span class="tag">Por kg</span></div></div></article>
+      <article class="prod" data-name="Mini Alfajores de maicena"><div class="pic"><img src="img/Mini Alfajoreces de maicena.JPG" alt=""></div><div class="body"><div class="name">Mini alfajores de maicena</div><div class="desc">Rellenos con dulce de leche, rebozados en coco rallado.</div><div class="tags"><span class="tag">Dulce de leche</span></div></div></article>
+    </div>
+    <div class="delivery-strip">
+      <div class="delivery-strip-text">
+        <span class="kicker">Más productos</span>
+        <p>No todo el catálogo está acá. Pedí el resto desde las apps de delivery:</p>
+      </div>
+      <div class="delivery-strip-btns">
+        <a href="https://www.rappi.com.ar/restaurantes/112409-mangini" class="delivery-btn rappi" target="_blank" rel="noopener" aria-label="Ver más productos en Rappi">
+          <img src="img/logo-rappi.png" alt="" class="delivery-logo">
+          <span class="delivery-label">Rappi</span>
+        </a>
+        <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires/mangini-confiterias-las-heras-menu?origin=shop_list" class="delivery-btn pya" target="_blank" rel="noopener" aria-label="Ver más productos en PedidosYa">
+          <img src="img/logo-pedidosya.png" alt="" class="delivery-logo">
+          <span class="delivery-label">PedidosYa</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMPANADAS -->
+<section class="cat-block" id="empanadas">
+  <div class="wrap">
+    <div class="cat-head">
+      <div>
+        <span class="kicker">Empanadas & canastitas</span>
+        <h2 class="h2">Repulgue a <em>mano.</em></h2>
+      </div>
+      <p class="lede">Empanadas criollas y canastitas abiertas, horneadas. Por unidad o docena. Se pueden congelar crudas y hornear en casa.</p>
+    </div>
+    <div class="prods" data-a>
+      <article class="prod" data-name="Empanada árabe"><div class="pic"><img src="img/empanada arabe.JPG" alt=""></div><div class="body"><div class="name">Empanada árabe</div><div class="desc">Carne de cordero con especias, limón y menta.</div><div class="tags"><span class="tag">Al horno</span></div></div></article>
+      <article class="prod" data-name="Canastita de humita"><div class="pic"><img src="img/canastita de humita.JPG" alt=""><span class="badge top">Top</span></div><div class="body"><div class="name">Canastita de humita</div><div class="desc">Humita cremosa con cebolla y queso. Formato abierto.</div><div class="tags"><span class="tag">Vegetariana</span></div></div></article>
+      <article class="prod" data-name="Canastita de jamón y queso"><div class="pic"><img src="img/canastita de jyq.JPG" alt=""></div><div class="body"><div class="name">Canastita de jamón y queso</div><div class="desc">Clásica combinación. Masa dorada, relleno abundante.</div><div class="tags"><span class="tag">Con jamón</span></div></div></article>
+      <article class="prod" data-name="Canastita de verdura"><div class="pic"><img src="img/canastita de verdura.JPG" alt=""></div><div class="body"><div class="name">Canastita de verdura</div><div class="desc">Acelga, espinaca, cebolla y ricota.</div><div class="tags"><span class="tag">Vegetariana</span></div></div></article>
+    </div>
+    <div class="delivery-strip">
+      <div class="delivery-strip-text">
+        <span class="kicker">Más productos</span>
+        <p>No todo el catálogo está acá. Pedí el resto desde las apps de delivery:</p>
+      </div>
+      <div class="delivery-strip-btns">
+        <a href="https://www.rappi.com.ar/restaurantes/112409-mangini" class="delivery-btn rappi" target="_blank" rel="noopener" aria-label="Ver más productos en Rappi">
+          <img src="img/logo-rappi.png" alt="" class="delivery-logo">
+          <span class="delivery-label">Rappi</span>
+        </a>
+        <a href="https://www.pedidosya.com.ar/restaurantes/buenos-aires/mangini-confiterias-las-heras-menu?origin=shop_list" class="delivery-btn pya" target="_blank" rel="noopener" aria-label="Ver más productos en PedidosYa">
+          <img src="img/logo-pedidosya.png" alt="" class="delivery-logo">
+          <span class="delivery-label">PedidosYa</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <div class="f-logo"><img src="logo_mangini.png" alt="Mangini"></div>
+        <p class="f-tag">Confitería & Panadería Artesanal<br>Producción propia desde 2004<br>Buenos Aires, Argentina</p>
+        <div class="f-social">
+          <a href="https://instagram.com/mangini.bsas" aria-label="Instagram" target="_blank"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2 0 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c0 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2 0-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c0-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.8-2.2 1.4-.7.7-1.1 1.4-1.4 2.2C.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c0 1.3.3 2.2.6 3 .3.8.8 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.5 3 .6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3 0 2.2-.3 3-.6.8-.3 1.5-.8 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.7.6-3 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c0-1.3-.3-2.2-.6-3-.3-.8-.8-1.5-1.4-2.2-.7-.7-1.4-1.1-2.2-1.4-.8-.3-1.7-.5-3-.6C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg></a>
+          <a href="https://wa.me/5491157491693" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
+          <a href="mailto:manginiconfiterias@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#panes">Panes</a></li>
+          <li><a href="#facturas">Facturas</a></li>
+          <li><a href="#tortas">Tortas</a></li>
+          <li><a href="#tartas">Tartas saladas</a></li>
+          <li><a href="#empanadas">Empanadas</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Mangini</h4>
+        <ul>
+          <li><a href="index.html#historia">Nosotros</a></li>
+          <li><a href="index.html#sucursales">Sucursales</a></li>
+          <li><a href="index.html#encargos">Encargos & catering</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="mailto:manginiconfiterias@gmail.com">manginiconfiterias@gmail.com</a></li>
+          <li><a href="https://wa.me/5491157491693" target="_blank">+54 9 11 5749-1693</a></li>
+          <li><a href="https://instagram.com/mangini.bsas" target="_blank">@mangini.bsas</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bot">
+      <span>© 2026 Mangini · Buenos Aires</span>
+      <span>Parte de Satchmo</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WA -->
+<a href="https://wa.me/5491157491693?text=Hola%20Mangini%2C%20quiero%20hacer%20un%20pedido." class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+</a>
+
+<script>
+// Reveal
+const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('[data-a]').forEach(el=>obs.observe(el));
+setTimeout(()=>document.querySelectorAll('[data-a]').forEach(el=>el.classList.add('v')),1800);
+
+// Search
+const q = document.getElementById('q');
+if(q){
+  q.addEventListener('input', e => {
+    const v = e.target.value.toLowerCase().trim();
+    document.querySelectorAll('.prod').forEach(p => {
+      const name = (p.dataset.name || '').toLowerCase();
+      const desc = (p.querySelector('.desc')?.textContent || '').toLowerCase();
+      p.style.display = (!v || name.includes(v) || desc.includes(v)) ? '' : 'none';
+    });
+    // Hide empty category blocks
+    document.querySelectorAll('.cat-block').forEach(cb => {
+      const visible = [...cb.querySelectorAll('.prod')].some(p => p.style.display !== 'none');
+      cb.style.display = visible ? '' : 'none';
+    });
+  });
+}
+
+// Category nav active state
+const catLinks = document.querySelectorAll('.cat-nav a');
+const catBlocks = document.querySelectorAll('.cat-block');
+function updateActive(){
+  let active = null;
+  const offset = 180;
+  catBlocks.forEach(cb => {
+    const r = cb.getBoundingClientRect();
+    if(r.top - offset <= 0) active = cb.id;
+  });
+  catLinks.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + active));
+}
+window.addEventListener('scroll', updateActive, {passive:true});
+updateActive();
+
+// Nav scrolled state
+const nav = document.querySelector('nav');
+let navRaf = false;
+window.addEventListener('scroll', ()=>{
+  if(navRaf) return;
+  navRaf = true;
+  requestAnimationFrame(()=>{
+    nav.classList.toggle('scrolled', scrollY>60);
+    navRaf = false;
+  });
+}, {passive:true});
+</script>
+</body>
+</html>
