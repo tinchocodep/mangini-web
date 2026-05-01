@@ -116,8 +116,8 @@ button{font-family:inherit;color:inherit}
 .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -6px rgba(26,20,15,.25)}
 .btn.brand{background:var(--brand);border-color:var(--brand);color:#fff}
 .btn.brand:hover{background:var(--brand-ink);border-color:var(--brand-ink)}
-.btn.warm{background:var(--warm);border-color:var(--warm);color:#fff}
-.btn.warm:hover{background:var(--warm-ink);border-color:var(--warm-ink)}
+.btn.warm{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.warm:hover{background:var(--brand-ink);border-color:var(--brand-ink)}
 .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
 .btn.ghost:hover{border-color:var(--ink);background:transparent}
 .btn.sm{padding:10px 16px;font-size:13px}
@@ -169,8 +169,8 @@ nav:not(.scrolled):not(.light-bg) .nav-burger em{background:#fff}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg img{width:100%;height:100%;object-fit:cover;animation:heroZoom 20s ease-out forwards}
 @keyframes heroZoom{from{transform:scale(1.08)}to{transform:scale(1)}}
-.hero-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg, rgba(20,12,6,.82) 0%, rgba(20,12,6,.55) 38%, rgba(20,12,6,.1) 62%, rgba(20,12,6,.15) 100%)}
-.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(20,12,6,.7) 0%, rgba(20,12,6,0) 55%)}
+.hero-bg::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg, rgba(20,12,6,.92) 0%, rgba(20,12,6,.72) 38%, rgba(20,12,6,.42) 62%, rgba(20,12,6,.45) 100%)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(20,12,6,.78) 0%, rgba(20,12,6,.15) 55%, rgba(20,12,6,0) 75%)}
 
 .hero-inner{position:relative;z-index:2;width:100%;max-width:var(--content-w);margin:0 auto;padding:140px clamp(20px,3vw,40px) 56px;display:flex;flex-direction:column;gap:48px}
 
@@ -179,12 +179,13 @@ nav:not(.scrolled):not(.light-bg) .nav-burger em{background:#fff}
 .hero-est::before{content:"";width:40px;height:1px;background:rgba(255,255,255,.4)}
 .hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:var(--r-pill);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff}
 .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:#7cd080;box-shadow:0 0 0 3px rgba(124,208,128,.25);animation:pulse 2s infinite}
+.hero-badge.closed .dot{background:#e35a3f;box-shadow:0 0 0 3px rgba(227,90,63,.25)}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(124,208,128,.3)}50%{box-shadow:0 0 0 6px rgba(124,208,128,.08)}}
 
 .hero-main{max-width:900px;display:flex;flex-direction:column;gap:24px;animation:fu 1s .1s both}
 .hero h1{color:#fff;margin:0;font-size:clamp(52px,8.5vw,132px);line-height:.95;letter-spacing:-0.035em;text-wrap:balance}
-.hero h1 em{color:color-mix(in oklab, var(--warm) 80%, white);font-style:italic;font-weight:300}
-.hero-sub{font-size:clamp(15px,1.4vw,18px);line-height:1.6;color:rgba(255,255,255,.78);max-width:52ch;margin:0}
+.hero h1 em{color:color-mix(in oklab, var(--brand) 70%, white);font-style:italic;font-weight:300}
+.hero-sub{font-size:clamp(16px,1.5vw,20px);line-height:1.55;color:rgba(255,255,255,.96);font-weight:400;max-width:54ch;margin:0;text-shadow:0 2px 14px rgba(20,12,6,.7),0 1px 3px rgba(20,12,6,.55)}
 .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
 .hero .btn.brand{background:var(--brand);color:#fff;border-color:var(--brand)}
 .hero .btn.brand:hover{filter:brightness(1.08)}
@@ -358,7 +359,7 @@ section.cream{background:var(--bg-alt)}
 .scrollvid-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(14,9,6,.25) 0%, rgba(14,9,6,.55) 100%);pointer-events:none}
 .scrollvid-text{position:relative;z-index:2;text-align:center;color:#fff;padding:0 24px;max-width:900px;will-change:transform,opacity,letter-spacing;transition:opacity .15s linear}
 .scrollvid-text .bleed-quote{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(28px,4vw,48px);line-height:1.2;color:#fff;margin-bottom:24px;letter-spacing:-0.02em}
-.scrollvid-text .bleed-quote em{color:color-mix(in oklab, var(--warm) 85%, #fff);font-style:italic}
+.scrollvid-text .bleed-quote em{color:color-mix(in oklab, var(--brand) 70%, #fff);font-style:italic}
 .scrollvid-text .bleed-attr{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 .scrollvid-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65);padding:8px 14px;border:1px solid rgba(255,255,255,.2);border-radius:var(--r-pill);background:rgba(255,255,255,.04)}
 .scrollvid-hint span{display:inline-block;width:18px;height:1px;background:rgba(255,255,255,.6);position:relative;animation:scrollhint 1.8s ease-in-out infinite}
@@ -514,7 +515,7 @@ section.cream{background:var(--bg-alt)}
 .bleed::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(20,12,6,.2) 0%, rgba(20,12,6,.6) 100%)}
 .bleed-text{position:relative;z-index:2;text-align:center;color:#fff;padding:0 24px;max-width:900px}
 .bleed-text .h2{color:#fff;margin-bottom:20px}
-.bleed-text .h2 em{color:color-mix(in oklab, var(--warm) 85%, #fff)}
+.bleed-text .h2 em{color:color-mix(in oklab, var(--brand) 70%, #fff)}
 .bleed-quote{font-family:var(--display);font-style:italic;font-weight:300;font-size:clamp(28px,4vw,48px);line-height:1.2;color:#fff;margin-bottom:28px}
 .bleed-attr{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 
@@ -614,7 +615,7 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
 @media(max-width:640px){.tweaks{bottom:auto;top:24px;left:24px;right:24px;width:auto}}
 
 /* DECOR: tape label */
-.tape{display:inline-block;padding:4px 10px;background:var(--warm);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;border-radius:var(--r-sm);transform:rotate(-2deg)}
+.tape{display:inline-block;padding:4px 10px;background:var(--brand);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;border-radius:var(--r-sm);transform:rotate(-2deg)}
 </style>
 </head>
 <body data-theme="light" data-display="fraunces" data-density="comfy">
@@ -651,16 +652,16 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"><img src="img/MEDIALUNAS DULCES.JPG" alt="Medialunas recién horneadas"></div>
+  <div class="hero-bg"><img src="img/confiteria-local.jpeg" alt="Vitrinas de la confitería Mangini"></div>
 
   <div class="hero-inner">
     <div class="hero-top">
       <div class="hero-est">Est. 2004 · Buenos Aires</div>
-      <span class="hero-badge"><span class="dot"></span> Abierto ahora · Horneando</span>
+      <span class="hero-badge" data-hours="7:00-20:00" data-open-text="Abierto ahora · Horneando" data-closed-text="Cerrado · Volvemos pronto"><span class="dot"></span> Abierto ahora · Horneando</span>
     </div>
     <div class="hero-main">
       <h1 class="h1">Tu barrio tiene una <em>Mangini,</em><br>tu Mangini conoce <em>tu barrio.</em></h1>
-      <p class="hero-sub">Confitería y panadería artesanal. Recetas europeas, manteca real, masa madre de 24h. Hecho hoy — lo probás hoy.</p>
+      <p class="hero-sub">Confitería y panadería artesanal — recetas tradicionales y en tendencia — Lo hacemos hoy, lo probás hoy.</p>
       <div class="hero-ctas">
         <a href="productos.html" class="btn brand">Ver productos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <a href="#sucursales" class="btn ghost">Encontrá tu local</a>
@@ -800,7 +801,7 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
     </div>
     <div class="sucs" data-a data-d="1">
       <div class="suc">
-        <div class="pic"><img src="img/sucursal-luis-campos.jpeg" alt="Local Mangini Las Cañitas"><span class="open-dot"><span class="d"></span> Abierto</span></div>
+        <div class="pic"><img src="img/sucursal-luis-campos.jpeg" alt="Local Mangini Las Cañitas"><span class="open-dot" data-hours="7:00-20:00"><span class="d"></span> Abierto</span></div>
         <div class="suc-body">
           <div class="suc-name">Las Cañitas</div>
           <div class="suc-info">
@@ -815,7 +816,7 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
         </div>
       </div>
       <div class="suc">
-        <div class="pic"><img src="img/sucursal-lacroze.jpeg" alt="Local Mangini Belgrano"><span class="open-dot"><span class="d"></span> Abierto</span></div>
+        <div class="pic"><img src="img/sucursal-lacroze.jpeg" alt="Local Mangini Belgrano"><span class="open-dot" data-hours="7:00-20:00"><span class="d"></span> Abierto</span></div>
         <div class="suc-body">
           <div class="suc-name">Belgrano</div>
           <div class="suc-info">
@@ -830,7 +831,7 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
         </div>
       </div>
       <div class="suc">
-        <div class="pic"><img src="img/sucursal-freire.jpeg" alt="Local Mangini Colegiales"><span class="open-dot"><span class="d"></span> Abierto</span></div>
+        <div class="pic"><img src="img/sucursal-freire.jpeg" alt="Local Mangini Colegiales"><span class="open-dot" data-hours="7:00-20:00"><span class="d"></span> Abierto</span></div>
         <div class="suc-body">
           <div class="suc-name">Colegiales</div>
           <div class="suc-info">
@@ -845,7 +846,7 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
         </div>
       </div>
       <div class="suc">
-        <div class="pic"><img src="img/sucursal-olivos.jpeg" alt="Local Mangini Olivos"><span class="open-dot"><span class="d"></span> Abierto</span></div>
+        <div class="pic"><img src="img/sucursal-olivos.jpeg" alt="Local Mangini Olivos"><span class="open-dot" data-hours="7:00-20:00"><span class="d"></span> Abierto</span></div>
         <div class="suc-body">
           <div class="suc-name">Olivos · Vicente López</div>
           <div class="suc-info">
@@ -860,7 +861,7 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
         </div>
       </div>
       <div class="suc">
-        <div class="pic"><img src="img/sucursal-las-heras.jpeg" alt="Local Mangini Palermo Botánico"><span class="open-dot"><span class="d"></span> Abierto</span></div>
+        <div class="pic"><img src="img/sucursal-las-heras.jpeg" alt="Local Mangini Palermo Botánico"><span class="open-dot" data-hours="7:00-20:00"><span class="d"></span> Abierto</span></div>
         <div class="suc-body">
           <div class="suc-name">Palermo Botánico</div>
           <div class="suc-info">
@@ -1363,6 +1364,35 @@ window.addEventListener('message', (e)=>{
   if(d.type === '__deactivate_edit_mode'){ document.getElementById('tweaksPanel').classList.remove('open'); }
 });
 try{ window.parent.postMessage({type:'__edit_mode_available'}, '*'); }catch(e){}
+
+// -------- OPEN/CLOSED STATUS BY BUENOS AIRES TIME --------
+function updateOpenStatus(){
+  const parts = new Intl.DateTimeFormat('en-US',{timeZone:'America/Argentina/Buenos_Aires',hour12:false,hour:'2-digit',minute:'2-digit'}).formatToParts(new Date());
+  const h = +parts.find(p=>p.type==='hour').value;
+  const m = +parts.find(p=>p.type==='minute').value;
+  const now = h*60 + m;
+  const parseTime = s => { const [hh,mm] = s.split(':').map(Number); return hh*60 + (mm||0); };
+
+  document.querySelectorAll('[data-hours]').forEach(el=>{
+    const [from,to] = el.dataset.hours.split('-').map(parseTime);
+    const open = now >= from && now < to;
+
+    if(el.classList.contains('hero-badge')){
+      el.classList.toggle('closed', !open);
+      const txt = open ? (el.dataset.openText || 'Abierto') : (el.dataset.closedText || 'Cerrado');
+      const dot = el.querySelector('.dot');
+      el.textContent = ' ' + txt;
+      if(dot) el.prepend(dot);
+    } else if(el.classList.contains('open-dot')){
+      el.classList.toggle('closed', !open);
+      const d = el.querySelector('.d');
+      el.textContent = ' ' + (open ? 'Abierto' : 'Cerrado');
+      if(d) el.prepend(d);
+    }
+  });
+}
+updateOpenStatus();
+setInterval(updateOpenStatus, 60000);
 </script>
 </body>
 </html>
