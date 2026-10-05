@@ -139,10 +139,6 @@ nav:not(.scrolled):not(.light-bg) .nav-logo img{filter:brightness(0) invert(1)}
 .nav-links a:hover::after{width:100%}
 nav:not(.scrolled):not(.light-bg) .nav-links a{color:#fff;opacity:.8}
 .nav-right{display:flex;align-items:center;gap:14px}
-.nav-wa{display:none;align-items:center;gap:8px;font-size:13px;padding:8px 14px;border:1px solid var(--line);border-radius:var(--r-pill);transition:all .3s}
-.nav-wa:hover{border-color:var(--brand);color:var(--brand)}
-.nav-wa svg{width:14px;height:14px;fill:currentColor}
-nav:not(.scrolled):not(.light-bg) .nav-wa{color:#fff;border-color:rgba(255,255,255,.35)}
 .cart-btn{position:relative;display:flex;align-items:center;gap:8px;font-size:13px;padding:8px 16px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--bg);cursor:pointer;transition:all .3s}
 .cart-btn:hover{border-color:var(--ink)}
 .cart-btn .cnt{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;font-size:10px;font-weight:600;background:var(--brand);color:#fff;border-radius:var(--r-pill);font-family:var(--mono)}
@@ -155,7 +151,6 @@ nav:not(.scrolled):not(.light-bg) .nav-burger em{background:#fff}
 .nav-burger.open em:nth-child(3){transform:rotate(-45deg) translate(4px,-5px)}
 @media(min-width:960px){
   .nav-links{display:flex}
-  .nav-wa{display:inline-flex}
   .nav-burger{display:none}
 }
 
@@ -334,8 +329,7 @@ section.cream{background:var(--bg-alt)}
 
 /* COMO PEDIR */
 .pedir-grid{display:grid;gap:24px;grid-template-columns:1fr}
-@media(min-width:640px){.pedir-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1100px){.pedir-grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:900px){.pedir-grid{grid-template-columns:repeat(3,1fr)}}
 .pedir{padding:32px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);display:flex;flex-direction:column;gap:14px;transition:all .4s;position:relative;overflow:hidden}
 .pedir:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--brand)}
 .pedir .num{font-family:var(--display);font-size:56px;font-weight:300;line-height:.9;color:var(--brand);font-style:italic;margin-bottom:10px}
@@ -489,16 +483,13 @@ section.cream{background:var(--bg-alt)}
   .cart-item .pic{width:56px;height:56px}
   .cart-item .name{font-size:13px;line-height:1.25}
   .cart-f{padding:16px 18px 20px}
-  .cart-wa{padding:13px 16px;font-size:13.5px;gap:8px}
+  .cart-send{padding:13px 16px;font-size:13.5px;gap:8px}
 
   /* ORDER BAR */
   .order-bar{left:12px;right:12px;bottom:12px;padding:8px 10px 8px 16px}
   .order-bar-count{font-size:12px}
   .order-bar .go{padding:10px 14px;font-size:13px}
   .order-bar .go svg{width:14px;height:14px}
-
-  /* WA FLOAT */
-  .wa-float{bottom:74px;right:12px;width:46px;height:46px}
 }
 
 @media(max-width:420px){
@@ -574,9 +565,9 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
 .cart-f-row{display:flex;justify-content:space-between;margin-bottom:16px;font-size:14px}
 .cart-f-row.total{font-family:var(--display);font-size:24px;font-weight:500;letter-spacing:-0.01em}
 .cart-f-row.total .val{color:var(--brand)}
-.cart-wa{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;background:var(--brand);color:#fff;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:all .3s;width:100%}
-.cart-wa:hover{background:var(--brand-ink)}
-.cart-wa svg{width:18px;height:18px;fill:currentColor}
+.cart-send{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;background:var(--brand);color:#fff;border-radius:var(--r-pill);font-size:14px;font-weight:500;transition:all .3s;width:100%}
+.cart-send:hover{background:var(--brand-ink)}
+.cart-send svg{width:18px;height:18px;fill:currentColor}
 .cart-note{margin-top:12px;text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--ink-mute);text-transform:uppercase}
 
 /* STICKY ORDER BAR */
@@ -588,16 +579,9 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
 .order-bar .go:hover{background:var(--brand-ink)}
 .order-bar .go svg{width:14px;height:14px;fill:currentColor}
 
-/* FLOATING WA */
-.wa-float{position:fixed;bottom:24px;right:24px;z-index:69;width:58px;height:58px;display:flex;align-items:center;justify-content:center;transition:transform .3s;filter:drop-shadow(0 10px 24px rgba(37,211,102,.35))}
-.wa-float:hover{transform:scale(1.08)}
-.wa-float img{width:100%;height:100%;display:block}
-.order-bar.show ~ .wa-float{transform:translateY(-72px)}
-.order-bar.show ~ .wa-float:hover{transform:translateY(-72px) scale(1.08)}
 @media(max-width:640px){
   .order-bar{bottom:16px;padding:8px 8px 8px 18px;gap:12px}
   .order-bar-total{font-size:18px}
-  .wa-float{bottom:16px;right:16px;width:50px;height:50px}
 }
 
 /* TWEAKS PANEL */
@@ -630,10 +614,6 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
     <li><a href="#sucursales">Sucursales</a></li>
   </ul>
   <div class="nav-right">
-    <a href="https://wa.me/5491157491693?text=Hola%20Mangini%2C%20quiero%20hacer%20un%20pedido." class="nav-wa" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
-      Pedidos
-    </a>
     <button class="cart-btn" onclick="toggleCart()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       Carrito <span class="cnt" id="cartCnt">0</span>
@@ -887,29 +867,23 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
         <span class="kicker alt">Cómo pedir</span>
         <h2 class="h2">Elegí como te quede más <em>cómodo</em></h2>
       </div>
-      <p class="lede">Cuatro formas de recibir tu pedido. Todas con la misma producción, todas el mismo día.</p>
+      <p class="lede">Tres formas de recibir tu pedido. Todas con la misma producción, todas el mismo día.</p>
     </div>
     <div class="pedir-grid" data-a data-d="1">
       <div class="pedir">
         <div class="num">01</div>
         <div class="name">Online</div>
-        <p class="desc">Armá tu pedido desde la web y cerralo por WhatsApp en 30 segundos.</p>
+        <p class="desc">Armá tu pedido desde la web y envialo por mail en 30 segundos.</p>
         <a href="productos.html" class="lnk">Ver productos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="pedir">
         <div class="num">02</div>
-        <div class="name">WhatsApp</div>
-        <p class="desc">Escribinos directo y te ayudamos a elegir. Respondemos en minutos.</p>
-        <a href="https://wa.me/5491157491693?text=Hola%20Mangini%2C%20quiero%20hacer%20un%20pedido." class="lnk" target="_blank">Abrir WhatsApp <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="pedir">
-        <div class="num">03</div>
         <div class="name">Rappi & PedidosYa</div>
         <p class="desc">Delivery en menos de una hora desde la sucursal más cercana.</p>
         <a href="#" class="lnk">Pedir por Rappi <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <div class="pedir">
-        <div class="num">04</div>
+        <div class="num">03</div>
         <div class="name">Retirá en sucursal</div>
         <p class="desc">Sin costo de envío. Te avisamos cuando tu pedido está listo.</p>
         <a href="#sucursales" class="lnk">Elegir sucursal <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -924,7 +898,7 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
     <span class="kicker">Encargos & catering</span>
     <h2 class="h2">Tortas, mesas dulces y <em>catering</em> a medida.</h2>
     <p class="lede">Cumpleaños, casamientos, oficinas, eventos corporativos. Armamos el pedido según lo que necesites — desde una torta especial hasta mesa dulce, desayunos ejecutivos o viandas para reuniones. Coordinamos con 48 horas de anticipación.</p>
-    <a href="https://wa.me/5491157491693?text=Hola%20Mangini%2C%20quiero%20hacer%20un%20encargo." class="btn brand" target="_blank">Coordinar por WhatsApp →</a>
+    <a href="mailto:manginiconfiterias@gmail.com?subject=Encargo&amp;body=Hola%20Mangini%2C%20quiero%20hacer%20un%20encargo." class="btn brand">Coordinar por mail →</a>
   </div>
 </section>
 
@@ -939,7 +913,6 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
         <p class="f-tag">Confitería & Panadería Artesanal<br>Producción propia desde 2004<br>Buenos Aires, Argentina</p>
         <div class="f-social">
           <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2 0 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c0 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2 0-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c0-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.1.6c-.8.3-1.5.8-2.2 1.4-.7.7-1.1 1.4-1.4 2.2C.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c0 1.3.3 2.2.6 3 .3.8.8 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.8.3 1.7.5 3 .6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3 0 2.2-.3 3-.6.8-.3 1.5-.8 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.8.5-1.7.6-3 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c0-1.3-.3-2.2-.6-3-.3-.8-.8-1.5-1.4-2.2-.7-.7-1.4-1.1-2.2-1.4-.8-.3-1.7-.5-3-.6C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zm0 10.2a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg></a>
-          <a href="https://wa.me/5491157491693" aria-label="WhatsApp" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></a>
           <a href="mailto:manginiconfiterias@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg></a>
         </div>
       </div>
@@ -956,7 +929,6 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
         <h4>Contacto</h4>
         <ul>
           <li><a href="mailto:manginiconfiterias@gmail.com">manginiconfiterias@gmail.com</a></li>
-          <li><a href="https://wa.me/5491157491693" target="_blank">+54 9 11 5749-1693</a></li>
           <li><a href="https://instagram.com/mangini.bsas" target="_blank">@mangini.bsas</a></li>
         </ul>
       </div>
@@ -988,8 +960,8 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
     <div class="cart-empty"><p>Todavía no agregaste nada.</p><a href="#favoritos" onclick="closeCart()" class="btn ghost sm">Ver favoritos</a></div>
   </div>
   <div class="cart-f" id="cartFooter" style="display:none">
-    <a href="#" class="cart-wa" id="cartWa" target="_blank"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>Cerrar pedido por WhatsApp</a>
-    <p class="cart-note">Te confirmamos el pedido y el tiempo de preparación por WhatsApp</p>
+    <a href="#" class="cart-send" id="cartSend"><svg viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>Enviar pedido por mail</a>
+    <p class="cart-note">Te confirmamos el pedido y el tiempo de preparación por mail</p>
   </div>
 </aside>
 
@@ -1000,9 +972,6 @@ footer{background:var(--ink);color:var(--bg);padding:80px 0 40px;position:relati
   </div>
   <button class="go" onclick="toggleCart()">Ver pedido <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
 </div>
-
-<!-- WA FLOAT -->
-<a href="https://wa.me/5491157491693?text=Hola%20Mangini%2C%20quiero%20hacer%20un%20pedido." class="wa-float" target="_blank" aria-label="WhatsApp"><img src="img/whatsapp.png" alt="WhatsApp"></a>
 
 <!-- TWEAKS PANEL -->
 <aside class="tweaks" id="tweaksPanel">
@@ -1095,7 +1064,7 @@ function renderCart(){
   const cntEl = document.getElementById('cartCnt');
   const items = document.getElementById('cartItems');
   const foot = document.getElementById('cartFooter');
-  const wa = document.getElementById('cartWa');
+  const send = document.getElementById('cartSend');
   const bar = document.getElementById('orderBar');
   const barCnt = document.getElementById('orderBarCnt');
   const count = cart.reduce((s,c)=>s+c.qty,0);
@@ -1122,7 +1091,7 @@ function renderCart(){
     </div>
   `).join('');
   const msg = `Hola Mangini, quiero hacer un pedido:\n\n${cart.map(c=>`• ${c.name} x${c.qty}`).join('\n')}\n\n¿Me confirman total y tiempo de preparación?`;
-  wa.href = `https://wa.me/5491157491693?text=${encodeURIComponent(msg)}`;
+  send.href = `mailto:manginiconfiterias@gmail.com?subject=${encodeURIComponent('Pedido web')}&body=${encodeURIComponent(msg.replace(/\n/g,'\r\n'))}`;
 }
 function toggleCart(){
   const ov = document.getElementById('cartOverlay');
