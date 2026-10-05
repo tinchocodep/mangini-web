@@ -1146,9 +1146,11 @@ setTimeout(()=>document.querySelectorAll('[data-a]').forEach(el=>el.classList.ad
   const hintEl = section && section.querySelector('.scrollvid-hint');
   if(!section || !video) return;
 
-  let duration = 0;
-  let current = 0;
-  let target = 0;
+  const FPS = 24;         // frame rate of video/obrador.mp4 (encoded all-keyframes so any frame seeks instantly)
+  let lastFrame = 0;      // index of the final frame, 0 until metadata loads
+  let current = 0;        // eased position, in frames
+  let target = 0;         // scroll position, in frames
+  let shown = -1;         // frame last requested from the decoder
   let progress = 0;       // 0..1
   let rafRunning = false;
   let inView = false;
@@ -1162,9 +1164,7 @@ setTimeout(()=>document.querySelectorAll('[data-a]').forEach(el=>el.classList.ad
     let p = -rect.top / total;
     p = Math.max(0, Math.min(1, p));
     progress = p;
-    if(!duration) return;
-    target = p * duration;
-    if(target >= duration) target = duration - 0.05;
+    target = p * lastFrame;
   }
 
   // easing helper
@@ -1198,15 +1198,21 @@ setTimeout(()=>document.querySelectorAll('[data-a]').forEach(el=>el.classList.ad
 
   function tick(){
     rafRunning = false;
-    if(!inView) { updateText(); return; }
+    updateText();
+    if(!inView || !lastFrame) return;
     const diff = target - current;
-    if(Math.abs(diff) > 0.01){
-      current += diff * 0.35;
-      try{ video.currentTime = current; }catch(e){}
+    current = Math.abs(diff) < 0.5 ? target : current + diff * 0.35;
+    const frame = Math.round(current);
+    // One seek at a time: setting currentTime again aborts the seek in flight, so its frame never paints.
+    // If we end up waiting on the decoder, the 'seeked' listener below resumes the loop.
+    if(frame !== shown && !video.seeking){
+      shown = frame;
+      try{ video.currentTime = (frame + 0.5) / FPS; }catch(e){}
+    }
+    if(current !== target){
       rafRunning = true;
       requestAnimationFrame(tick);
     }
-    updateText();
   }
 
   function schedule(){
@@ -1216,15 +1222,16 @@ setTimeout(()=>document.querySelectorAll('[data-a]').forEach(el=>el.classList.ad
   }
 
   function onReady(){
-    duration = video.duration || 0;
+    const duration = video.duration || 0;
     if(!duration) return;
+    lastFrame = Math.round(duration * FPS) - 1;
     video.pause();
     try{
       const p = video.play();
       if(p && p.then){
-        p.then(()=>{ video.pause(); video.currentTime = 0; schedule(); })
-         .catch(()=>{ try{ video.currentTime = 0.01; }catch(e){} schedule(); });
-      } else { video.currentTime = 0.01; schedule(); }
+        p.then(()=>{ video.pause(); video.currentTime = 0; shown = -1; schedule(); })
+         .catch(()=>{ try{ video.currentTime = 0.01; }catch(e){} shown = -1; schedule(); });
+      } else { video.currentTime = 0.01; shown = -1; schedule(); }
     }catch(e){ schedule(); }
   }
 
@@ -1237,6 +1244,7 @@ setTimeout(()=>document.querySelectorAll('[data-a]').forEach(el=>el.classList.ad
   // Wheel + touch + scroll — catch everything (passive, RAF-throttled in schedule)
   window.addEventListener('scroll', schedule, {passive:true});
   window.addEventListener('resize', schedule);
+  video.addEventListener('seeked', schedule);
 })();
 
 
