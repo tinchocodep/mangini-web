@@ -397,3 +397,28 @@
 .mg-pd-fly{z-index:2147483002}
 .mg-pd-toast{z-index:2147482990}
 .mg-pd-bar{z-index:2147482980}
+
+/* ---------- Secciones de Rio que siguen debajo en el inicio: misma estética ---------- */
+.js-home-sections-container{background:var(--mg-crema);color:var(--mg-tinta);font-family:var(--mg-sans)}
+.js-home-sections-container>section{padding:clamp(56px,7vw,104px) 0;margin:0!important;background:transparent!important}
+.js-home-sections-container .section-title{font:700 clamp(30px,3.6vw,52px)/1 var(--mg-display)!important;letter-spacing:-.03em!important;text-transform:none!important;color:var(--mg-tinta)!important;margin:0 auto clamp(24px,3vw,40px)!important;max-width:1320px;padding:0 var(--mg-gutter)}
+/* Destacados: tarjetas redondeadas, fotos más contenidas */
+.section-featured-home .js-products-featured-container{max-width:1320px;margin:0 auto}
+.section-featured-home .js-product-container{background:var(--mg-papel);border-radius:24px;padding:10px 10px 18px;box-shadow:0 1px 0 var(--mg-linea),0 24px 50px -36px rgba(60,20,10,.35)}
+.section-featured-home .product-item-image-container{border-radius:18px;overflow:hidden;max-height:420px}
+.section-featured-home .product-item-image{object-fit:cover}
+.section-featured-home .item-description{padding:14px 8px 0}
+.section-featured-home .item-name{font:700 19px/1.2 var(--mg-display)!important;letter-spacing:-.02em;color:var(--mg-tinta)!important;text-transform:none!important}
+.section-featured-home .item-price,.section-featured-home .js-price-display{font:700 18px var(--mg-sans)!important;color:var(--mg-bordo)!important}
+.section-featured-home .swiper-button-prev,.section-featured-home .swiper-button-next{background:var(--mg-papel);border-radius:999px;width:48px;height:48px;box-shadow:0 10px 24px -12px rgba(0,0,0,.35)}
+/* Beneficios (medios de pago, compra segura...) */
+.section-informative-banners{border-top:1px solid var(--mg-linea);border-bottom:1px solid var(--mg-linea)}
+.section-informative-banners h3,.section-informative-banners .h5,.section-informative-banners .font-weight-bold{font:700 18px/1.2 var(--mg-display)!important;letter-spacing:-.01em;text-transform:none!important;color:var(--mg-tinta)}
+.section-informative-banners p,.section-informative-banners .font-small{color:var(--mg-tinta-2)}
+.section-informative-banners svg{color:var(--mg-bordo);fill:currentColor}
+/* Banners de categorías */
+.section-banners-home a,.section-banners-home img{border-radius:24px;overflow:hidden}
+.section-banners-home .container,.section-banners-home .container-fluid{max-width:1320px}
+/* Testimonios */
+.section-testimonials-home .section-title{text-align:left}
+.section-testimonials-home p{font:500 19px/1.5 var(--mg-sans);color:var(--mg-tinta)}
