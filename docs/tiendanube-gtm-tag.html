@@ -1,17 +1,31 @@
 <!--
-  Etiqueta "HTML personalizado" de Google Tag Manager para la tienda
+  Etiqueta "HTML personalizado" de Google Tag Manager (GTM-M3FJGT66) para la tienda
   manginiconfiteria.mitiendanube.com (activación: All Pages).
 
   Recibe el pedido armado en manginiconfiterias.com.ar/nueva como
   ?mgc=<base64url(JSON)>, por ejemplo [{"p":301465458,"v":["1 kg"],"q":2}],
-  vacía el carrito actual de Tiendanube (para no duplicar), suma cada producto
-  con su variante y lleva al carrito, donde se calcula el envío y se paga.
-  Este archivo es solo la copia de referencia: lo que corre es lo publicado en GTM.
+  y arma el carrito de Tiendanube con eso.
+
+  Protecciones:
+  - Solo acepta los productos y tamaños de la lista PERMITIDOS (lo demás se ignora).
+  - Si el visitante llega desde manginiconfiterias.com.ar, reemplaza el carrito solo
+    (es lo que pidió al tocar "Ir a pagar"). Si llega desde cualquier otro lado, primero
+    muestra lo que se va a cargar y no toca el carrito hasta que la persona confirma.
+
+  Este archivo es la copia de referencia: lo que corre es la versión publicada en GTM.
 -->
 <script>
 (function () {
   var m = /[?&]mgc=([^&#]+)/.exec(location.search);
   if (!m) return;
+
+  var PERMITIDOS = {
+    '301465458': { nombre: 'Pan dulce Tradicional', tamanos: ['500 g', '1 kg'] },
+    '303353732': { nombre: 'Pan dulce Frutos secos', tamanos: ['500 g', '1 kg'] },
+    '383018642': { nombre: 'Pack Mesa Familiar', tamanos: [] },
+    '383018784': { nombre: 'Pack Degustación', tamanos: [] }
+  };
+
   var items;
   try {
     var b64 = m[1].replace(/-/g, '+').replace(/_/g, '/');
@@ -19,12 +33,20 @@
     items = JSON.parse(decodeURIComponent(escape(atob(b64))));
   } catch (e) { return; }
   if (!items || !items.length || items.length > 20) return;
-  items = items.filter(function (it) { return it && /^\d+$/.test(String(it.p)); });
+
+  items = items.filter(function (it) {
+    if (!it || !Object.prototype.hasOwnProperty.call(PERMITIDOS, String(it.p))) return false;
+    var tam = PERMITIDOS[String(it.p)].tamanos, v = it.v || [];
+    return tam.length ? (v.length === 1 && tam.indexOf(String(v[0])) !== -1) : v.length === 0;
+  }).map(function (it) {
+    return { p: String(it.p), v: it.v ? [String(it.v[0])] : [], q: Math.max(1, Math.min(99, parseInt(it.q, 10) || 1)) };
+  });
   if (!items.length) return;
 
+  var desdeWeb = /^https:\/\/(www\.)?manginiconfiterias\.com\.ar\//.test(document.referrer || '');
+
   var ov = document.createElement('div');
-  ov.setAttribute('style', 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background:#7A1424;color:#F6F0E6;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 20px/1.4 system-ui,-apple-system,sans-serif');
-  ov.textContent = 'Armando tu pedido de Mangini...';
+  ov.setAttribute('style', 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background:#7A1424;color:#F6F0E6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:24px;font:600 20px/1.4 system-ui,-apple-system,sans-serif');
   document.documentElement.appendChild(ov);
 
   function enc(k, v) { return encodeURIComponent(k) + '=' + encodeURIComponent(v); }
@@ -37,29 +59,59 @@
     });
   }
 
-  fetch('/comprar/', { credentials: 'same-origin' })
-    .then(function (r) { return r.text(); })
-    .then(function (html) {
-      var ids = {}, re = /name="quantity\[(\d+)\]"/g, x;
-      while ((x = re.exec(html))) ids[x[1]] = 1;
-      var parts = Object.keys(ids).map(function (id) { return enc('quantity[' + id + ']', 0); });
-      if (!parts.length) return;
-      parts.push('cart_page=0');
-      return post('/cart/update/', parts.join('&'));
-    })
-    .catch(function () {})
-    .then(function () {
-      var i = 0;
-      function next() {
-        if (i >= items.length) return Promise.resolve();
-        var it = items[i++];
-        var q = Math.max(1, Math.min(99, parseInt(it.q, 10) || 1));
-        var parts = [enc('add_to_cart', it.p), enc('quantity', q), 'add_to_cart_enhanced=1'];
-        (it.v || []).forEach(function (val, k) { parts.push(enc('variation[' + k + ']', String(val))); });
-        return post('/comprar/', parts.join('&')).catch(function () {}).then(next);
-      }
-      return next();
-    })
-    .then(function () { location.replace('/comprar/'); });
+  function armar() {
+    ov.textContent = 'Armando tu pedido de Mangini...';
+    fetch('/comprar/', { credentials: 'same-origin' })
+      .then(function (r) { return r.text(); })
+      .then(function (html) {
+        var ids = {}, re = /name="quantity\[(\d+)\]"/g, x;
+        while ((x = re.exec(html))) ids[x[1]] = 1;
+        var parts = Object.keys(ids).map(function (id) { return enc('quantity[' + id + ']', 0); });
+        if (!parts.length) return;
+        parts.push('cart_page=0');
+        return post('/cart/update/', parts.join('&'));
+      })
+      .catch(function () {})
+      .then(function () {
+        var i = 0;
+        function next() {
+          if (i >= items.length) return Promise.resolve();
+          var it = items[i++];
+          var parts = [enc('add_to_cart', it.p), enc('quantity', it.q), 'add_to_cart_enhanced=1'];
+          it.v.forEach(function (val, k) { parts.push(enc('variation[' + k + ']', val)); });
+          return post('/comprar/', parts.join('&')).catch(function () {}).then(next);
+        }
+        return next();
+      })
+      .then(function () { location.replace('/comprar/'); });
+  }
+
+  if (desdeWeb) { armar(); return; }
+
+  // Llegó desde otro sitio: mostrar el pedido y esperar confirmación antes de tocar el carrito.
+  var titulo = document.createElement('p');
+  titulo.textContent = 'Vas a cargar este pedido de Mangini en tu carrito:';
+  var lista = document.createElement('ul');
+  lista.setAttribute('style', 'list-style:none;padding:0;margin:0;font-weight:500;font-size:17px');
+  items.forEach(function (it) {
+    var li = document.createElement('li');
+    li.textContent = it.q + ' × ' + PERMITIDOS[it.p].nombre + (it.v[0] ? ' ' + it.v[0] : '');
+    lista.appendChild(li);
+  });
+  var nota = document.createElement('p');
+  nota.setAttribute('style', 'font-weight:400;font-size:14px;opacity:.85');
+  nota.textContent = 'Reemplaza lo que tengas ahora en el carrito.';
+  var si = document.createElement('button');
+  si.textContent = 'Cargar pedido';
+  si.setAttribute('style', 'font:600 16px system-ui,sans-serif;padding:14px 26px;border-radius:999px;border:0;background:#F6F0E6;color:#7A1424;cursor:pointer');
+  var no = document.createElement('button');
+  no.textContent = 'Cancelar';
+  no.setAttribute('style', 'font:600 15px system-ui,sans-serif;padding:10px 20px;border-radius:999px;border:1px solid rgba(246,240,230,.5);background:transparent;color:#F6F0E6;cursor:pointer');
+  si.onclick = armar;
+  no.onclick = function () {
+    ov.remove();
+    try { history.replaceState(null, '', location.pathname); } catch (e) {}
+  };
+  [titulo, lista, nota, si, no].forEach(function (el) { ov.appendChild(el); });
 })();
 </script>
