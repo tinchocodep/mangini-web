@@ -252,16 +252,6 @@
     }, { passive: true });
   }
 
-  /* ---------------- WhatsApp de regalos empresariales ---------------- */
-  // Si no se cargó un número comercial, usa el WhatsApp que la tienda ya muestra (botón flotante de Rio)
-  var wa = $('[data-mg-wa]');
-  if (wa && (wa.getAttribute('href') || '#') === '#') {
-    var rio = $$('a[href*="wa.me/"], a[href*="api.whatsapp.com"], a[href*="whatsapp.com/send"]').filter(function (a) { return !a.closest('.mg-root'); })[0];
-    var m = rio && /(?:wa\.me\/|phone=)(\d{8,15})/.exec(rio.getAttribute('href'));
-    if (m) wa.setAttribute('href', 'https://wa.me/' + m[1] + '?text=' + encodeURIComponent(wa.getAttribute('data-mg-wa')));
-    else wa.hidden = true;
-  }
-
   desdeLS();
   pintar();
   window.MG = { abrir: abrir, sumar: sumar };

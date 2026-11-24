@@ -15,14 +15,18 @@
 </section>
 
 {% set mg_wa_texto = 'Hola, quiero consultar por pan dulce Mangini para regalos empresariales. Empresa: . Cantidad estimada: . Presentación: . Localidad: . Fecha en que lo necesitamos: .' %}
-{% if mg_whatsapp_comercial %}{% set mg_wa_url = 'https://wa.me/' ~ mg_whatsapp_comercial ~ '?text=' ~ (mg_wa_texto | url_encode) %}{% else %}{% set mg_wa_url = '#' %}{% endif %}
 <section class="mg-biz" id="empresas">
   <div class="mg-biz-inner">
     <div>
       <h2>Regalos empresariales</h2>
-      <p>Pan dulce Mangini en su caja para tu equipo o tus clientes. Te pasamos la cotización por WhatsApp con el área comercial.</p>
+      <p>Pan dulce Mangini en su caja para tu equipo o tus clientes. Contanos qué necesitás y te pasamos la cotización con el área comercial.</p>
       <ul><li>Empresa y localidad</li><li>Cantidad estimada</li><li>Variedad y tamaño</li><li>Fecha de entrega</li></ul>
-      <a class="mg-btn mg-btn-bordo" href="{{ mg_wa_url }}" data-mg-wa="{{ mg_wa_texto }}" target="_blank" rel="noopener"><img src="{{ 'img/mg/whatsapp.png' | static_url }}" alt="">Cotizar por WhatsApp</a>
+      {# Solo se usa WhatsApp con un número comercial confirmado (el número general de la tienda está bloqueado). #}
+      {% if mg_whatsapp_comercial %}
+        <a class="mg-btn mg-btn-bordo" href="https://wa.me/{{ mg_whatsapp_comercial }}?text={{ mg_wa_texto | url_encode }}" target="_blank" rel="noopener"><img src="{{ 'img/mg/whatsapp.png' | static_url }}" alt="">Cotizar por WhatsApp</a>
+      {% else %}
+        <a class="mg-btn mg-btn-bordo" href="/contacto/">Pedir cotización</a>
+      {% endif %}
     </div>
     <div class="mg-biz-box">
       <img src="{{ 'img/mg/cut-caja.webp' | static_url }}" alt="Caja de pan dulce Mangini" loading="lazy">
@@ -38,7 +42,7 @@
   <details open><summary>¿A dónde envían?</summary><p>A todo el país. En CABA con reparto propio; al resto del país, por correo. El costo depende de tu código postal y lo ves antes de pagar.</p></details>
   <details><summary>¿Cuándo llega?</summary><p>Te mostramos el plazo estimado cuando ponés tu código postal. Despachamos en días hábiles.</p></details>
   <details><summary>¿Cómo pago?</summary><p>Con Mercado Pago o por transferencia, que tiene 5% de descuento. Si pagás por transferencia, despachamos cuando se acredita.</p></details>
-  <details><summary>¿Tienen regalos para empresas?</summary><p>Sí. Escribinos por WhatsApp con la cantidad, la variedad y la fecha, y te pasamos la cotización.</p></details>
+  <details><summary>¿Tienen regalos para empresas?</summary><p>Sí. Pedinos la cotización desde <a href="/contacto/">Contacto</a> con la cantidad, la variedad y la fecha.</p></details>
   {# Pendientes antes de sumarlas (las confirma Mangini): conservación, ingredientes y alérgenos, retiro en local. #}
 </section>
 
