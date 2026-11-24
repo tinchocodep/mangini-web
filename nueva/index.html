@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Mangini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/nueva/m2.css?v=1">
+<style>
+.daily{padding:clamp(80px,10vw,140px) var(--gutter);max-width:1320px;margin:0 auto}
+.daily-head{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:40px}
+.daily-head p{color:var(--tinta-2);max-width:42ch;font-size:18px}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.tile{position:relative;border-radius:24px;overflow:hidden;text-decoration:none;color:#fff;aspect-ratio:3/4}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.tile:hover img{transform:scale(1.06)}
+.tile div{position:absolute;inset:auto 0 0;padding:60px 20px 18px;background:linear-gradient(180deg,transparent,rgba(31,21,19,.75))}
+.tile strong{display:block;font:800 26px var(--display);letter-spacing:-.02em}
+.tile span{font-size:14px;opacity:.9}
+.branches{padding:clamp(80px,10vw,140px) var(--gutter)}
+.branches-inner{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px);align-items:start}
+.branches .lead{color:var(--tinta-2);font-size:18px;max-width:34ch}
+.blist{list-style:none;padding:0}
+.blist li{display:grid;grid-template-columns:1fr auto;gap:2px 24px;padding:20px 0;border-top:1px solid var(--linea)}
+.blist li:last-child{border-bottom:1px solid var(--linea)}
+.blist strong{font:700 22px var(--display);letter-spacing:-.02em}
+.blist span{color:var(--tinta-2);font-size:15px;grid-column:1}
+.blist a{grid-row:1/3;grid-column:2;align-self:center;font-weight:600;font-size:15px;background:var(--papel);padding:10px 16px;border-radius:999px;text-decoration:none}
+@media (max-width:900px){.daily-head{flex-direction:column;align-items:start}.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.tile strong{font-size:20px}.branches-inner{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="nav" data-nav>
+  <a href="/nueva/" aria-label="Mangini, inicio">
+    <img class="logo logo-light" src="/nueva/img/logo-crema.png" alt="Mangini">
+    <img class="logo logo-dark" src="/nueva/img/logo.png" alt="">
+  </a>
+  <nav class="nav-links" aria-label="Principal">
+    <a href="/nueva/pan-dulce.html">Pan dulce</a>
+    <a href="#productos">Productos</a>
+    <a href="#sucursales">Sucursales</a>
+    <a href="/nueva/pan-dulce.html#empresas">Empresas</a>
+  </nav>
+  <button class="cart-btn" type="button" data-open-cart>Pedido <span class="n" data-count>0</span></button>
+</header>
+
+<main>
+  <section class="hero" data-hero>
+    <div class="hero-copy">
+      <p class="hero-kicker"><img src="/nueva/img/suit-g-oro.png" alt="">Temporada 2026</p>
+      <h1>Llegó el pan dulce <span>Mangini</span></h1>
+      <p class="hero-lede">Tradicional o con frutos secos, en 500 g y 1 kg. Lo hacemos en nuestra planta y lo enviamos a todo el país.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-cream" href="/nueva/pan-dulce.html">Comprar pan dulce</a>
+        <a class="btn btn-line" href="/nueva/pan-dulce.html#empresas">Regalos empresariales</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>Desde 2004</b>Producción propia</div>
+        <div><b>Todo el país</b>Envío a domicilio</div>
+      </div>
+    </div>
+
+    <div class="deck-wrap">
+      <div class="deck" data-deck>
+        <a class="card" href="/nueva/pan-dulce.html#elegir" data-pick="tradicional" style="--i:0;z-index:1" data-slot="l">
+          <div class="card-float">
+            <div class="card-face">
+              <span class="pip pip-tl"><img src="/nueva/img/suit-g.png" alt="">T</span>
+              <span class="pip pip-br"><img src="/nueva/img/suit-g.png" alt="">T</span>
+              <div class="card-info">
+                <h3>Tradicional</h3>
+                <div class="card-prices"><span>500 g <b>$17.000</b></span><span>1 kg <b>$30.000</b></span></div>
+              </div>
+            </div>
+            <img class="card-prod" src="/nueva/img/cut-tradicional.webp" alt="Pan dulce Tradicional con glasé">
+          </div>
+        </a>
+        <a class="card" href="/nueva/pan-dulce.html#elegir" data-pick="frutos" style="--i:2;z-index:2" data-slot="r">
+          <div class="card-float">
+            <div class="card-face">
+              <span class="pip pip-tl"><img src="/nueva/img/suit-g.png" alt="">F</span>
+              <span class="pip pip-br"><img src="/nueva/img/suit-g.png" alt="">F</span>
+              <div class="card-info">
+                <h3>Frutos secos</h3>
+                <div class="card-prices"><span>500 g <b>$18.000</b></span><span>1 kg <b>$32.000</b></span></div>
+              </div>
+            </div>
+            <img class="card-prod" src="/nueva/img/cut-frutos.webp" alt="Pan dulce de Frutos secos">
+          </div>
+        </a>
+        <a class="card card-box" href="/nueva/pan-dulce.html#empresas" style="--i:1;z-index:3" data-slot="c">
+          <div class="card-float">
+            <div class="card-face">
+              <span class="pip pip-tl"><img src="/nueva/img/suit-g.png" alt="">R</span>
+              <span class="pip pip-br"><img src="/nueva/img/suit-g.png" alt="">R</span>
+              <div class="card-info">
+                <h3>Para regalar</h3>
+                <div class="card-prices"><span>Viene en su caja Mangini</span></div>
+              </div>
+            </div>
+            <img class="card-prod" src="/nueva/img/cut-caja.webp" alt="Caja de pan dulce Mangini">
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <span class="ing far"  style="--x:44%;--y:12%;--s:70px;--d:.4;--t:11s;--rot:-20deg"><img src="/nueva/img/ing-almendra.webp" alt=""></span>
+    <span class="ing"      style="--x:90%;--y:16%;--s:110px;--d:1;--t:9s;--rot:15deg;--z:6"><img src="/nueva/img/ing-nuez.webp" alt=""></span>
+    <span class="ing near" style="--x:91%;--y:80%;--s:118px;--d:1.6;--t:10s;--rot:-10deg;--z:6"><img src="/nueva/img/ing-cereza.webp" alt=""></span>
+    <span class="ing far"  style="--x:58%;--y:88%;--s:58px;--d:.5;--t:12s"><img src="/nueva/img/ing-naranja.webp" alt=""></span>
+    <span class="ing"      style="--x:96%;--y:48%;--s:84px;--d:.9;--t:8s;--rot:30deg"><img src="/nueva/img/ing-avellana.webp" alt=""></span>
+    <span class="ing far"  style="--x:62%;--y:6%;--s:56px;--d:.3;--t:13s;--rot:40deg"><img src="/nueva/img/ing-verde.webp" alt=""></span>
+    <span class="ing"      style="--x:45%;--y:84%;--s:84px;--d:.8;--t:10s;--rot:-25deg;--z:6"><img src="/nueva/img/ing-higo.webp" alt=""></span>
+    <span class="ing far"  style="--x:3%;--y:88%;--s:80px;--d:.4;--t:12s;--rot:20deg"><img src="/nueva/img/ing-nuez2.webp" alt=""></span>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Envíos a todo el país</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>Mercado Pago o transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>Hecho en nuestra planta desde 2004</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>Regalos empresariales</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>Cinco locales en Buenos Aires</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>Envíos a todo el país</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>Mercado Pago o transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>Hecho en nuestra planta desde 2004</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>Regalos empresariales</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>Cinco locales en Buenos Aires</span><img src="/nueva/img/ing-cereza.webp" alt="">
+    </div>
+  </div>
+
+  <section class="daily" id="productos">
+    <div class="daily-head">
+      <h2>Todos los días en Mangini</h2>
+      <p>Pan, facturas y tortas que salen de nuestra planta y llegan a los cinco locales a lo largo del día.</p>
+    </div>
+    <div class="tiles">
+      <a class="tile" href="#"><img src="/nueva/img/medialunas-dulces.jpg" alt=""><div><strong>Medialunas</strong><span>De manteca y saladas</span></div></a>
+      <a class="tile" href="#"><img src="/nueva/img/pan-de-masa-madre.jpg" alt=""><div><strong>Panes</strong><span>Masa madre, campo, chapata</span></div></a>
+      <a class="tile" href="#"><img src="/nueva/img/facturas-surtidas.jpg" alt=""><div><strong>Facturas</strong><span>Surtidas por docena</span></div></a>
+      <a class="tile" href="#"><img src="/nueva/img/torta-mangini.jpg" alt=""><div><strong>Tortas</strong><span>Mangini, Balcarce, Niza</span></div></a>
+    </div>
+  </section>
+
+  <section class="biz">
+    <div class="biz-inner">
+      <div>
+        <h2>Regalos empresariales</h2>
+        <p>Pan dulce Mangini en su caja para tu equipo o tus clientes. Te cotizamos por WhatsApp con el área comercial.</p>
+        <a class="btn btn-bordo" href="/nueva/pan-dulce.html#empresas"><img src="/nueva/img/whatsapp.png" alt="">Cotizar por WhatsApp</a>
+      </div>
+      <div class="biz-box">
+        <img src="/nueva/img/cut-caja.webp" alt="Caja de pan dulce Mangini">
+        <span class="ing" style="--x:-6%;--y:8%;--s:90px;--d:0;--t:9s;--rot:-15deg"><img src="/nueva/img/ing-nuez.webp" alt=""></span>
+        <span class="ing" style="--x:86%;--y:-4%;--s:80px;--d:0;--t:10s"><img src="/nueva/img/ing-cereza.webp" alt=""></span>
+        <span class="ing" style="--x:90%;--y:74%;--s:96px;--d:0;--t:11s;--rot:25deg"><img src="/nueva/img/ing-almendra.webp" alt=""></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="branches" id="sucursales">
+    <div class="branches-inner">
+      <div>
+        <h2>Cinco locales</h2>
+        <p class="lead">Abiertos todos los días de 7 a 20. También podés pedir por Rappi o PedidosYa desde el local más cercano.</p>
+      </div>
+      <ul class="blist">
+        <li><strong>Belgrano</strong><span>Federico Lacroze 1694</span><a href="#">Cómo llegar</a></li>
+        <li><strong>Las Cañitas</strong><span>Av. Luis María Campos 805</span><a href="#">Cómo llegar</a></li>
+        <li><strong>Colegiales</strong><span>Cap. Gral. Ramón Freire 1535</span><a href="#">Cómo llegar</a></li>
+        <li><strong>Palermo Botánico</strong><span>Av. Gral. Las Heras 4001</span><a href="#">Cómo llegar</a></li>
+        <li><strong>Olivos</strong><span>Av. Maipú 2439</span><a href="#">Cómo llegar</a></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <img src="/nueva/img/logo.png" alt="Mangini">
+  <p>Confitería y panadería desde 2004. Producción propia en Villa Lugano.</p>
+  <nav><a href="/nueva/pan-dulce.html">Pan dulce</a><a href="#">Instagram</a><a href="#">Mayoristas</a></nav>
+</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+requestAnimationFrame(()=>setTimeout(()=>$('.deck-wrap').classList.add('is-dealt'),60));
+const hero=$('[data-hero]');
+hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect();hero.style.setProperty('--mx',((e.clientX-r.left)/r.width*2-1).toFixed(3));hero.style.setProperty('--my',((e.clientY-r.top)/r.height*2-1).toFixed(3))});
+hero.addEventListener('pointerleave',()=>{hero.style.setProperty('--mx',0);hero.style.setProperty('--my',0)});
+const nav=$('[data-nav]');const onScroll=()=>nav.classList.toggle('is-solid',scrollY>innerHeight*.75);addEventListener('scroll',onScroll,{passive:true});onScroll();
+</script>
+</body>
+</html>
