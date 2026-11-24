@@ -1,0 +1,65 @@
+<!--
+  Etiqueta "HTML personalizado" de Google Tag Manager para la tienda
+  manginiconfiteria.mitiendanube.com (activación: All Pages).
+
+  Recibe el pedido armado en manginiconfiterias.com.ar/nueva como
+  ?mgc=<base64url(JSON)>, por ejemplo [{"p":301465458,"v":["1 kg"],"q":2}],
+  vacía el carrito actual de Tiendanube (para no duplicar), suma cada producto
+  con su variante y lleva al carrito, donde se calcula el envío y se paga.
+  Este archivo es solo la copia de referencia: lo que corre es lo publicado en GTM.
+-->
+<script>
+(function () {
+  var m = /[?&]mgc=([^&#]+)/.exec(location.search);
+  if (!m) return;
+  var items;
+  try {
+    var b64 = m[1].replace(/-/g, '+').replace(/_/g, '/');
+    while (b64.length % 4) b64 += '=';
+    items = JSON.parse(decodeURIComponent(escape(atob(b64))));
+  } catch (e) { return; }
+  if (!items || !items.length || items.length > 20) return;
+  items = items.filter(function (it) { return it && /^\d+$/.test(String(it.p)); });
+  if (!items.length) return;
+
+  var ov = document.createElement('div');
+  ov.setAttribute('style', 'position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647;background:#7A1424;color:#F6F0E6;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 20px/1.4 system-ui,-apple-system,sans-serif');
+  ov.textContent = 'Armando tu pedido de Mangini...';
+  document.documentElement.appendChild(ov);
+
+  function enc(k, v) { return encodeURIComponent(k) + '=' + encodeURIComponent(v); }
+  function post(url, body) {
+    return fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', 'X-Requested-With': 'XMLHttpRequest' },
+      body: body
+    });
+  }
+
+  fetch('/comprar/', { credentials: 'same-origin' })
+    .then(function (r) { return r.text(); })
+    .then(function (html) {
+      var ids = {}, re = /name="quantity\[(\d+)\]"/g, x;
+      while ((x = re.exec(html))) ids[x[1]] = 1;
+      var parts = Object.keys(ids).map(function (id) { return enc('quantity[' + id + ']', 0); });
+      if (!parts.length) return;
+      parts.push('cart_page=0');
+      return post('/cart/update/', parts.join('&'));
+    })
+    .catch(function () {})
+    .then(function () {
+      var i = 0;
+      function next() {
+        if (i >= items.length) return Promise.resolve();
+        var it = items[i++];
+        var q = Math.max(1, Math.min(99, parseInt(it.q, 10) || 1));
+        var parts = [enc('add_to_cart', it.p), enc('quantity', q), 'add_to_cart_enhanced=1'];
+        (it.v || []).forEach(function (val, k) { parts.push(enc('variation[' + k + ']', String(val))); });
+        return post('/comprar/', parts.join('&')).catch(function () {}).then(next);
+      }
+      return next();
+    })
+    .then(function () { location.replace('/comprar/'); });
+})();
+</script>

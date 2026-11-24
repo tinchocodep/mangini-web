@@ -17,6 +17,29 @@
   SKUS['pack-mesa'] = { nombre: 'Pack Mesa Familiar', img: IMG + 'cut-tradicional.webp', precio: 132906, detalle: '2 Tradicional 1 kg, 1 Tradicional 500 g y 2 Frutos secos 500 g' };
   SKUS['pack-degustacion'] = { nombre: 'Pack Degustación', img: IMG + 'cut-frutos.webp', precio: 46750, detalle: 'Tradicional y Frutos secos de 500 g' };
 
+  // Producto y variante de cada uno en Tiendanube (la etiqueta de GTM de la tienda arma el carrito con esto).
+  // online:false = todavía no se puede comprar en la tienda (producto oculto); se bloquea el pago con aviso.
+  const TIENDA = 'https://manginiconfiteria.mitiendanube.com/';
+  const TN = {
+    'tradicional-500': { p: 301465458, v: ['500 g'] },
+    'tradicional-1000': { p: 301465458, v: ['1 kg'] },
+    'frutos-500': { p: 303353732, v: ['500 g'] },
+    'frutos-1000': { p: 303353732, v: ['1 kg'] },
+    'pack-mesa': { p: 383018642, online: false },
+    'pack-degustacion': { p: 383018784, online: false },
+  };
+  function linkDePago() {
+    const lista = items.map((i) => {
+      const t = TN[i.id];
+      const it = { p: t.p, q: i.q };
+      if (t.v) it.v = t.v;
+      return it;
+    });
+    const json = JSON.stringify(lista);
+    const b64 = btoa(unescape(encodeURIComponent(json))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    return `${TIENDA}?mgc=${b64}`;
+  }
+
   const KEY = 'mangini-pedido-v2';
   const fmt = (n) => '$' + n.toLocaleString('es-AR', { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -49,8 +72,9 @@
         <div class="pd-line"><span>Total</span><b data-pd-sub>$0</b></div>
         <div class="pd-line pd-tr"><span>Pagando por transferencia, 5% off</span><b data-pd-tr>$0</b></div>
         <div class="pd-line pd-muted"><span>Envío</span><span>Lo calculás con tu código postal al pagar</span></div>
+        <p class="pd-nota" data-pd-nota hidden></p>
         <a class="btn btn-bordo btn-wide pd-pay" href="#" data-pd-pay>Ir a pagar</a>
-        <p class="pd-pays">Mercado Pago o transferencia. 5% off pagando por transferencia.</p>
+        <p class="pd-pays">Pagás en la tienda segura de Mangini en Tiendanube. Mercado Pago o transferencia con 5% off.</p>
       </div>
     </aside>
     <button type="button" class="pd-bar" data-pd-bar>
@@ -82,7 +106,7 @@
   function sugerencias() {
     const en = new Set(items.map((i) => i.id));
     const orden = ['frutos-1000', 'tradicional-1000', 'pack-degustacion', 'tradicional-500', 'frutos-500', 'pack-mesa'];
-    return orden.filter((id) => !en.has(id)).slice(0, 4);
+    return orden.filter((id) => !en.has(id) && !(TN[id] && TN[id].online === false)).slice(0, 4);
   }
 
   const tacho = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -115,6 +139,11 @@
     const pay = $('[data-pd-pay]');
     pay.textContent = n ? `Ir a pagar ${fmt(t)}` : 'Ir a pagar';
     pay.classList.toggle('is-off', !n);
+    pay.href = n ? linkDePago() : '#';
+    const bloqueados = items.filter((i) => TN[i.id] && TN[i.id].online === false);
+    const nota = $('[data-pd-nota]');
+    nota.hidden = !bloqueados.length;
+    nota.textContent = bloqueados.length ? `${bloqueados.map((i) => SKUS[i.id].nombre).join(' y ')}: todavía no se puede pagar online. Sacalo del pedido para seguir o pedilo por WhatsApp.` : '';
     $('[data-pd-bar-n]').textContent = n;
     $('[data-pd-bar-p]').textContent = fmt(t);
     bar.classList.toggle('show', n > 0);
@@ -184,7 +213,13 @@
     const a = e.target.closest('[data-pd-add]');
     if (a) { agregar(a.dataset.pdAdd, 1, null); pintar(); return; }
     if (e.target.closest('[data-pd-bar]')) { abrir(); return; }
-    if (e.target.closest('[data-pd-pay]')) { e.preventDefault(); if (cantidad()) avisar('En la versión final acá pasás al pago seguro de Tiendanube.'); }
+    if (e.target.closest('[data-pd-pay]')) {
+      e.preventDefault();
+      if (!cantidad()) return;
+      if (items.some((i) => TN[i.id] && TN[i.id].online === false)) { avisar('Los packs todavía no se pueden pagar online.'); return; }
+      $('[data-pd-pay]').textContent = 'Te llevamos al pago...';
+      location.href = linkDePago();
+    }
   });
 
   document.addEventListener('click', (e) => {

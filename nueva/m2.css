@@ -393,3 +393,5 @@ h2{font-size:clamp(40px,5.6vw,84px);margin-bottom:.35em}
 .pd-tr b{font:700 17px var(--sans);color:#2F5A2A}
 .pd-tr[hidden]{display:none}
 .pd-sug-n{padding-right:30px}
+.pd-nota{font-size:13px;line-height:1.4;background:#FFF1CF;color:#6B4A12;border-radius:12px;padding:10px 12px}
+.pd-nota[hidden]{display:none}
