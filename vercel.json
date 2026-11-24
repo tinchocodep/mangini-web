@@ -1,4 +1,18 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/productos",
+      "missing": [{ "type": "host", "value": "manginiconfiterias.com.ar" }],
+      "destination": "https://manginiconfiterias.com.ar/productos/",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "missing": [{ "type": "host", "value": "manginiconfiterias.com.ar" }],
+      "destination": "https://manginiconfiterias.com.ar/",
+      "permanent": true
+    }
+  ]
 }
