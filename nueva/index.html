@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/nueva/m2.css?v=1">
+<link rel="stylesheet" href="/nueva/m2.css?v=8">
 <style>
 .daily{padding:clamp(80px,10vw,140px) var(--gutter);max-width:1320px;margin:0 auto}
 .daily-head{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:40px}
@@ -68,45 +68,47 @@
 
     <div class="deck-wrap">
       <div class="deck" data-deck>
-        <a class="card" href="/nueva/pan-dulce.html#elegir" data-pick="tradicional" style="--i:0;z-index:1" data-slot="l">
+        <div class="card" data-slot="l" data-pick="tradicional" style="--i:0;z-index:1">
           <div class="card-float">
-            <div class="card-face">
+            <a class="card-face" href="/nueva/pan-dulce.html#elegir">
               <span class="pip pip-tl"><img src="/nueva/img/suit-g.png" alt="">T</span>
               <span class="pip pip-br"><img src="/nueva/img/suit-g.png" alt="">T</span>
               <div class="card-info">
                 <h3>Tradicional</h3>
-                <div class="card-prices"><span>500 g <b>$17.000</b></span><span>1 kg <b>$30.000</b></span></div>
+                <span class="card-prices"><span>500 g <b>$21.860</b></span><span>1 kg <b>$42.360</b></span></span>
               </div>
-            </div>
+            </a>
             <img class="card-prod" src="/nueva/img/cut-tradicional.webp" alt="Pan dulce Tradicional con glasé">
+            <button class="card-add" type="button" data-quick="tradicional" aria-label="Agregar Tradicional 1 kg al pedido">+</button>
           </div>
-        </a>
-        <a class="card" href="/nueva/pan-dulce.html#elegir" data-pick="frutos" style="--i:2;z-index:2" data-slot="r">
+        </div>
+        <div class="card" data-slot="r" data-pick="frutos" style="--i:2;z-index:2">
           <div class="card-float">
-            <div class="card-face">
+            <a class="card-face" href="/nueva/pan-dulce.html#elegir">
               <span class="pip pip-tl"><img src="/nueva/img/suit-g.png" alt="">F</span>
               <span class="pip pip-br"><img src="/nueva/img/suit-g.png" alt="">F</span>
               <div class="card-info">
                 <h3>Frutos secos</h3>
-                <div class="card-prices"><span>500 g <b>$18.000</b></span><span>1 kg <b>$32.000</b></span></div>
+                <span class="card-prices"><span>500 g <b>$24.890</b></span><span>1 kg <b>$46.845</b></span></span>
               </div>
-            </div>
+            </a>
             <img class="card-prod" src="/nueva/img/cut-frutos.webp" alt="Pan dulce de Frutos secos">
+            <button class="card-add" type="button" data-quick="frutos" aria-label="Agregar Frutos secos 1 kg al pedido">+</button>
           </div>
-        </a>
-        <a class="card card-box" href="/nueva/pan-dulce.html#empresas" style="--i:1;z-index:3" data-slot="c">
+        </div>
+        <div class="card card-box" data-slot="c" style="--i:1;z-index:3">
           <div class="card-float">
-            <div class="card-face">
+            <a class="card-face" href="/nueva/pan-dulce.html#empresas">
               <span class="pip pip-tl"><img src="/nueva/img/suit-g.png" alt="">R</span>
               <span class="pip pip-br"><img src="/nueva/img/suit-g.png" alt="">R</span>
               <div class="card-info">
                 <h3>Para regalar</h3>
-                <div class="card-prices"><span>Viene en su caja Mangini</span></div>
+                <span class="card-prices"><span>Viene en su caja Mangini</span></span>
               </div>
-            </div>
+            </a>
             <img class="card-prod" src="/nueva/img/cut-caja.webp" alt="Caja de pan dulce Mangini">
           </div>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -123,12 +125,12 @@
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
       <span>Envíos a todo el país</span><img src="/nueva/img/ing-cereza.webp" alt="">
-      <span>Mercado Pago o transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>5% off pagando por transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Hecho en nuestra planta desde 2004</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Regalos empresariales</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Cinco locales en Buenos Aires</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Envíos a todo el país</span><img src="/nueva/img/ing-cereza.webp" alt="">
-      <span>Mercado Pago o transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>5% off pagando por transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Hecho en nuestra planta desde 2004</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Regalos empresariales</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Cinco locales en Buenos Aires</span><img src="/nueva/img/ing-cereza.webp" alt="">
@@ -187,6 +189,7 @@
   <nav><a href="/nueva/pan-dulce.html">Pan dulce</a><a href="#">Instagram</a><a href="#">Mayoristas</a></nav>
 </footer>
 
+<script src="/nueva/pedido.js?v=2"></script>
 <script>
 const $=s=>document.querySelector(s);
 requestAnimationFrame(()=>setTimeout(()=>$('.deck-wrap').classList.add('is-dealt'),60));

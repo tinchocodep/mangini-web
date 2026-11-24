@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/nueva/m2.css?v=1">
+<link rel="stylesheet" href="/nueva/m2.css?v=8">
 </head>
 <body>
 
@@ -21,6 +21,7 @@
   </a>
   <nav class="nav-links" aria-label="Principal">
     <a href="#elegir">Comprar</a>
+    <a href="#packs">Packs</a>
     <a href="#empresas">Regalos empresariales</a>
     <a href="#preguntas">Envíos y pagos</a>
     <a href="/nueva/">Mangini</a>
@@ -47,45 +48,47 @@
 
     <div class="deck-wrap">
       <div class="deck" data-deck>
-        <a class="card" href="#elegir" data-pick="tradicional" style="--i:0;z-index:1" data-slot="l">
+        <div class="card" data-slot="l" data-pick="tradicional" style="--i:0;z-index:1">
           <div class="card-float">
-            <div class="card-face">
+            <a class="card-face" href="#elegir">
               <span class="pip pip-tl"><img src="/nueva/img/suit-g.png" alt="">T</span>
               <span class="pip pip-br"><img src="/nueva/img/suit-g.png" alt="">T</span>
               <div class="card-info">
                 <h3>Tradicional</h3>
-                <div class="card-prices"><span>500 g <b>$17.000</b></span><span>1 kg <b>$30.000</b></span></div>
+                <span class="card-prices"><span>500 g <b>$21.860</b></span><span>1 kg <b>$42.360</b></span></span>
               </div>
-            </div>
+            </a>
             <img class="card-prod" src="/nueva/img/cut-tradicional.webp" alt="Pan dulce Tradicional con glasé">
+            <button class="card-add" type="button" data-quick="tradicional" aria-label="Agregar Tradicional 1 kg al pedido">+</button>
           </div>
-        </a>
-        <a class="card" href="#elegir" data-pick="frutos" style="--i:2;z-index:2" data-slot="r">
+        </div>
+        <div class="card" data-slot="r" data-pick="frutos" style="--i:2;z-index:2">
           <div class="card-float">
-            <div class="card-face">
+            <a class="card-face" href="#elegir">
               <span class="pip pip-tl"><img src="/nueva/img/suit-g.png" alt="">F</span>
               <span class="pip pip-br"><img src="/nueva/img/suit-g.png" alt="">F</span>
               <div class="card-info">
                 <h3>Frutos secos</h3>
-                <div class="card-prices"><span>500 g <b>$18.000</b></span><span>1 kg <b>$32.000</b></span></div>
+                <span class="card-prices"><span>500 g <b>$24.890</b></span><span>1 kg <b>$46.845</b></span></span>
               </div>
-            </div>
+            </a>
             <img class="card-prod" src="/nueva/img/cut-frutos.webp" alt="Pan dulce de Frutos secos">
+            <button class="card-add" type="button" data-quick="frutos" aria-label="Agregar Frutos secos 1 kg al pedido">+</button>
           </div>
-        </a>
-        <a class="card card-box" href="#empresas" style="--i:1;z-index:3" data-slot="c">
+        </div>
+        <div class="card card-box" data-slot="c" style="--i:1;z-index:3">
           <div class="card-float">
-            <div class="card-face">
+            <a class="card-face" href="#empresas">
               <span class="pip pip-tl"><img src="/nueva/img/suit-g.png" alt="">R</span>
               <span class="pip pip-br"><img src="/nueva/img/suit-g.png" alt="">R</span>
               <div class="card-info">
                 <h3>Para regalar</h3>
-                <div class="card-prices"><span>Viene en su caja Mangini</span></div>
+                <span class="card-prices"><span>Viene en su caja Mangini</span></span>
               </div>
-            </div>
+            </a>
             <img class="card-prod" src="/nueva/img/cut-caja.webp" alt="Caja de pan dulce Mangini">
           </div>
-        </a>
+        </div>
       </div>
     </div>
 
@@ -102,12 +105,12 @@
   <div class="ticker" aria-hidden="true">
     <div class="ticker-track">
       <span>Envíos a todo el país</span><img src="/nueva/img/ing-cereza.webp" alt="">
-      <span>Mercado Pago o transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>5% off pagando por transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Hecho en nuestra planta desde 2004</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Regalos empresariales</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Cinco locales en Buenos Aires</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Envíos a todo el país</span><img src="/nueva/img/ing-cereza.webp" alt="">
-      <span>Mercado Pago o transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
+      <span>5% off pagando por transferencia</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Hecho en nuestra planta desde 2004</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Regalos empresariales</span><img src="/nueva/img/ing-cereza.webp" alt="">
       <span>Cinco locales en Buenos Aires</span><img src="/nueva/img/ing-cereza.webp" alt="">
@@ -126,7 +129,7 @@
         <p class="prod-desc">Frutas secas, escurridas y glasé.</p>
         <div class="seg" role="group" aria-label="Tamaño"><button type="button" data-size="500">500 g</button><button type="button" class="on" data-size="1000">1 kg</button></div>
         <div class="prod-buy">
-          <span class="prod-price" data-price>$30.000</span>
+          <span class="prod-price" data-price>$42.360</span>
           <div class="qty"><button type="button" data-q="-1" aria-label="Uno menos">−</button><output data-qo>1</output><button type="button" data-q="1" aria-label="Uno más">+</button></div>
           <button class="btn btn-bordo" type="button" data-add>Agregar al pedido</button>
         </div>
@@ -137,7 +140,7 @@
         <p class="prod-desc">Coronado de frutos secos enteros.</p>
         <div class="seg" role="group" aria-label="Tamaño"><button type="button" data-size="500">500 g</button><button type="button" class="on" data-size="1000">1 kg</button></div>
         <div class="prod-buy">
-          <span class="prod-price" data-price>$32.000</span>
+          <span class="prod-price" data-price>$46.845</span>
           <div class="qty"><button type="button" data-q="-1" aria-label="Uno menos">−</button><output data-qo>1</output><button type="button" data-q="1" aria-label="Uno más">+</button></div>
           <button class="btn btn-bordo" type="button" data-add>Agregar al pedido</button>
         </div>
@@ -153,24 +156,81 @@
     </div>
   </section>
 
+  <section class="packs" id="packs">
+    <div class="packs-head">
+      <h2>Packs</h2>
+      <p>Para probar las dos variedades o para resolver la mesa de las fiestas en un solo pedido.</p>
+    </div>
+    <div class="pack-grid">
+      <article class="pack pack-mesa" data-pack="mesa">
+        <span class="pack-badge">Recomendado</span>
+        <div class="pack-vis" aria-hidden="true">
+          <img style="--px:4%;--py:6%;--pw:50%;--pr:-9deg;--pd:0s" src="/nueva/img/cut-tradicional.webp" alt="">
+          <img style="--px:46%;--py:0%;--pw:50%;--pr:8deg;--pd:-2.4s" src="/nueva/img/cut-tradicional.webp" alt="">
+          <img style="--px:-2%;--py:44%;--pw:36%;--pr:10deg;--pd:-4.1s" src="/nueva/img/cut-frutos.webp" alt="">
+          <img style="--px:66%;--py:44%;--pw:36%;--pr:-8deg;--pd:-1.2s" src="/nueva/img/cut-frutos.webp" alt="">
+          <img style="--px:32%;--py:48%;--pw:36%;--pr:3deg;--pd:-3.3s" src="/nueva/img/cut-tradicional.webp" alt="">
+        </div>
+        <div class="pack-body">
+          <h3>Mesa Familiar</h3>
+          <p class="pack-desc">Para mesas desde 5 personas: 3,5 kg de pan dulce, unas 35 porciones.</p>
+          <ul class="pack-list">
+            <li><b>2</b>Tradicional 1 kg</li>
+            <li><b>1</b>Tradicional 500 g</li>
+            <li><b>2</b>Frutos secos 500 g</li>
+          </ul>
+          <div class="pack-price">
+            <strong data-pk-price>$132.906</strong>
+            <s data-pk-full>$156.360</s>
+            <span class="pack-off">15% off</span>
+          </div>
+          <p class="pack-tr">Por transferencia <b data-pk-tr>$126.260,70</b></p>
+          <button class="btn btn-cream btn-wide" type="button" data-add-pack>Agregar al pedido</button>
+          <span class="tbd">A validar: cuántas personas cubre (porciones por persona).</span>
+        </div>
+      </article>
+      <article class="pack pack-deg" data-pack="degustacion">
+        <div class="pack-vis" aria-hidden="true">
+          <img style="--px:4%;--py:8%;--pw:56%;--pr:-10deg;--pd:-1s" src="/nueva/img/cut-tradicional.webp" alt="">
+          <img style="--px:42%;--py:20%;--pw:56%;--pr:9deg;--pd:-3.6s" src="/nueva/img/cut-frutos.webp" alt="">
+        </div>
+        <div class="pack-body">
+          <h3>Degustación</h3>
+          <p class="pack-desc">Uno de cada variedad, en 500 g. Conocé, probá y disfrutá.</p>
+          <ul class="pack-list">
+            <li><b>1</b>Tradicional 500 g</li>
+            <li><b>1</b>Frutos secos 500 g</li>
+          </ul>
+          <div class="pack-price"><strong data-pk-price>$46.750</strong></div>
+          <button class="btn btn-bordo btn-wide" type="button" data-add-pack>Agregar al pedido</button>
+          <span class="tbd">A definir: descuento propio del pack.</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <section class="story" data-story>
     <div class="story-inner">
       <div class="story-stage"><img data-story-img src="/nueva/img/cut-tradicional.webp" alt=""></div>
       <div class="story-steps">
         <div class="step" data-step data-img="/nueva/img/cut-tradicional.webp">
+          <img class="step-img" src="/nueva/img/cut-tradicional.webp" alt="">
           <h3>Desde 2004</h3>
           <p>Abrimos en Belgrano hace más de veinte años. Hoy somos cinco locales y una planta propia en Villa Lugano donde hacemos todo lo que vendemos.</p>
         </div>
         <div class="step" data-step data-img="/nueva/img/cut-tradicional.webp">
+          <img class="step-img" src="/nueva/img/cut-tradicional.webp" alt="">
           <h3>Frutas escurridas y glasé</h3>
           <p>El Tradicional lleva frutas secas escurridas en la masa y lo terminamos con glasé.</p>
         </div>
         <div class="step" data-step data-img="/nueva/img/cut-frutos.webp">
+          <img class="step-img" src="/nueva/img/cut-frutos.webp" alt="">
           <h3>Coronado de frutos secos</h3>
           <p>La otra variedad va cubierta de frutos secos enteros.</p>
           <span class="tbd">Composición exacta a confirmar por producción</span>
         </div>
         <div class="step" data-step data-img="/nueva/img/cut-caja.webp">
+          <img class="step-img" src="/nueva/img/cut-caja.webp" alt="">
           <h3>Listo para regalar</h3>
           <p>Sale de la planta en su caja Mangini, para llevar a una cena o dejar en la mesa de Navidad.</p>
         </div>
@@ -210,10 +270,10 @@
     <h2>Preguntas frecuentes</h2>
     <details open><summary>¿A dónde envían?</summary><p>A todo el país. En CABA con reparto propio; al resto del país, por correo. El costo depende de tu código postal y lo ves antes de pagar.</p></details>
     <details><summary>¿Cuándo llega?</summary><p>Te mostramos el plazo estimado cuando ponés tu código postal. Despachamos en días hábiles.</p></details>
-    <details><summary>¿Cómo pago?</summary><p>Con Mercado Pago o por transferencia. Si pagás por transferencia, despachamos cuando se acredita.</p></details>
+    <details><summary>¿Cómo pago?</summary><p>Por transferencia tenés 5% de descuento adicional y despachamos cuando se acredita. También podés pagar con Mercado Pago, o en efectivo si lo retirás en un local.</p><p><span class="tbd">A confirmar: si el 5% por transferencia aplica también a unidades sueltas y al pack Degustación, el recargo de Mercado Pago (“tasa + diferencia”) y el precio en efectivo.</span></p></details>
     <details><summary>¿Cómo se conserva?</summary><p><span class="tbd">A confirmar por producción: duración y forma de conservación.</span></p></details>
     <details><summary>Ingredientes y alérgenos</summary><p><span class="tbd">A confirmar por producción: ingredientes completos y alérgenos de cada variedad.</span></p></details>
-    <details><summary>¿Puedo retirarlo en un local?</summary><p><span class="tbd">A confirmar si se habilita el retiro en sucursal para la compra online.</span></p></details>
+    <details><summary>¿Puedo retirarlo en un local?</summary><p>Sí, y podés pagarlo en efectivo al retirar.</p><p><span class="tbd">A confirmar: en qué locales, desde qué fecha y con qué packaging.</span></p></details>
   </section>
 
   <section class="closing">
@@ -234,27 +294,15 @@
 
 <div class="sticky" data-sticky>
   <img data-st-img src="/nueva/img/cut-tradicional.webp" alt="">
-  <div><strong data-st-name>Tradicional 1 kg</strong><span data-st-price>$30.000</span></div>
+  <div><strong data-st-name>Tradicional 1 kg</strong><span data-st-price>$42.360</span></div>
   <button class="btn btn-cream" type="button" data-st-add>Agregar</button>
 </div>
 
-<div class="scrim" data-close-cart></div>
-<aside class="cart" aria-label="Tu pedido">
-  <div class="cart-head"><h2>Tu pedido</h2><button type="button" data-close-cart aria-label="Cerrar">×</button></div>
-  <ul class="cart-items" data-items></ul>
-  <div class="cart-foot">
-    <div class="cart-sub"><span>Subtotal</span><b data-sub>$0</b></div>
-    <p class="cart-note">El envío se calcula con tu código postal antes de pagar.</p>
-    <a class="btn btn-bordo btn-wide" href="#">Ir a pagar</a>
-    <button class="link" type="button" data-close-cart>Seguir eligiendo</button>
-  </div>
-</aside>
-
+<script src="/nueva/pedido.js?v=2"></script>
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const fmt=n=>'$'+n.toLocaleString('es-AR');
-const P={tradicional:{name:'Tradicional',img:'/nueva/img/cut-tradicional.webp',500:17000,1000:30000},frutos:{name:'Frutos secos',img:'/nueva/img/cut-frutos.webp',500:18000,1000:32000}};
-const S={tradicional:{s:1000,q:1},frutos:{s:1000,q:1}};let last='tradicional';const cart=[];
+const {variedades:P,fmt,peso}=window.Pedido;
+const S={tradicional:{s:1000,q:1},frutos:{s:1000,q:1}};let last='tradicional';
 
 // la baraja se reparte al cargar
 requestAnimationFrame(()=>setTimeout(()=>$('.deck-wrap').classList.add('is-dealt'),60));
@@ -265,29 +313,22 @@ hero.addEventListener('pointerleave',()=>{hero.style.setProperty('--mx',0);hero.
 // nav sólida al bajar
 const nav=$('[data-nav]');const onScroll=()=>nav.classList.toggle('is-solid',scrollY>innerHeight*.75);addEventListener('scroll',onScroll,{passive:true});onScroll();
 
+// selector por variedad
 function paint(k){const el=$(`[data-prod="${k}"]`),st=S[k];
-  el.querySelectorAll('[data-size]').forEach(b=>b.classList.toggle('on',+b.dataset.size===st.s));
-  el.querySelector('[data-price]').textContent=fmt(P[k][st.s]*st.q);el.querySelector('[data-qo]').textContent=st.q;
+  el.querySelectorAll('[data-size]').forEach(b=>{const on=+b.dataset.size===st.s;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
+  el.querySelector('[data-price]').textContent=fmt(P[k].precios[st.s]*st.q);el.querySelector('[data-qo]').textContent=st.q;
   $$('.prod').forEach(p=>p.classList.toggle('is-picked',p.dataset.prod===last));
-  const L=S[last];$('[data-st-img]').src=P[last].img;$('[data-st-name]').textContent=`${L.q>1?L.q+' × ':''}${P[last].name} ${L.s===1000?'1 kg':'500 g'}`;$('[data-st-price]').textContent=fmt(P[last][L.s]*L.q);
+  const L=S[last];$('[data-st-img]').src=P[last].img;$('[data-st-name]').textContent=`${L.q>1?L.q+' × ':''}${P[last].nombre} ${peso(L.s)}`;$('[data-st-price]').textContent=fmt(P[last].precios[L.s]*L.q);
 }
 $$('.prod').forEach(el=>{const k=el.dataset.prod;
   el.querySelectorAll('[data-size]').forEach(b=>b.onclick=()=>{S[k].s=+b.dataset.size;last=k;paint(k)});
   el.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{S[k].q=Math.max(1,S[k].q+ +b.dataset.q);last=k;paint(k)});
-  el.querySelector('[data-add]').onclick=()=>{last=k;paint(k);add(k)};
+  el.querySelector('[data-add]').onclick=()=>{last=k;Pedido.agregar(k+'-'+S[k].s,S[k].q,el.querySelector('.prod-img'));S[k].q=1;paint(k)};
 });
-$$('[data-pick]').forEach(a=>a.addEventListener('click',()=>{last=a.dataset.pick;paint(last)}));
-function add(k){const st=S[k],id=k+st.s,f=cart.find(c=>c.id===id);if(f)f.q+=st.q;else cart.push({id,k,s:st.s,q:st.q});drawCart();document.body.classList.add('cart-open')}
-$('[data-st-add]').onclick=()=>add(last);
-function drawCart(){const ul=$('[data-items]');let sub=0,n=0;ul.innerHTML=cart.length?'':'<li class="cart-empty">Todavía no agregaste nada.</li>';
-  cart.forEach((c,i)=>{const p=P[c.k][c.s];sub+=p*c.q;n+=c.q;const li=document.createElement('li');
-    li.innerHTML=`<img src="${P[c.k].img}" alt=""><div><strong>${P[c.k].name} ${c.s===1000?'1 kg':'500 g'}</strong><span>${fmt(p)} c/u</span></div><div class="qty"><button data-i="${i}" data-d="-1" aria-label="Uno menos">−</button><output>${c.q}</output><button data-i="${i}" data-d="1" aria-label="Uno más">+</button></div>`;ul.appendChild(li)});
-  $('[data-sub]').textContent=fmt(sub);$$('[data-count]').forEach(e=>e.textContent=n);}
-$('[data-items]').onclick=e=>{const b=e.target.closest('button[data-i]');if(!b)return;const c=cart[+b.dataset.i];c.q+=+b.dataset.d;if(c.q<1)cart.splice(+b.dataset.i,1);drawCart()};
-$$('[data-open-cart]').forEach(b=>b.onclick=()=>{drawCart();document.body.classList.add('cart-open')});
-$$('[data-close-cart]').forEach(b=>b.onclick=()=>document.body.classList.remove('cart-open'));
+$$('[data-pick]').forEach(c=>c.querySelector('.card-face').addEventListener('click',()=>{last=c.dataset.pick;paint(last)}));
+$('[data-st-add]').onclick=()=>{Pedido.agregar(last+'-'+S[last].s,S[last].q,$('[data-st-img]'))};
 
-// barra fija al pasar la zona de compra
+// barra de selección: aparece al pasar la zona de compra (si todavía no hay pedido)
 const sticky=$('[data-sticky]');
 new IntersectionObserver(([e])=>sticky.classList.toggle('show',!e.isIntersecting&&e.boundingClientRect.top<0),{threshold:0}).observe($('.prods'));
 
@@ -298,7 +339,7 @@ steps.forEach(s=>so.observe(s));
 const story=$('[data-story]');
 addEventListener('scroll',()=>{const r=story.getBoundingClientRect();const p=Math.min(1,Math.max(0,-r.top/(r.height-innerHeight)));stage.style.setProperty('--rot',(p*40-20).toFixed(1)+'deg');stage.style.setProperty('--sc',(0.92+Math.sin(p*Math.PI)*0.12).toFixed(3))},{passive:true});
 
-paint('tradicional');paint('frutos');drawCart();
+paint('tradicional');paint('frutos');
 </script>
 </body>
 </html>
