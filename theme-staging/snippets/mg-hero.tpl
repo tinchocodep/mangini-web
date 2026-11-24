@@ -4,14 +4,18 @@
   <div class="mg-hero-copy">
     <p class="mg-hero-kicker"><img src="{{ 'img/mg/suit-g-oro.png' | static_url }}" alt="">Temporada 2026</p>
     <h1>Pan dulce <span>Mangini</span></h1>
+    {% if mg_envios %}
     <p class="mg-hero-lede">Receta tradicional, hecho en nuestra planta. Elegí el tuyo y te lo mandamos a todo el país en su caja.</p>
+    {% else %}
+    <p class="mg-hero-lede">Receta tradicional, hecho en nuestra planta. Pedilo online y retiralo gratis en Belgrano o Colegiales.</p>
+    {% endif %}
     <div class="mg-hero-ctas">
       <a class="mg-btn mg-btn-cream" href="#elegir">Comprar ahora</a>
       <a class="mg-btn mg-btn-line" href="#empresas">Regalos empresariales</a>
     </div>
     <div class="mg-hero-meta">
       <div><b>Desde 2004</b>Producción propia</div>
-      <div><b>Todo el país</b>Envío a domicilio</div>
+      {% if mg_envios %}<div><b>Todo el país</b>Envío a domicilio</div>{% else %}<div><b>Retiro gratis</b>Belgrano y Colegiales</div>{% endif %}
     </div>
   </div>
 
@@ -69,7 +73,8 @@
 <div class="mg-ticker" aria-hidden="true">
   <div class="mg-ticker-track">
     {% for vuelta in 1..2 %}
-      {% for t in ['Envíos a todo el país', '5% off pagando por transferencia', 'Hecho en nuestra planta desde 2004', 'Regalos empresariales', 'Cinco locales en Buenos Aires'] %}
+      {% if mg_envios %}{% set mg_t1 = 'Envíos a todo el país' %}{% else %}{% set mg_t1 = 'Retiro gratis en Belgrano y Colegiales' %}{% endif %}
+      {% for t in [mg_t1, '5% off pagando por transferencia', 'Hecho en nuestra planta desde 2004', 'Regalos empresariales', 'Cinco locales en Buenos Aires'] %}
         <span>{{ t }}</span><img src="{{ 'img/mg/ing-cereza.webp' | static_url }}" alt="">
       {% endfor %}
     {% endfor %}

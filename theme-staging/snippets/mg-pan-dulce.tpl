@@ -6,6 +6,7 @@
      mg_pack_mesa   → producto Pack Mesa Familiar (id 383018642), opcional
      mg_pack_deg    → producto Pack Degustación (id 383018784), opcional
      mg_whatsapp_comercial → opcional, número para cotizar regalos empresariales
+     mg_envios      → true cuando la tienda tenga un medio de envío a domicilio activo (si no, los textos hablan de retiro gratis)
 
    Y cargá en el layout:
      {{ 'css/mangini.css' | static_url | css_tag }}
@@ -13,7 +14,7 @@
      <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
      <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 #}
-<div class="mg-root">
+<div class="mg-root" data-mg-envios="{% if mg_envios %}1{% else %}0{% endif %}">
   {% include 'snippets/mg-hero.tpl' %}
   {% include 'snippets/mg-elegir.tpl' %}
   {% include 'snippets/mg-packs.tpl' %}

@@ -61,7 +61,7 @@
       '<div class="mg-pd-foot">' +
         '<div class="mg-pd-line"><span>Total</span><b data-mg-sub>$0</b></div>' +
         '<div class="mg-pd-line mg-pd-tr" data-mg-tr-line><span>Pagando por transferencia, 5% off</span><b data-mg-tr>$0</b></div>' +
-        '<div class="mg-pd-line mg-pd-muted"><span>Envío</span><span>Se calcula al pagar, con tu código postal</span></div>' +
+        '<div class="mg-pd-line mg-pd-muted"><span>Entrega</span><span data-mg-entrega>Retiro gratis en el local que elijas al pagar</span></div>' +
         '<a class="mg-btn mg-btn-bordo mg-btn-wide mg-pd-pay" href="' + CFG.carritoUrl + '" data-mg-pay>Ir a pagar</a>' +
         '<p class="mg-pd-pays">Mercado Pago o transferencia con 5% off.</p>' +
       '</div>' +
@@ -70,6 +70,7 @@
     '<div class="mg-pd-toast" data-mg-toast role="status" aria-live="polite"></div>';
   document.body.appendChild(ui);
   var sheet = $('.mg-pd-sheet', ui), bar = $('[data-mg-bar]', ui), toast = $('[data-mg-toast]', ui);
+  if ($('.mg-root').getAttribute('data-mg-envios') === '1') $('[data-mg-entrega]', ui).textContent = 'Se calcula al pagar, con tu código postal';
   var antes = null;
 
   function abrir() { pintar(); antes = document.activeElement; document.documentElement.classList.add('mg-pd-open'); setTimeout(function () { sheet.focus(); }, 60); }

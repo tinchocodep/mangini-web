@@ -34,7 +34,11 @@
     {% endfor %}
   </div>
   <div class="mg-ship">
-    <div><h3>Envío a todo el país</h3><p>CABA con reparto propio, resto del país por correo. Ves el costo y el plazo en el carrito, antes de pagar.</p></div>
+    {% if mg_envios %}
+    <div><h3>Envío a todo el país</h3><p>CABA con reparto propio, resto del país por correo. Ves el costo y el plazo antes de pagar.</p></div>
+    {% else %}
+    <div><h3>Retiro gratis en el local</h3><p>Federico Lacroze 1694 (Belgrano) o Cap. Gral. Ramón Freire 1535 (Colegiales). Elegís el local al pagar.</p></div>
+    {% endif %}
     <div class="mg-apps">También en <img src="{{ 'img/mg/logo-rappi.png' | static_url }}" alt="Rappi"><img src="{{ 'img/mg/logo-pedidosya.png' | static_url }}" alt="PedidosYa"></div>
   </div>
 </section>
