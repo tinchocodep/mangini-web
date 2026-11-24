@@ -390,3 +390,10 @@
   .mg-pd-open .mg-pd-bar{transform:translateY(160%)}
   .mg-pd-toast{bottom:92px}
 }
+
+/* Dentro de la tienda: el panel y la barra van por encima del header, el aviso de cookies y el WhatsApp de Rio */
+.mg-pd-scrim{z-index:2147483000}
+.mg-pd-sheet{z-index:2147483001}
+.mg-pd-fly{z-index:2147483002}
+.mg-pd-toast{z-index:2147482990}
+.mg-pd-bar{z-index:2147482980}

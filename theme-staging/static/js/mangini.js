@@ -61,7 +61,7 @@
       '<div class="mg-pd-foot">' +
         '<div class="mg-pd-line"><span>Total</span><b data-mg-sub>$0</b></div>' +
         '<div class="mg-pd-line mg-pd-tr" data-mg-tr-line><span>Pagando por transferencia, 5% off</span><b data-mg-tr>$0</b></div>' +
-        '<div class="mg-pd-line mg-pd-muted"><span>Envío</span><span>Lo calculás con tu código postal en el carrito</span></div>' +
+        '<div class="mg-pd-line mg-pd-muted"><span>Envío</span><span>Se calcula al pagar, con tu código postal</span></div>' +
         '<a class="mg-btn mg-btn-bordo mg-btn-wide mg-pd-pay" href="' + CFG.carritoUrl + '" data-mg-pay>Ir a pagar</a>' +
         '<p class="mg-pd-pays">Mercado Pago o transferencia con 5% off.</p>' +
       '</div>' +
