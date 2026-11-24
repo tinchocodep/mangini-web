@@ -28,12 +28,12 @@
           <li><b>2</b>Frutos secos 500 g</li>
         </ul>
         <div class="mg-pack-price">
-          <strong>{{ vm.price_short }}</strong>
-          {% if vm.compare_at_price_short %}<s>{{ vm.compare_at_price_short }}</s><span class="mg-pack-off">15% off</span>{% endif %}
+          <strong>{{ vm.price_short | replace({',00': ''}) }}</strong>
+          {% if vm.compare_at_price_short %}<s>{{ vm.compare_at_price_short | replace({',00': ''}) }}</s><span class="mg-pack-off">15% off</span>{% endif %}
         </div>
         <button class="mg-btn mg-btn-cream mg-btn-wide" type="button" data-mg-add-pack>Agregar al pedido</button>
       </div>
-      <span hidden data-mg-sug="{{ mg_pack_mesa.id }}" data-mg-nombre="Pack Mesa Familiar" data-mg-precio="{{ vm.price_short }}" data-mg-img="{{ 'img/mg/cut-tradicional.webp' | static_url }}"></span>
+      <span hidden data-mg-sug="{{ mg_pack_mesa.id }}" data-mg-nombre="Pack Mesa Familiar" data-mg-precio="{{ vm.price_short | replace({',00': ''}) }}" data-mg-img="{{ 'img/mg/cut-tradicional.webp' | static_url }}"></span>
     </article>
     {% endif %}
     {% if mg_pack_deg %}
@@ -50,10 +50,10 @@
           <li><b>1</b>Tradicional 500 g</li>
           <li><b>1</b>Frutos secos 500 g</li>
         </ul>
-        <div class="mg-pack-price"><strong>{{ vd.price_short }}</strong></div>
+        <div class="mg-pack-price"><strong>{{ vd.price_short | replace({',00': ''}) }}</strong></div>
         <button class="mg-btn mg-btn-bordo mg-btn-wide" type="button" data-mg-add-pack>Agregar al pedido</button>
       </div>
-      <span hidden data-mg-sug="{{ mg_pack_deg.id }}" data-mg-nombre="Pack Degustación" data-mg-precio="{{ vd.price_short }}" data-mg-img="{{ 'img/mg/cut-frutos.webp' | static_url }}"></span>
+      <span hidden data-mg-sug="{{ mg_pack_deg.id }}" data-mg-nombre="Pack Degustación" data-mg-precio="{{ vd.price_short | replace({',00': ''}) }}" data-mg-img="{{ 'img/mg/cut-frutos.webp' | static_url }}"></span>
     </article>
     {% endif %}
   </div>

@@ -36,7 +36,7 @@
 .mg-btn img{width:20px}
 
 /* ---------- Hero ---------- */
-.mg-hero{position:relative;min-height:100svh;background:radial-gradient(120% 90% at 68% 42%,var(--mg-bordo-hi) 0%,var(--mg-bordo) 42%,var(--mg-bordo-lo) 100%);color:var(--mg-crema);overflow:hidden;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center;padding:110px var(--mg-gutter) 64px;perspective:1600px}
+.mg-hero{position:relative;min-height:calc(100svh - 106px);background:radial-gradient(120% 90% at 68% 42%,var(--mg-bordo-hi) 0%,var(--mg-bordo) 42%,var(--mg-bordo-lo) 100%);color:var(--mg-crema);overflow:hidden;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:center;padding:56px var(--mg-gutter) 64px;perspective:1600px}
 .mg-hero-copy{position:relative;z-index:5;max-width:560px}
 .mg-hero-kicker{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14px;color:var(--mg-oro);margin-bottom:22px}
 .mg-hero-kicker img{width:22px}
@@ -208,7 +208,7 @@
   .mg-nav .mg-logo{width:104px}
   .mg-nav-links{display:none}
   .mg-cart-btn{margin-left:auto}
-  .mg-hero{grid-template-columns:minmax(0,1fr);padding:92px var(--mg-gutter) 36px;align-items:start;min-height:auto}
+  .mg-hero{grid-template-columns:minmax(0,1fr);padding:28px var(--mg-gutter) 36px;align-items:start;min-height:auto}
   .mg-hero-copy{display:contents}
   .mg-hero-kicker{order:0;margin-bottom:14px}
   .mg-hero h1{order:1;font-size:60px;margin-bottom:0;position:relative;z-index:5}
@@ -381,3 +381,12 @@
 .mg-ui img{display:block;max-width:100%}
 .mg-ui button{font-family:inherit}
 .mg-ui .mg-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 16px/1 var(--mg-sans);text-decoration:none;border:0;border-radius:999px;padding:18px 30px;cursor:pointer}
+
+/* Dentro del tema: el header de Rio queda fijo arriba */
+.mg-root [id]{scroll-margin-top:96px}
+@media (max-width:700px){
+  .mg-pd-bar{left:12px;width:calc(100% - 96px);transform:translateY(160%)}
+  .mg-pd-bar.mg-show{transform:none}
+  .mg-pd-open .mg-pd-bar{transform:translateY(160%)}
+  .mg-pd-toast{bottom:92px}
+}

@@ -30,7 +30,7 @@
               <div class="mg-card-info">
                 <h3>{{ card.nombre }}</h3>
                 <span class="mg-card-prices">
-                  {% for v in card.p.variants_object %}<span>{{ v.option0 }} <b>{{ v.price_short }}</b></span>{% endfor %}
+                  {% for v in card.p.variants_object %}<span>{{ v.option0 }} <b>{{ v.price_short | replace({',00': ''}) }}</b></span>{% endfor %}
                 </span>
               </div>
             </a>

@@ -143,7 +143,7 @@
   }
   function rebote() {
     if (reduce || !bar.classList.contains('mg-show')) return;
-    bar.animate([{ transform: 'translateX(-50%) scale(1)' }, { transform: 'translateX(-50%) scale(1.06)' }, { transform: 'translateX(-50%) scale(1)' }], { duration: 380, easing: 'ease-out' });
+    bar.animate([{ scale: '1' }, { scale: '1.06' }, { scale: '1' }], { duration: 380, easing: 'ease-out' });
   }
   var tt;
   function avisar(html) { toast.innerHTML = html; toast.classList.add('mg-show'); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove('mg-show'); }, 2400); }

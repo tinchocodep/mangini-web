@@ -27,7 +27,7 @@
         </div>
         {# Sugerencias para el panel "Tu pedido" #}
         {% for v in prod.p.variants_object %}
-          <span hidden data-mg-sug="{{ prod.p.id }}" data-mg-opcion="{{ v.option0 }}" data-mg-nombre="{{ prod.nombre }} {{ v.option0 }}" data-mg-precio="{{ v.price_short }}" data-mg-img="{{ prod.img | static_url }}"></span>
+          <span hidden data-mg-sug="{{ prod.p.id }}" data-mg-opcion="{{ v.option0 }}" data-mg-nombre="{{ prod.nombre }} {{ v.option0 }}" data-mg-precio="{{ v.price_short | replace({',00': ''}) }}" data-mg-img="{{ prod.img | static_url }}"></span>
         {% endfor %}
       </article>
       {% endif %}
