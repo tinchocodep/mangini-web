@@ -22,7 +22,7 @@
       <h2>Regalos empresariales</h2>
       <p>Pan dulce Mangini en su caja para tu equipo o tus clientes. Te pasamos la cotización por WhatsApp con el área comercial.</p>
       <ul><li>Empresa y localidad</li><li>Cantidad estimada</li><li>Variedad y tamaño</li><li>Fecha de entrega</li></ul>
-      <a class="mg-btn mg-btn-bordo" href="{{ mg_wa_url }}" target="_blank" rel="noopener"><img src="{{ 'img/mg/whatsapp.png' | static_url }}" alt="">Cotizar por WhatsApp</a>
+      <a class="mg-btn mg-btn-bordo" href="{{ mg_wa_url }}" data-mg-wa="{{ mg_wa_texto }}" target="_blank" rel="noopener"><img src="{{ 'img/mg/whatsapp.png' | static_url }}" alt="">Cotizar por WhatsApp</a>
     </div>
     <div class="mg-biz-box">
       <img src="{{ 'img/mg/cut-caja.webp' | static_url }}" alt="Caja de pan dulce Mangini" loading="lazy">
@@ -37,10 +37,9 @@
   <h2>Preguntas frecuentes</h2>
   <details open><summary>¿A dónde envían?</summary><p>A todo el país. En CABA con reparto propio; al resto del país, por correo. El costo depende de tu código postal y lo ves antes de pagar.</p></details>
   <details><summary>¿Cuándo llega?</summary><p>Te mostramos el plazo estimado cuando ponés tu código postal. Despachamos en días hábiles.</p></details>
-  <details><summary>¿Cómo pago?</summary><p>Por transferencia tenés 5% de descuento adicional y despachamos cuando se acredita. También podés pagar con Mercado Pago, o en efectivo si lo retirás en un local.</p><p><span class="mg-tbd">A confirmar: si el 5% por transferencia aplica también a unidades sueltas y al pack Degustación, el recargo de Mercado Pago (“tasa + diferencia”) y el precio en efectivo.</span></p></details>
-  <details><summary>¿Cómo se conserva?</summary><p><span class="mg-tbd">A confirmar por producción: duración y forma de conservación.</span></p></details>
-  <details><summary>Ingredientes y alérgenos</summary><p><span class="mg-tbd">A confirmar por producción: ingredientes completos y alérgenos de cada variedad.</span></p></details>
-  <details><summary>¿Puedo retirarlo en un local?</summary><p>Sí, y podés pagarlo en efectivo al retirar.</p><p><span class="mg-tbd">A confirmar: en qué locales, desde qué fecha y con qué packaging.</span></p></details>
+  <details><summary>¿Cómo pago?</summary><p>Con Mercado Pago o por transferencia, que tiene 5% de descuento. Si pagás por transferencia, despachamos cuando se acredita.</p></details>
+  <details><summary>¿Tienen regalos para empresas?</summary><p>Sí. Escribinos por WhatsApp con la cantidad, la variedad y la fecha, y te pasamos la cotización.</p></details>
+  {# Pendientes antes de sumarlas (las confirma Mangini): conservación, ingredientes y alérgenos, retiro en local. #}
 </section>
 
 <section class="mg-closing">

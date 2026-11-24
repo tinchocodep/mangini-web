@@ -1,0 +1,19 @@
+/* Mangini 2026 · Ajustes globales sobre el tema Rio (cargar en TODAS las páginas, después del CSS de Rio).
+   Lleva los botones y el carrito de Rio a la misma estética de la página de pan dulce. */
+:root{--mgr-bordo:#7A1424;--mgr-bordo-lo:#4C0B16;--mgr-crema:#F6F0E6;--mgr-tinta:#1F1513}
+
+/* Botón principal de Rio ("Iniciar compra", "Agregar al carrito", etc.) */
+.btn-primary,input.btn-primary,a.btn-primary{background:var(--mgr-bordo)!important;border-color:var(--mgr-bordo)!important;color:#fff!important;border-radius:999px!important;font-weight:600;letter-spacing:.04em}
+.btn-primary:hover,.btn-primary:focus-visible{background:var(--mgr-bordo-lo)!important;border-color:var(--mgr-bordo-lo)!important}
+
+/* Panel lateral del carrito */
+#modal-cart{background:var(--mgr-crema)}
+#modal-cart .modal-header,#modal-cart .modal-body,#modal-cart .modal-footer{background:transparent}
+#modal-cart .modal-header{border-bottom:1px solid #E6DACA}
+#modal-cart .cart-item{background:#FFFBF4;border-radius:18px;padding:12px;margin-bottom:10px;border:0}
+#modal-cart img{border-radius:12px}
+#modal-cart .js-cart-quantity-container,#modal-cart .form-quantity{border-radius:999px;overflow:hidden}
+
+/* Página del carrito (/comprar/) */
+#shoppingCartPage .cart-item{background:#FFFBF4;border-radius:18px;padding:12px;border:0;margin-bottom:10px}
+#shoppingCartPage img{border-radius:12px}

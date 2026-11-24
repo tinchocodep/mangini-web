@@ -166,9 +166,28 @@
     if (d) { var it = items[+d.getAttribute('data-mg-k')]; if (it) cambiarCantidad(it.itemId, Math.max(0, it.q + +d.getAttribute('data-mg-d'))).then(pintar); return; }
     var a = e.target.closest('[data-mg-add]');
     if (a) { agregarAlCarrito(a.getAttribute('data-mg-add'), a.getAttribute('data-mg-opcion'), 1).then(pintar).catch(function () { avisar('No pudimos sumarlo. Probá de nuevo.'); }); return; }
-    if (e.target.closest('[data-mg-bar]')) abrir();
+    if (e.target.closest('[data-mg-bar]')) { abrir(); return; }
+    var pay = e.target.closest('[data-mg-pay]');
+    if (pay) {
+      // Directo al checkout de Tiendanube (envío y pago), sin pasar por la página del carrito de Rio
+      e.preventDefault();
+      if (!cantidad()) return;
+      pay.textContent = 'Te llevamos al pago...';
+      var f = document.createElement('form');
+      f.method = 'post'; f.action = CFG.carritoUrl; f.style.display = 'none';
+      var inp = document.createElement('input'); inp.type = 'hidden'; inp.name = 'go_to_checkout'; inp.value = 'Iniciar compra';
+      f.appendChild(inp); document.body.appendChild(f); f.submit();
+    }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') cerrar(); });
+
+  // El ícono del carrito del header de Rio abre "Tu pedido" en vez del panel de Rio
+  document.addEventListener('click', function (e) {
+    var icon = e.target.closest('[data-toggle="#modal-cart"]');
+    if (!icon) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    abrir();
+  }, true);
   var y0 = null;
   sheet.addEventListener('touchstart', function (e) { if (e.target.closest('.mg-pd-grip, .mg-pd-head')) y0 = e.touches[0].clientY; }, { passive: true });
   sheet.addEventListener('touchmove', function (e) { if (y0 !== null) sheet.style.transform = 'translateY(' + Math.max(0, e.touches[0].clientY - y0) + 'px)'; }, { passive: true });
@@ -231,6 +250,16 @@
       stage.style.setProperty('--mg-rot', (p * 40 - 20).toFixed(1) + 'deg');
       stage.style.setProperty('--mg-sc', (0.92 + Math.sin(p * Math.PI) * 0.12).toFixed(3));
     }, { passive: true });
+  }
+
+  /* ---------------- WhatsApp de regalos empresariales ---------------- */
+  // Si no se cargó un número comercial, usa el WhatsApp que la tienda ya muestra (botón flotante de Rio)
+  var wa = $('[data-mg-wa]');
+  if (wa && (wa.getAttribute('href') || '#') === '#') {
+    var rio = $$('a[href*="wa.me/"], a[href*="api.whatsapp.com"], a[href*="whatsapp.com/send"]').filter(function (a) { return !a.closest('.mg-root'); })[0];
+    var m = rio && /(?:wa\.me\/|phone=)(\d{8,15})/.exec(rio.getAttribute('href'));
+    if (m) wa.setAttribute('href', 'https://wa.me/' + m[1] + '?text=' + encodeURIComponent(wa.getAttribute('data-mg-wa')));
+    else wa.hidden = true;
   }
 
   desdeLS();
