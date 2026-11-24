@@ -35,7 +35,7 @@
   </div>
   <div class="mg-ship">
     {% if mg_envios %}
-    <div><h3>Envío a todo el país</h3><p>CABA con reparto propio, resto del país por correo. Ves el costo y el plazo antes de pagar.</p></div>
+    <div><h3>Envío a todo el país</h3><p>A tu casa o a una sucursal del correo. Ves el costo y el plazo con tu código postal antes de pagar. Si preferís, lo retirás gratis en Belgrano o Colegiales.</p></div>
     {% else %}
     <div><h3>Retiro gratis en el local</h3><p>Federico Lacroze 1694 (Belgrano) o Cap. Gral. Ramón Freire 1535 (Colegiales). Elegís el local al pagar.</p></div>
     {% endif %}

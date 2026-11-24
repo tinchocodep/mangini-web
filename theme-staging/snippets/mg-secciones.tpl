@@ -40,7 +40,7 @@
 <section class="mg-faq" id="preguntas">
   <h2>Preguntas frecuentes</h2>
   {% if mg_envios %}
-  <details open><summary>¿A dónde envían?</summary><p>A todo el país. En CABA con reparto propio; al resto del país, por correo. El costo depende de tu código postal y lo ves antes de pagar.</p></details>
+  <details open><summary>¿A dónde envían?</summary><p>A todo el país, a tu casa o a una sucursal del correo. El costo depende de tu código postal y lo ves antes de pagar. También podés retirarlo gratis en Federico Lacroze 1694 (Belgrano) o en Cap. Gral. Ramón Freire 1535 (Colegiales).</p></details>
   <details><summary>¿Cuándo llega?</summary><p>Te mostramos el plazo estimado cuando ponés tu código postal. Despachamos en días hábiles.</p></details>
   {% else %}
   <details open><summary>¿Cómo lo recibo?</summary><p>Por ahora lo retirás gratis en Federico Lacroze 1694 (Belgrano) o en Cap. Gral. Ramón Freire 1535 (Colegiales). Elegís el local al pagar.</p></details>

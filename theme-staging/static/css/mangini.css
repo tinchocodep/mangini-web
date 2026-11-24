@@ -419,6 +419,22 @@
 /* Banners de categorías */
 .section-banners-home a,.section-banners-home img{border-radius:24px;overflow:hidden}
 .section-banners-home .container,.section-banners-home .container-fluid{max-width:1320px}
-/* Testimonios */
-.section-testimonials-home .section-title{text-align:left}
-.section-testimonials-home p{font:500 19px/1.5 var(--mg-sans);color:var(--mg-tinta)}
+/* Testimonios: tarjetas como el resto, título alineado con ellas y sin el doble espacio de arriba */
+.section-testimonials-home{padding:clamp(48px,6vw,88px) 0!important}
+.section-testimonials-home .js-section-testimonials{padding:0!important}
+.section-testimonials-home .container{max-width:1320px;padding:0 var(--mg-gutter)}
+.section-testimonials-home .js-testimonial-title-container{text-align:left!important}
+.section-testimonials-home .section-title{text-align:left!important;padding:0!important;margin:0 0 clamp(24px,3vw,40px)!important}
+.section-testimonials-home .swiper-wrapper{align-items:stretch}
+.section-testimonials-home .swiper-slide{height:auto;position:relative;isolation:isolate;text-align:left!important;padding:clamp(24px,2.4vw,36px) clamp(26px,2.6vw,40px);display:flex;flex-direction:column}
+.section-testimonials-home .swiper-slide::before{content:'';position:absolute;inset:0 8px;z-index:-1;background:var(--mg-papel);border-radius:24px;box-shadow:0 1px 0 var(--mg-linea),0 24px 50px -36px rgba(60,20,10,.35)}
+.section-testimonials-home p.js-testimonial-description{font:500 18px/1.5 var(--mg-sans)!important;color:var(--mg-tinta)!important;padding:0!important;margin:0 0 20px!important;flex:1}
+.section-testimonials-home p.js-testimonial-description::before{content:'\201C';display:block;font:800 72px/.7 var(--mg-display);color:var(--mg-bordo);margin-bottom:6px}
+.section-testimonials-home .js-testimonial-name{font:600 14px/1.3 var(--mg-sans)!important;letter-spacing:0!important;color:var(--mg-tinta-2)!important;text-transform:none!important}
+
+/* Mientras se ve el aviso de cookies (tarjeta abajo a la izquierda), la barra "Ver pedido" sube para no taparlo */
+body:has(.js-notification-cookie-banner:not([style*="none"]):not(.notification-hidden)) .mg-pd-bar{bottom:136px}
+/* La barra escondida no depende solo de moverla hacia abajo (con la barra subida, el desplazamiento no alcanzaba y se veía "0 · $0") */
+.mg-pd-bar{transition:transform .45s var(--mg-ease),opacity .3s,visibility 0s linear .45s}
+.mg-pd-bar.mg-show{transition:transform .45s var(--mg-ease),opacity .3s,visibility 0s}
+.mg-pd-bar:not(.mg-show),.mg-pd-open .mg-pd-bar{visibility:hidden;opacity:0;pointer-events:none}

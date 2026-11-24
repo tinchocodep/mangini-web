@@ -1,19 +1,199 @@
-/* Mangini 2026 · mg-tienda.css: ajustes globales sobre el tema Rio (cargar en TODAS las páginas, después del CSS de Rio).
-   Lleva los botones y el carrito de Rio a la misma estética de la página de pan dulce. */
-:root{--mgr-bordo:#7A1424;--mgr-bordo-lo:#4C0B16;--mgr-crema:#F6F0E6;--mgr-tinta:#1F1513}
+/* Mangini 2026 · mg-tienda.css: la estética de la web nueva en TODAS las páginas de la tienda (cargar después del CSS de Rio).
+   Rio pinta casi todo con variables (--main-background, --accent-color, --heading-font…): primero las pisamos con los colores
+   y letras de Mangini, después ajustamos piezas puntuales (listado, producto, modales, formularios, pie).
+   El encabezado lo maneja mg-rio.css. Las fuentes (Bricolage Grotesque + Hanken Grotesk) las carga el layout en todas las páginas. */
 
-/* Botón principal de Rio ("Iniciar compra", "Agregar al carrito", etc.) */
-.btn-primary,input.btn-primary,a.btn-primary{background:var(--mgr-bordo)!important;border-color:var(--mgr-bordo)!important;color:#fff!important;border-radius:999px!important;font-weight:600;letter-spacing:.04em}
-.btn-primary:hover,.btn-primary:focus-visible{background:var(--mgr-bordo-lo)!important;border-color:var(--mgr-bordo-lo)!important}
+html:root{
+  --mg-bordo:#7A1424;--mg-bordo-hi:#9A2133;--mg-bordo-lo:#4C0B16;
+  --mg-crema:#F6F0E6;--mg-papel:#FFFBF4;--mg-kraft:#D9B47E;--mg-oro:#EBCF9A;
+  --mg-tinta:#1F1513;--mg-tinta-2:#6B5A4E;--mg-linea:#E6DACA;
+  --mg-display:'Bricolage Grotesque',system-ui,sans-serif;
+  --mg-sans:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+  --mg-gutter:clamp(16px,4vw,64px);
+  --mg-sombra:0 1px 0 var(--mg-linea),0 24px 50px -36px rgba(60,20,10,.35);
 
-/* Panel lateral del carrito */
-#modal-cart{background:var(--mgr-crema)}
+  /* Variables de Rio → paleta Mangini */
+  --main-background:#F6F0E6;--main-foreground:#1F1513;
+  --accent-color:#7A1424;
+  --button-background:#7A1424;--button-foreground:#FFFFFF;
+  --label-background:#4C0B16;--label-foreground:#EBCF9A;
+  --footer-background:#4C0B16;--footer-foreground:#F6F0E6;
+  --newsletter-background:#4C0B16;--newsletter-foreground:#F6F0E6;
+  --main-foreground-opacity-05:#1F15130D;--main-foreground-opacity-08:#1F151314;--main-foreground-opacity-10:#1F15131A;
+  --main-foreground-opacity-20:#1F151333;--main-foreground-opacity-30:#1F15134D;--main-foreground-opacity-40:#1F151366;
+  --main-foreground-opacity-50:#1F151380;--main-foreground-opacity-60:#1F151399;--main-foreground-opacity-80:#1F1513CC;
+  --main-foreground-opacity-90:#1F1513E6;
+  --main-background-opacity-20:#F6F0E633;--main-background-opacity-30:#F6F0E64D;--main-background-opacity-50:#F6F0E680;
+  --main-background-opacity-60:#F6F0E699;--main-background-opacity-80:#F6F0E6CC;--main-background-opacity-90:#F6F0E6E6;
+  --accent-color-opacity-20:#7A142433;
+  --newsletter-foreground-opacity-80:#F6F0E6CC;
+  --footer-foreground-opacity-20:#F6F0E633;--footer-foreground-opacity-30:#F6F0E64D;--footer-foreground-opacity-50:#F6F0E680;
+  --footer-foreground-opacity-60:#F6F0E699;--footer-foreground-opacity-80:#F6F0E6CC;
+  --heading-font:'Bricolage Grotesque',system-ui,sans-serif;
+  --body-font:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+  --title-font-weight:700;
+}
+
+body{background:var(--mg-crema);color:var(--mg-tinta);font-family:var(--mg-sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--mg-oro);color:var(--mg-tinta)}
+:focus-visible{outline:3px solid var(--mg-oro);outline-offset:3px}
+
+/* Títulos: Bricolage apretada, sin mayúsculas forzadas */
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{font-family:var(--mg-display);font-weight:700;letter-spacing:-.02em;text-transform:none}
+.section-title,.page-header h1,.page-header .h4,h1.js-product-name{font-family:var(--mg-display)!important;font-weight:700!important;letter-spacing:-.03em!important;text-transform:none!important;color:var(--mg-tinta)}
+.page-header h1,.page-header .h4{font-size:clamp(34px,4.4vw,60px)!important;line-height:1!important;margin:.15em 0 .3em}
+.section-title{font-size:clamp(28px,3.2vw,44px)!important;line-height:1.02!important}
+.subtitle,.form-label{font-family:var(--mg-sans);font-weight:600;letter-spacing:0;text-transform:none;color:var(--mg-tinta-2)}
+.divider{background:none!important;border:0!important;border-top:1px solid var(--mg-linea)!important;height:0!important}
+
+/* Migas de pan */
+.breadcrumbs{font:500 13px/1.4 var(--mg-sans);text-transform:none;letter-spacing:0;color:var(--mg-tinta-2)}
+.breadcrumbs .crumb{display:inline-block;color:var(--mg-tinta-2);text-transform:none}
+.breadcrumbs .crumb.active{color:var(--mg-tinta)}
+
+/* ---------- Botones ---------- */
+.btn{font-family:var(--mg-sans);text-transform:none;letter-spacing:0}
+.btn-primary,input.btn-primary,a.btn-primary{background:var(--mg-bordo)!important;border-color:var(--mg-bordo)!important;color:#fff!important;border-radius:999px!important;font:600 16px/1 var(--mg-sans)!important;letter-spacing:0!important;text-transform:none!important;padding:18px 28px!important;transition:background-color .2s,transform .2s}
+.btn-primary:hover,.btn-primary:focus-visible{background:var(--mg-bordo-lo)!important;border-color:var(--mg-bordo-lo)!important}
+.btn-primary:active{transform:scale(.98)}
+.btn-secondary,.btn-default{background:var(--mg-papel);color:var(--mg-tinta);border:1.5px solid var(--mg-linea);border-radius:999px;font-weight:600;text-transform:none;letter-spacing:0}
+.btn-secondary:hover,.btn-default:hover{border-color:var(--mg-tinta)}
+.btn-link,.btn-link-primary{color:var(--mg-bordo);text-transform:none;letter-spacing:0;font-weight:600}
+
+/* ---------- Formularios ---------- */
+.form-control,.form-select,select.form-select,textarea.form-control{background:var(--mg-papel)!important;border:1.5px solid var(--mg-linea)!important;border-radius:14px!important;color:var(--mg-tinta)!important;font:500 16px/1.3 var(--mg-sans)!important;box-shadow:none!important}
+.form-control:focus,.form-select:focus{border-color:var(--mg-bordo)!important;box-shadow:0 0 0 3px var(--accent-color-opacity-20)!important}
+.form-control::placeholder{color:var(--mg-tinta-2);opacity:.7}
+.form-label{font-size:14px!important;margin-bottom:6px}
+input[type=checkbox],input[type=radio]{accent-color:var(--mg-bordo)}
+.checkbox-container .checkbox-color,.checkbox-container .checkbox-icon{border-radius:6px;border-color:var(--mg-linea)}
+.checkbox-container input:checked~.checkbox-icon,.checkbox-container input:checked+.checkbox-icon{background:var(--mg-bordo);border-color:var(--mg-bordo)}
+
+/* Etiquetas (descuento, sin stock, envío gratis) */
+.label{background:var(--mg-bordo-lo)!important;color:var(--mg-oro)!important;border-radius:999px!important;font:700 12px/1 var(--mg-sans)!important;letter-spacing:.02em;padding:6px 10px!important;text-transform:none}
+
+/* ---------- Listado de productos (categorías, búsqueda, destacados, relacionados) ---------- */
+.category-controls,.category-body,.section-single-product,.section-products-related,.contact-page{max-width:1400px;margin-left:auto;margin-right:auto}
+.category-controls{background:transparent!important}
+.category-controls .btn-default,.category-controls .form-select{border-radius:999px!important;font-weight:600!important}
+
+.filters-sidebar{font-family:var(--mg-sans)}
+.filters-sidebar a,.filters-sidebar li{text-transform:none;letter-spacing:0;font-size:16px;color:var(--mg-tinta)}
+.filters-sidebar a:hover{color:var(--mg-bordo)}
+.filters-sidebar .btn-link{display:inline-block;color:var(--mg-tinta);font-weight:500}
+/* Los nombres de categoría vienen en MAYÚSCULAS desde el admin: se muestran como oración */
+.filters-sidebar .btn-link,.breadcrumbs .crumb:not(.active),body.template-category .page-header h1{text-transform:lowercase!important}
+.filters-sidebar .btn-link::first-letter,.breadcrumbs .crumb:not(.active)::first-letter,body.template-category .page-header h1::first-letter{text-transform:uppercase}
+.filters-sidebar .h5,.filters-sidebar h5,.filters-sidebar h4{font:700 22px/1.1 var(--mg-display);letter-spacing:-.02em}
+.filters-sidebar .font-small,.filters-sidebar .subtitle{text-transform:none;letter-spacing:0;font-size:14px;font-weight:700;color:var(--mg-tinta)}
+
+.item-product .js-product-container,.js-item-product>.js-product-container{background:var(--mg-papel);border-radius:24px;padding:10px 10px 16px;box-shadow:var(--mg-sombra);height:100%;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+@media (hover:hover){.item-product .js-product-container:hover{transform:translateY(-4px);box-shadow:0 1px 0 var(--mg-linea),0 30px 60px -34px rgba(60,20,10,.45)}}
+.item-product .item-image,.item-product .product-item-image-container{border-radius:18px;overflow:hidden}
+.item-product .item-description{padding:14px 8px 0;background:transparent!important}
+.item-product .item-name{font:700 18px/1.2 var(--mg-display)!important;letter-spacing:-.02em;color:var(--mg-tinta)!important;text-transform:none!important}
+.item-product .item-price,.item-product .js-price-display{font:700 17px/1.2 var(--mg-sans)!important;color:var(--mg-bordo)!important}
+.item-product .price-compare{font:500 14px var(--mg-sans);color:var(--mg-tinta-2)!important;opacity:.8}
+.item-product .item-installments{color:var(--mg-tinta-2);font-size:13px}
+.js-load-more.btn-primary{padding:16px 32px!important}
+@media (max-width:767px){
+  .category-body .container-fluid>.row{margin-left:-6px;margin-right:-6px}
+  .js-item-product{padding-left:6px!important;padding-right:6px!important;margin-bottom:12px}
+  .item-product .js-product-container{border-radius:20px;padding:8px 8px 14px}
+  .item-product .item-name{font-size:16px!important}
+}
+
+/* ---------- Página de producto ---------- */
+#single-product{padding-top:clamp(12px,2vw,32px)}
+#single-product .section-single-product>.col{padding-left:clamp(16px,3vw,56px)!important}
+@media (min-width:768px){.section-single-product>.col-md-8{position:sticky;top:96px;align-self:flex-start}}
+@media (max-width:767px){#single-product .section-single-product>.col{padding-left:0!important;padding-right:0!important}}
+.section-single-product .product-image-container,.section-single-product .js-swiper-product{border-radius:28px;overflow:hidden}
+.section-single-product .product-thumb{border-radius:14px;overflow:hidden;border:2px solid transparent}
+.section-single-product .product-thumb.selected,.section-single-product .product-thumb:hover{border-color:var(--mg-bordo)}
+h1.js-product-name{font-size:clamp(30px,2.9vw,44px)!important;line-height:1.02!important;margin:.2em 0 .1em;max-width:16ch}
+#single-product #price_display,#single-product .js-price-display{font:700 clamp(28px,2.6vw,36px)/1 var(--mg-display)!important;letter-spacing:-.02em;color:var(--mg-bordo)!important}
+#single-product .price-compare{font:500 18px var(--mg-sans);color:var(--mg-tinta-2)}
+#single-product .price-without-taxes-container{font-size:13px;color:var(--mg-tinta-2);opacity:1!important}
+.btn-variant{background:var(--mg-papel)!important;color:var(--mg-tinta)!important;border:1.5px solid var(--mg-linea)!important;border-radius:999px!important;font:600 15px/1 var(--mg-sans)!important;text-transform:none!important;letter-spacing:0!important;padding:12px 20px!important;min-width:72px;transition:background-color .2s,border-color .2s,color .2s}
+.btn-variant:hover{border-color:var(--mg-tinta)!important}
+.btn-variant.selected{background:var(--mg-bordo)!important;border-color:var(--mg-bordo)!important;color:#fff!important}
+.btn-variant .btn-variant-content{text-transform:none}
+.js-product-variants .form-label{font-size:14px;margin-right:8px}
+.form-quantity,.js-form-quantity-container .form-row{background:var(--mg-papel);border:1.5px solid var(--mg-linea);border-radius:999px;overflow:hidden}
+.form-quantity-icon{color:var(--mg-tinta)}
+.form-quantity input,.js-quantity-input{background:transparent!important;border:0!important;text-align:center;font-weight:700}
+#single-product .js-addtocart{min-height:58px}
+.js-added-to-cart-product-message{color:var(--mg-tinta-2)}
+#single-product .js-accordion-container{background:var(--mg-papel);border:1px solid var(--mg-linea);border-radius:18px;padding:14px 18px}
+#single-product .js-accordion-toggle,#single-product .js-accordion-toggle *{font:600 15px/1.3 var(--mg-sans)!important;text-transform:none!important;letter-spacing:0!important;color:var(--mg-tinta)}
+#single-product .user-content{font:400 16px/1.65 var(--mg-sans);color:var(--mg-tinta)}
+#single-product .user-content h2,#single-product .user-content h3{font-family:var(--mg-display);letter-spacing:-.02em;line-height:1.05}
+#single-product .user-content strong,#single-product .user-content b{font-weight:700}
+.section-products-related{padding:clamp(40px,6vw,88px) var(--mg-gutter)!important;border-top:0!important}
+.section-products-related .section-title,.js-related-products-notification-container h3,.js-related-products-notification-container .h5{text-align:center}
+
+/* ---------- Avisos y modales de Rio ---------- */
+.modal{background:var(--mg-crema);color:var(--mg-tinta)}
+.modal-bottom-sheet,.modal-bottom{border-radius:28px 28px 0 0}
+@media (min-width:768px){.modal-bottom-sheet{border-radius:28px}}
+.modal-header{font:700 22px/1.1 var(--mg-display);letter-spacing:-.02em;text-transform:none}
+.modal-header *{text-transform:none}
+.modal-overlay{background:rgba(31,21,19,.45)}
+#related-products-notification .modal-header,#js-cross-selling-modal .modal-header{border-bottom:1px solid var(--mg-linea)}
+#related-products-notification .js-cart-notification-item{background:var(--mg-papel);border-radius:18px;padding:10px;margin:0}
+#related-products-notification img{border-radius:12px}
+#related-products-notification .js-cart-total{font:700 20px var(--mg-display);color:var(--mg-bordo)}
+.notification-cart,.notification-primary{background:var(--mg-papel);color:var(--mg-tinta);border-radius:18px;box-shadow:0 24px 50px -24px rgba(60,20,10,.45)}
+
+/* Panel lateral del carrito y página del carrito */
+#modal-cart{background:var(--mg-crema)}
 #modal-cart .modal-header,#modal-cart .modal-body,#modal-cart .modal-footer{background:transparent}
-#modal-cart .modal-header{border-bottom:1px solid #E6DACA}
-#modal-cart .cart-item{background:#FFFBF4;border-radius:18px;padding:12px;margin-bottom:10px;border:0}
+#modal-cart .modal-header{border-bottom:1px solid var(--mg-linea)}
+#modal-cart .cart-item{background:var(--mg-papel);border-radius:18px;padding:12px;margin-bottom:10px;border:0}
 #modal-cart img{border-radius:12px}
 #modal-cart .js-cart-quantity-container,#modal-cart .form-quantity{border-radius:999px;overflow:hidden}
-
-/* Página del carrito (/comprar/) */
-#shoppingCartPage .cart-item{background:#FFFBF4;border-radius:18px;padding:12px;border:0;margin-bottom:10px}
+#modal-cart .cart-total,#shoppingCartPage .cart-total{font-family:var(--mg-display);letter-spacing:-.02em}
+#shoppingCartPage .cart-item{background:var(--mg-papel);border-radius:18px;padding:12px;border:0;margin-bottom:10px}
 #shoppingCartPage img{border-radius:12px}
+
+/* Buscador */
+#nav-search .search-input{border-radius:999px!important;padding-left:20px!important}
+.search-suggest{background:var(--mg-papel);border-radius:18px}
+
+/* Aviso de cookies: tarjeta flotante chica en vez de franja */
+.js-notification-cookie-banner.notification-fixed-bottom{left:16px;right:auto;bottom:16px;max-width:min(420px,calc(100% - 32px));background:var(--mg-tinta)!important;color:var(--mg-crema)!important;border-radius:18px;padding:14px 16px;box-shadow:0 20px 40px -20px rgba(0,0,0,.5);font:500 14px/1.4 var(--mg-sans)}
+.js-notification-cookie-banner .container-fluid{padding:0!important}
+.js-notification-cookie-banner .row{flex-wrap:wrap;margin:0;justify-content:flex-start!important;gap:10px}
+.js-notification-cookie-banner .col,.js-notification-cookie-banner [class*=col-]{flex:1 1 100%;max-width:100%;padding:0!important;white-space:normal}
+@media (max-width:767px){.js-notification-cookie-banner.notification-fixed-bottom{left:12px;bottom:12px;max-width:calc(100% - 24px)}}
+.js-notification-cookie-banner strong{color:var(--mg-oro)}
+.js-notification-cookie-banner .btn{background:var(--mg-crema)!important;color:var(--mg-tinta)!important;border:0!important;border-radius:999px!important;padding:10px 16px!important;font:600 14px/1 var(--mg-sans)!important;letter-spacing:0!important}
+
+/* Botón "Pedido" con el carrito vacío: mg-tienda.js oculta el "0" y acá se empareja el margen derecho */
+#ajax-cart>a:has(.js-cart-widget-amount[style*="none"]){padding-right:16px!important}
+@media (max-width:767px){#ajax-cart>a:has(.js-cart-widget-amount[style*="none"]){padding-right:12px!important}}
+
+/* ---------- Márgenes laterales: el contenido arranca a la misma altura que el logo ---------- */
+header.js-head-main~.container-fluid,header.js-head-main~section.container-fluid,header.js-head-main~:not(.modal):not(.js-notification) .container-fluid{padding-left:var(--mg-gutter)!important;padding-right:var(--mg-gutter)!important}
+
+/* ---------- Páginas de texto, contacto y cuenta ---------- */
+.contact-page{padding-left:var(--mg-gutter);padding-right:var(--mg-gutter)}
+.contact-item,.contact-page a{color:var(--mg-tinta)}
+.contact-item,.contact-page .contact-item a{font-size:16px!important}
+.contact-page .form-control{min-height:52px}
+.user-content{font-family:var(--mg-sans);line-height:1.65}
+.alert{border-radius:14px}
+.alert-info{background:var(--mg-papel);color:var(--mg-tinta);border-color:var(--mg-linea)}
+
+/* ---------- Pie ---------- */
+.js-footer{background:var(--mg-bordo-lo)!important;color:var(--mg-crema);padding-top:clamp(40px,5vw,72px)}
+.js-footer .subtitle{font:700 13px/1.2 var(--mg-sans);letter-spacing:.06em;color:var(--mg-oro)!important;text-transform:uppercase}
+.js-footer a,.js-footer .contact-item{color:var(--mg-crema)!important;text-decoration:none;font-size:15px}
+.js-footer li{margin-bottom:6px}
+.js-footer a:hover{color:var(--mg-oro)!important}
+.js-footer .form-control{background:transparent!important;border-color:rgba(246,240,230,.35)!important;color:var(--mg-crema)!important;border-radius:999px!important}
+.js-footer .form-control::placeholder{color:var(--mg-crema)}
+.js-footer svg,.js-footer svg *{fill:currentColor}
+.footer-legal{background:var(--mg-tinta)!important;color:rgba(246,240,230,.7)}
+.footer-legal a{color:var(--mg-crema)!important;font-size:inherit!important}
