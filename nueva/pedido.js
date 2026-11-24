@@ -96,7 +96,7 @@
         const p = SKUS[i.id];
         return `<li class="pd-item">
           <img src="${p.img}" alt="">
-          <div class="pd-item-t"><strong>${p.nombre}</strong><span>${p.detalle ? p.detalle : fmt(p.precio) + ' c/u'}</span>${p.detalle ? `<span>${fmt(p.precio)}</span>` : ''}</div>
+          <div class="pd-item-t"><strong>${p.nombre}</strong>${p.detalle ? `<span class="pd-item-d">${p.detalle}</span>` : ''}<span class="pd-item-p">${fmt(p.precio)}${i.q > 1 ? ' <small>c/u</small>' : ''}</span></div>
           <div class="pd-step"><button type="button" data-pd-d="-1" data-pd-k="${k}" aria-label="${i.q === 1 ? 'Quitar' : 'Uno menos de'} ${p.nombre}">${i.q === 1 ? tacho : '−'}</button><output>${i.q}</output><button type="button" data-pd-d="1" data-pd-k="${k}" aria-label="Uno más de ${p.nombre}">+</button></div>
         </li>`;
       }).join('');

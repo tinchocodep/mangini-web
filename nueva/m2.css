@@ -15,8 +15,8 @@
   --ease:cubic-bezier(.2,.8,.2,1);
 }
 *{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;scroll-padding-top:80px;overflow-x:clip}
-body{background:var(--crema);color:var(--tinta);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--crema);color:var(--tinta);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip}
 img{display:block;max-width:100%}
 a{color:inherit}
 h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.03em;line-height:.95}
@@ -304,7 +304,10 @@ h2{font-size:clamp(40px,5.6vw,84px);margin-bottom:.35em}
 .pd-item{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;background:var(--papel);border-radius:18px;padding:10px 12px}
 .pd-item img{width:64px;height:64px;object-fit:contain}
 .pd-item-t strong{display:block;font-size:16px;line-height:1.25}
-.pd-item-t span{font-size:14px;color:var(--tinta-2)}
+.pd-item-t span{display:block}
+.pd-item-d{font-size:13px;line-height:1.35;color:var(--tinta-2);margin-top:3px}
+.pd-item-p{font:800 18px/1 var(--display);letter-spacing:-.02em;color:var(--tinta);margin-top:8px}
+.pd-item-p small{font:500 13px var(--sans);letter-spacing:0;color:var(--tinta-2)}
 .pd-step{display:flex;align-items:center;background:var(--crema);border-radius:999px}
 .pd-step button{width:38px;height:38px;border:0;background:none;font-size:20px;cursor:pointer;color:var(--tinta);display:grid;place-items:center}
 .pd-step output{min-width:20px;text-align:center;font-weight:700}
